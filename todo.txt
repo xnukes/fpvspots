@@ -1,12 +1,17 @@
-nebo udelej neco jako soukrom� mista
+FIRST TASK:
+Vyrobit system upgradovani verzi systemu vuci databazi. V pripade zmeny struktury, zapisovat do nejakych sql souboru ktere se pusti a upravi danou tabulku.
+------------------------------------------------
+Možnost přidání youtube odkazu k uzivateli
+Na frontendu vypis videi v playeru + Nazev videa + Kratky popis + Obrázek jako náhled (nemusí byt)
+------------------------------------------------
+Události
+------------------------------------------------
+nebo udelej neco jako soukromá mista
 a verejna
 jojo ?? taky muze byt
-
+------------------------------------------------
 a moznost otevrit chat s osobou kera to misto zalozila
 nebo sapon kolonku kontak nebo tak neco
-
--------------------------------------------------------
-
+------------------------------------------------
 mapa s eshop/kamenyma obchodama
-
-----------------------------------------------------------
+------------------------------------------------
