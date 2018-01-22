@@ -1,0 +1,75 @@
+{block content}
+{define pagetitle}{_administrator.menu.drones}{/define}
+
+{form droneForm, class => 'nomargin'}
+<div class="row nomargin">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="title elipsis">
+                    <strong>{_administrator.drones.title.edit}</strong>
+                </span>
+                <ul class="options pull-right list-inline">
+                    <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Sbalit"></a></li>
+                    <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Celá obrazovka"><i class="fa fa-expand"></i></a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        {label name /}
+                        {input name}
+                        {label type /}
+                        {input type}
+                        {label photo /}
+                        {input photo}
+                    </div>
+                    <div class="col-md-6">
+                        {label description /}
+                        {input description}
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                {input send, class => 'btn btn-success btn-sm pull-right'}
+                <a n:href=":default" class="btn btn-danger btn-sm pull-right">{_default.buttons.backToList}</a>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{/form}
+{if count($drone->photos)}
+    <div class="row nomargin">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <span class="title elipsis">
+                    <strong>{_administrator.drones.title.photos}</strong>
+                </span>
+                    <ul class="options pull-right list-inline">
+                        <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Sbalit"></a></li>
+                        <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Celá obrazovka"><i class="fa fa-expand"></i></a></li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        {foreach $drone->photos as $key => $photo}
+                        <div class="col-md-2 margin-bottom-20">
+                            <a class="lightbox" href="{$basePath}/files/photos/{$photo->filehash}" data-lightbox="image" data-plugin-options='{"type":"image", "closeOnBgClick":false}'>
+                                <img src="{$basePath}/files/photos/thumbs/{$photo->filehash}" alt="" class="img-responsive img-thumbnail margin-bottom-6">
+                            </a>
+                            <a n:href="removeDronePhoto! $photo->id" class="btn btn-danger btn-xs fullwidth"><i class="fa fa-recycle"></i> {_default.buttons.remove}</a>
+                        </div>
+                        {/foreach}
+                    </div>
+                </div>
+                {*<div class="panel-footer">*}
+                    {*{input send, class => 'btn btn-success btn-sm pull-right'}*}
+                    {*<a n:href=":default" class="btn btn-danger btn-sm pull-right">{_default.buttons.backToList}</a>*}
+                    {*<div class="clear"></div>*}
+                {*</div>*}
+            </div>
+        </div>
+    </div>
+{/if}

@@ -1,0 +1,50 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+		<span class="title elipsis">
+			<strong>Zeď</strong>
+		</span>
+        <ul class="options pull-right list-inline">
+            <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Sbalit"></a></li>
+            <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Celá obrazovka"><i class="fa fa-expand"></i></a></li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        {form wallForm}
+            {input message}
+            <div class="margin-top-10">
+                <input n:name="send" />
+                <div class="clearfix"></div>
+                {*<a href="#" class="btn btn-link profile-btn-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Add a Location"><i class="fa fa-map-marker"></i></a>*}
+                {*<a href="#" class="btn btn-link profile-btn-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Add Photo"><i class="fa fa-camera"></i></a>*}
+                {*<a href="#" class="btn btn-link profile-btn-link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Add File"><i class="fa fa-file"></i></a>*}
+            </div>
+        {/form}
+        <hr class="invisible half-margins">
+
+        <ul class="comment list-unstyled">
+            {foreach $wallMessages as $message}
+                <li class="comment">
+                    {if $message->user->photo}
+                        <img class="avatar" src="{$basePath}/files/photos/thumbs/{$message->user->photo->filehash}" width="50" {*height="50"*} alt="avatar">
+                    {else}
+                        <img class="avatar" src="{$basePath}/Admin/assets/images/noavatar.jpg" width="50" height="50" alt="avatar">
+                    {/if}
+                    <div class="comment-body">
+                        <a href="#" class="comment-author">
+                            <small class="text-muted pull-right">
+                                {$message->createdOn|date:'d.m.Y H:i:s'}
+                            </small>
+                            <span>{$message->user->username} ({$message->user->email})</span>
+                        </a>
+                        <small n:if="$message->user == $presenter->userEntity">
+                            <a n:href="remove! $message->id" class="text-danger text-muted pull-right">{_default.buttons.remove} <i class="fa fa-remove"></i></a>
+                        </small>
+                        <p>{$message->message}</p>
+                    </div>
+                </li>
+                <hr>
+            {/foreach}
+        </ul>
+
+    </div>
+</div>

@@ -1,0 +1,33 @@
+{include '@head.latte'}
+
+<body>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-51240862-7"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){
+        dataLayer.push(arguments)
+    };
+    gtag('js', new Date());
+
+    gtag('config', 'UA-51240862-7');
+</script>
+	<div class="padding-15">
+		<div class="login-box">
+			<div class="row">
+				<div class="col-12 text-center">
+					<a class="{*navbar-brand*}" href="{$basePath}/">
+						<img src="{$basePath}/Front/images/web-logo-fpvspots.png" alt="FPVSpots.info">
+					</a>
+				</div>
+			</div>
+			<hr>
+			{include content}
+		</div>
+	</div>
+	<!-- JAVASCRIPT FILES -->
+	<script type="text/javascript">var plugin_path = '../../Admin/assets/plugins/';</script>
+	<script type="text/javascript" src="{$basePath}/Admin/assets/plugins/jquery/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="{$basePath}/Admin/assets/js/app.js"></script>
+</body>
+</html>

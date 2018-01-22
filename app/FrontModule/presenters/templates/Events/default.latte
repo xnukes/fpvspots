@@ -1,0 +1,67 @@
+{block content}
+
+{define title}Nadcházející závody, turnaje, soutěže{/define}
+
+<main role="main">
+
+    <div class="album text-muted">
+        <div class="container">
+
+            <h1 class="jumbotron-heading text-dark">
+                <i class="fa fa-calendar"></i> Nadcházející závody, turnaje, soutěže
+            </h1>
+
+            <div class="clearfix"></div>
+
+            {include googleAdsenseEvents}
+
+            {if count($events) == 0}
+                <p class="lead text-center mt-5">Omlouváme se, ale v nejbližší době není evidována žádná událost.</p>
+            {else}
+                {foreach $events as $event}
+
+                    <div class="card text-white bg-dark mb-3 col-md-12">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 pb-3 pb-md-0">
+                                    {if count($event->photos)}
+                                        <img class="img-thumbnail img-event" src="{$basePath}/files/photos/thumbs/{$event->photos[0]->filehash}" alt="{$event->name}">
+                                    {else}
+                                        <img class="img-thumbnail img-event" src="{$basePath}/Front/images/noimage.png" alt="{$event->name}">
+                                    {/if}
+                                </div>
+                                <div class="col-md-9">
+                                    <h4>{$event->name}<span class="badge badge-light float-right d-none d-sm-block">{$event->eventType->name}</span></h4>
+                                    <ul class="list-unstyled">
+                                        <li><span>Pořadatel: </span>{$event->user->username} {$event->user->firstName} {$event->user->lastName}</li>
+                                        <li><span>Kapacita: </span>{$event->maxUsers}</li>
+                                        <li><span>Termín: </span>{$event->eventDate|date:'d.m.Y'}</li>
+                                        <li><span>Kontakt: </span><a href="mailto:{$event->user->email}">{$event->user->email}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {/foreach}
+            {/if}
+
+            {*<p class="mt-5">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center;"
+                     data-ad-layout="in-article"
+                     data-ad-format="fluid"
+                     data-ad-client="ca-pub-6145936523743265"
+                     data-ad-slot="9849574755"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </p>*}
+
+        </div>
+    </div>
+
+</main>
+
+{include '../@footer-back.latte'}

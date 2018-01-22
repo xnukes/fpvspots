@@ -1,0 +1,50 @@
+{block content}
+
+{form signInForm, class => 'sky-form boxed'}
+
+	<header><i class="fa fa-users"></i> Přihlášení do systému</header>
+
+	{snippet flashes}
+		<div n:foreach="$flashes as $flash" class="{$flash->type} alert alert-{$flash->type} noborder text-center weight-400 nomargin noradius">{$flash->message|noescape}</div>
+	{/snippet}
+	{if $form->hasErrors()}
+		<div n:foreach="$form->errors as $error" class="alert alert-danger noborder text-center weight-400 nomargin noradius">{$error|noescape}</div>
+	{/if}
+
+	<fieldset>
+		<section>
+			{label username, class => 'label' /}
+			<label class="input">
+				<i class="icon-append fa fa-user"></i>
+				{input username}
+				<span class="tooltip tooltip-top-right">Zadejte vaše přihlašovací jméno</span>
+			</label>
+		</section>
+		<section>
+			{label password, class => 'label' /}
+			<label class="input">
+				<i class="icon-append fa fa-lock"></i>
+				{input password}
+				<b class="tooltip tooltip-top-right">Zadejte heslo</b>
+			</label>
+			<label class="checkbox nomargin">
+				{$form['remember']->getControlPart()}
+				<i></i>{$form['remember']->getLabelPart()}
+			</label>
+		</section>
+	</fieldset>
+
+	<footer>
+		<div class="row">
+			<div class="col-md-6 text-left"><a n:href="Sign:lost" class="btn btn-sm btn-primary pull-left"><i class="fa fa-life-ring"></i>Zapoměli jste heslo?</a></div>
+			<div class="col-md-6 text-right"><button n:name="send" class="btn btn-sm btn-warning pull-right"><i class="fa fa-signing"></i>Přihlásit</button></div>
+		</div>
+		<section class="text-center">
+			<small class="text-muted">Pokud ještě nemáte účet, stačí se <a n:href="Register:in">zaregistrovat zde.</a></small>
+		</section>
+	</footer>
+{/form}
+
+<div class="text-center">
+	{$systemVersion|noescape}
+</div>

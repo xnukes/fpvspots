@@ -1,0 +1,128 @@
+{block content}
+{define pagetitle}{_administrator.menu.settings}{/define}
+
+
+{form usersProfileForm, class => 'nomargin'}
+    <div class="row nomargin">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="title elipsis">
+                        <strong>{_administrator.users.profile}</strong>
+                    </span>
+                    {*<ul class="options pull-right list-inline">
+                        <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Sbalit"></a></li>
+                        <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Celá obrazovka"><i class="fa fa-expand"></i></a></li>
+                    </ul>*}
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {if empty($userEntity->photo)}
+                                        <img src="{$basePath}/Admin/assets/images/noavatar.jpg" class="img-thumbnail" alt="No photo !">
+                                    {else}
+                                        <img src="{$basePath}/files/photos/thumbs/{$userEntity->photo->filehash}" class="img-thumbnail" alt="User profile image !">
+                                    {/if}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="checkbox">
+                                        <input type="checkbox" value="1" n:name="public">
+                                        <i></i> Veřejný profil
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {label username /}
+                                    {input username}
+                                </div>
+                                <div class="col-md-6">
+                                    {label email /}
+                                    {input email}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {label firstName /}
+                                    {input firstName}
+                                </div>
+                                <div class="col-md-6">
+                                    {label lastName /}
+                                    {input lastName}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {label photo /}
+                                    {input photo}
+                                </div>
+                                <div class="col-md-6">
+                                    {label phone /}
+                                    {input phone}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-heading">
+                    <span class="title elipsis">
+                        <strong>{_administrator.users.changePassword}</strong>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {label password /}
+                            {input password}
+                        </div>
+                        <div class="col-md-6">
+                            {label passwordVerify /}
+                            {input passwordVerify}
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    {input send, class => 'btn btn-success btn-sm pull-right'}
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/form}
+
+{form usersProfilePageForm, class => 'nomargin'}
+    <div class="row nomargin">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="title elipsis">
+                        <strong>{_administrator.users.profilepage}</strong>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">{label pageWebsite /}{input pageWebsite}</div>
+                        <div class="col-md-4">{label pageFacebook /}{input pageFacebook}</div>
+                        <div class="col-md-4">{label pageGoogleplus /}{input pageGoogleplus}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {label pageContent /}
+                            {input pageContent}
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    {input send, class => 'btn btn-success btn-sm pull-right'}
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/form}

@@ -1,0 +1,10 @@
+/log/*
+/temp/cache/*
+/temp/proxies/*
+/temp/sessions/*
+/vendor/*
+config.local.neon
+/.idea/*
+!.gitignore
+/.htaccess
+/www/files/photos/

@@ -1,0 +1,32 @@
+{
+  "name": "history.nette.ajax.js",
+  "license": "MIT",
+  "keywords": [
+    "nette",
+    "ajax",
+    "jquery",
+    "history"
+  ],
+  "main": "client-side/history.ajax.js",
+  "ignore": [
+    "src/*",
+    "composer.json",
+    "CONTRIBUTING.md",
+    "readme.md"
+  ],
+  "dependencies": {
+    "nette.ajax.js": "~2.0"
+  },
+  "homepage": "https://github.com/vojtech-dobes/history.nette.ajax.js",
+  "version": "2.0.0",
+  "_release": "2.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.0.0",
+    "commit": "f3fab92e5ed17ff6e8d4325401cbf211c4e17dba"
+  },
+  "_source": "https://github.com/vojtech-dobes/history.nette.ajax.js.git",
+  "_target": "^2.0.0",
+  "_originalSource": "vojtech-dobes/history.nette.ajax.js",
+  "_direct": true
+}

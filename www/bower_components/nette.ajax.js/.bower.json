@@ -1,0 +1,29 @@
+{
+  "name": "nette.ajax.js",
+  "license": "MIT",
+  "keywords": [
+    "nette",
+    "ajax",
+    "jquery"
+  ],
+  "main": "nette.ajax.js",
+  "ignore": [
+    "CONTRIBUTING.md",
+    "example.js",
+    "readme.md"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.0"
+  },
+  "homepage": "https://github.com/vojtech-dobes/nette.ajax.js",
+  "version": "2.3.0",
+  "_release": "2.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.3.0",
+    "commit": "299903f97158084b06fcbaeb2a2db87b38eac68b"
+  },
+  "_source": "https://github.com/vojtech-dobes/nette.ajax.js.git",
+  "_target": ">= 2.1.0",
+  "_originalSource": "nette.ajax.js"
+}

@@ -1,0 +1,62 @@
+{block content}
+{define pagetitle}{_administrator.menu.dashboard}{/define}
+
+<div class="row">
+    <div class="col-md-3 col-sm-6">
+        <div class="box danger">
+            <div class="box-title">
+                <h4><a href="#">{$totalPlaces} Míst k létání</a></h4>
+                <small class="block">{$totalLastMonthPlaces} přidaných za tento měsíc</small>
+                <i class="fa fa-map-signs"></i>
+            </div>
+            <div class="box-body text-center">
+                <span class="sparkline" data-plugin-options=""><canvas width="160" height="35" style="display: inline-block; width: 160px; height: 35px; vertical-align: top;"></canvas></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="box warning">
+            <div class="box-title">
+                <h4>{$totalDrones} Zaregistrovaných strojů</h4>
+                <small class="block">{$totalLastMonthDrones} nových strojů za měsíc</small>
+                <i class="fa fa-rocket"></i>
+            </div>
+            <div class="box-body text-center">
+                <span class="sparkline" data-plugin-options=""><canvas width="160" height="35" style="display: inline-block; width: 160px; height: 35px; vertical-align: top;"></canvas></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="box default">
+            <div class="box-title">
+                <h4>{$totalUsers} {_administrator.dashboard.titleUsers}</h4>
+                <small class="block">{$totalLastMonthUsers} {_administrator.dashboard.titleNewUsers}</small>
+                <i class="fa fa-users"></i>
+            </div>
+            <div class="box-body text-center">
+                <span class="sparkline" data-plugin-options=""><canvas width="160" height="35" style="display: inline-block; width: 160px; height: 35px; vertical-align: top;"></canvas></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="box success">
+            <div class="box-title">
+                <h4>{$totalUsersOnline} Online pilot</h4>
+                <small class="block">Dnes vás tu celkem bylo {$totalUsersTodayOnline}</small>
+                <i class="fa fa-globe"></i>
+            </div>
+            <div class="box-body text-center">
+                <span class="sparkline" data-plugin-options=""><canvas width="160" height="35" style="display: inline-block; width: 160px; height: 35px; vertical-align: top;"></canvas></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        {control wall}
+    </div>
+    <div class="col-md-4">
+        {control events}
+        {*{control messages}*}
+    </div>
+</div>

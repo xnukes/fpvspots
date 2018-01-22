@@ -1,0 +1,34 @@
+{
+  "name": "jQuery UI Sortable",
+  "homepage": "https://github.com/ryantbrown/jquery-ui-sortable",
+  "authors": [
+    "Ryan Brown >ryan.brown.916@gmail.com>"
+  ],
+  "description": "jQuery UI Sortable",
+  "main": [
+    "./jquery-ui-sortable.min.js",
+    "./jquery-ui-sortable.js"
+  ],
+  "keywords": [
+    "jQuery",
+    "UI",
+    "Sortable"
+  ],
+  "license": "MIT",
+  "ignore": [
+    ".gitignore",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.0"
+  },
+  "_release": "4323c165b8",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "4323c165b89d9510480d2bf479d2cb1aad5464e1"
+  },
+  "_source": "https://github.com/ryantbrown/jquery-ui-sortable.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/ryantbrown/jquery-ui-sortable.git"
+}

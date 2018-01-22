@@ -1,0 +1,37 @@
+{
+  "name": "nette-forms",
+  "description": "Client side script for Nette Forms Component",
+  "homepage": "https://nette.org",
+  "keywords": [
+    "nette",
+    "validation",
+    "forms"
+  ],
+  "license": [
+    "BSD-3-Clause",
+    "GPL-2.0",
+    "GPL-3.0"
+  ],
+  "authors": [
+    "David Grudl (https://davidgrudl.com)"
+  ],
+  "main": "src/assets/netteForms.min.js",
+  "ignore": [
+    "src/Bridges",
+    "src/Forms",
+    "tests",
+    "examples",
+    "**/.*",
+    "*.json"
+  ],
+  "version": "2.4.6",
+  "_release": "2.4.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.4.6",
+    "commit": "857660b792ab95ac94821c0b254638181dc7145c"
+  },
+  "_source": "https://github.com/nette/bower-nette-forms.git",
+  "_target": "^2.3",
+  "_originalSource": "nette-forms"
+}

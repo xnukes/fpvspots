@@ -1,0 +1,10 @@
+parameters:
+	filesPath: '%wwwDir%/files'
+	photosPath: '%wwwDir%/files/photos'
+	photosThumbsPath: '%wwwDir%/files/photos/thumbs'
+	encoding: 'cs-CZ'
+	charset: 'UTF-8'
+	sitename: 'FPVSpots.info'
+	sitetitle: 'FPV Spots - Databáze pilotů a míst'
+	metaauthor: 'Lukáš Vlček (xnukes@gmail.com)'
+	googleMapsJSApi: 'AIzaSyBgK_mOnwuBJ9FeigD0vjn61B3X_gdQ3Xs'

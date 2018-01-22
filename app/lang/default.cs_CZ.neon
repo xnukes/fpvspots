@@ -1,0 +1,28 @@
+buttons:
+    add: 'Přidat'
+    create: 'Vytvořit'
+    edit: 'Změnit'
+    remove: 'Smazat'
+    back: 'Zpět'
+    backToList: 'Zpět na seznam'
+    backToMap: 'Zpět na mapu'
+    save: 'Uložit'
+    display: 'Zobrazit Podrobnosti'
+    selectFile: 'Vybrat soubor'
+    close: 'Zavřít'
+menus:
+	mainbtn: 'Nabídka'
+	homepage: 'FPV SPOTS'
+	map: 'Mapa'
+messages:
+    itemSaved: 'Záznam byl uložen.'
+    fileNotImage: 'Soubor není obrázek'
+    itemNotFind: 'Položka nebyla nalezena !'
+    fileIsDeleted: 'Soubor byl smazán.'
+    weJoined: 'Byl jste připojen.'
+    weLogout: 'Byl jste odhlášen.'
+    profileSaved: 'Změny byly úspěšně uloženy.'
+forms:
+	messages:
+		required: 'Tato položka je povinná.'
+		requiredMap: 'Prosím vyberte místo kliknutím do mapy.'

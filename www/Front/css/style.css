@@ -1,0 +1,160 @@
+/*
+ * Class style.css , Last changed 18.1.17 23:03
+ * This file is part of the drones-map
+ * Copyright (c) 2017 Lukáš Vlček (http://www.vlceklukas.cz)
+ */
+
+body {
+	font-variant: small-caps;
+}
+
+#map {
+	height: 100%;
+}
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+/* header */
+.navbar-header {
+	color: white;
+	font-size: 19px;
+	padding: 9px;
+}
+
+a:hover {
+	color: #0056b3;
+	text-decoration: none;
+}
+
+/* google search */
+input.gsc-search-button.gsc-search-button-v2 {
+	height: 25px;
+	width: 68px;
+}
+input.gsc-input {
+	line-height: normal !important;
+	font-size: 18px !important;
+	margin: 14px 10px !important;
+	width: 99% !important;
+}
+.gsib_a {
+	padding: 0px !important;
+}
+.gsc-input-box {
+	height: 50px !important;
+}
+input.gsc-search-button.gsc-search-button-v2 {
+	height: 48px;
+	width: 75px;
+	padding: 15px 28px;
+	margin: 2px 0px 0px 0px !important;
+	cursor: pointer;
+}
+
+/**/
+
+/* ratings */
+div.ratings a {
+	color: #ccc;
+}
+
+div.ratings a:hover, div.ratings a.active {
+	color: #ffd500;
+}
+
+/* images machines */
+.img-machine {
+	width: 100%;
+}
+.img-event {
+	width: 100%;
+	max-height: 146px;
+}
+
+.event-row {
+	margin-top: 30px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	background: #0c0c0c;
+	padding: 20px 10px;
+}
+
+.event-row h4 {
+	color: white;
+}
+
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+body {
+	padding-top: 3.53rem;
+}
+
+/*
+ * Typography
+ */
+
+h1 {
+	margin-bottom: 20px;
+	padding-bottom: 9px;
+	border-bottom: 1px solid #eee;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+	position: fixed;
+	top: 51px;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+	padding: 20px;
+	overflow-x: hidden;
+	overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+	border-right: 1px solid #eee;
+}
+
+/* custom bootstrap */
+
+/* Sidebar navigation */
+.sidebar {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.sidebar .nav {
+	margin-bottom: 20px;
+}
+
+.sidebar .nav-item {
+	width: 100%;
+}
+
+.sidebar .nav-item + .nav-item {
+	margin-left: 0;
+}
+
+.sidebar .nav-link {
+	border-radius: 0;
+}
+
+/*
+ * Dashboard
+ */
+
+/* Placeholders */
+.placeholders {
+	padding-bottom: 3rem;
+}
+
+.placeholder img {
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+}

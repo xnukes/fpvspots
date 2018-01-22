@@ -1,0 +1,449 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://www.opengis.net/kml/2.2'>
+	<Document>
+		<name>Mapa pilotů a jejich letišť</name>
+		<description><![CDATA[]]></description>
+		<Folder>
+			<name>Piloti</name>
+			<Placemark>
+				<name>Jiří Pluhař</name>
+				<description><![CDATA[Odkaz na FB: <br>https://www.facebook.com/jirka.pluhar?ref=bookmarks<br>Email: pluhar.jiri@gmail.com<br>Dron: Parrot Bebop 2<br>Účel: ¨Hobby létání a natáčení"]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>15.8182524,50.0350911,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Lord_M</name>
+				<description><![CDATA[Dron: DJI<br>Účel: Hobby]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>15.1978683,50.0252773,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Alois Móler</name>
+				<description><![CDATA[Odkaz na FB: <br>https://www.facebook.com/alois.moler.5<br>Email: aloisml@seznam.czaloisml@seznam.cz<br>Dron: Dji Phantom 3pro<br>Účel: Hobby]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>17.4184799,49.8719042,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>David</name>
+				<description><![CDATA[Email: Vantuch.david@seznam.cz<br>Dron: Phantom 3 Standart<br>Účel: Hobby]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>13.5806036,49.8383423,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Pavel Jakeš</name>
+				<description><![CDATA[Odkaz na FB: https://www.facebook.com/pawel.koksfriend<br>Email: jakes-pavel@seznam.cz<br>Dron: Spider R10]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>16.2543368,49.0728679,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Jirka Černovský</name>
+				<description><![CDATA[Odkaz na FB: https://www.facebook.com/jirka.cernovsky<br>Email: j.cernovsky@atlas.cz<br>Dron: DJI Phantom 2 Vision+ , <br>Dron: DJI P3A]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>12.4010539,50.2537085,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Štefan Stepanowski</name>
+				<description><![CDATA[Odkaz na FB: https://www.facebook.com/stepak.novotny<br>Dron: Phantom 3 Stadart]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>15.9051991,49.7624725,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Radovan Dvorský</name>
+				<description><![CDATA[Odkaz na FB: https://www.facebook.com/dvorsky.rado<br>Email: dvorsky.rado@gmail.com<br>Dron: HK X650F vlastní stavba]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>21.2829208,49.2951282,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Mirek</name>
+				<description><![CDATA[Odkaz na FB: https://www.facebook.com/mirek.lysacek<br>Email: mireklysacek@gmail.com<br>Dron: DJI Phantom 3 Advanced]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>18.023243,49.0833392,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Václav Slepička</name>
+				<description><![CDATA[Email: sshelby@seznam.cz<br>Dron: Phantom 2 vision+]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>14.1666555,49.5097174,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>David Damborský </name>
+				<description><![CDATA[Kontakt na FB: https://www.facebook.com/profile.php?id=100001437528181<br>Email: david.damborsky@gmail.com<br>Dron: Phantom 3 Standard<br>Dron: QU4D X]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>16.6614962,49.2049111,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Lukáš</name>
+				<description><![CDATA[Emal: xnukes@gmail.com<br>Dron: Nighthawk 250 Race, LitleBee Opto Pro 20A, EMax Motors, SPF3, Forteex 800TVL, MinimOSD, Skyzone TS5823s 200mw]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>16.8705636,49.882645,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Tomáš Gotvald</name>
+				<description><![CDATA[Email: veteranclubbrno@seznam.cz<br>Dron: Phantom 4]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>16.6112638,49.1907073,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Mark Art Okem Dronu</name>
+				<description><![CDATA[Odkaz na FB: https://www.facebook.com/MarkArtOkemDronu/<br>Email: marek-sevcik254@seznam.cz<br>Dron: Dji phantom 3 standard]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>14.9084473,50.4136044,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Filip</name>
+				<description><![CDATA[Dron: DJI]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>15.7734168,50.0269057,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Bradík</name>
+				<description><![CDATA[Email: jbradik@seznam.cz<br>Dron: Phantom 3 A]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>13.4587669,49.7578983,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Harvy</name>
+				<description><![CDATA[Email: harvy@harvyproduction.cz<br>Dron: Phantom 3 profesional]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>14.2602968,50.425171,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Ján Hrušík </name>
+				<description><![CDATA[Email: hrusoman@seznam.cz<br>Dron: dji Phantom 3 advanced]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>14.3740654,50.4529137,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Michal Žálek</name>
+				<description><![CDATA[Odkaz na FB: https://www.facebook.com/m1ch1sw0rld/<br>Email: michal.zalek@michislfyphoto.eu<br>Dron: DJI Phantom 4<br>Profi práce]]></description>
+				<styleUrl>#icon-1603-FF5252</styleUrl>
+				<Point>
+					<coordinates>14.4763756,48.9896799,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>milhaus</name>
+				<description><![CDATA[Email: milhavti@seznam.cz<br>Dron:  Phantom 3 Advance]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>16.8784332,49.9335579,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Wan</name>
+				<description><![CDATA[Odkaz na FB: https://www.facebook.com/Deejay.Wan.Dc<br>Email: nidrivan@seznam.cz<br>Dron: Hexacoptera-w609-7]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>14.2328967,50.7805572,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Martin</name>
+				<description><![CDATA[Odkaz na FB: https://www.facebook.com/frolikmartin<br>Email: frolma@seznam.cz<br>Dron: DJI phantom 3 Standart, SYMA x5sw, JJRC H37 6-Axis]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>13.9907885,50.2696208,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Wanderer</name>
+				<description><![CDATA[Odkaz na FB: https://www.facebook.com/wanderer.revuca<br>Email: wandererra@gmail.com<br>Dron: Syma X8HC, X5SW, Turnigy Microquad V3]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>20.113821,48.6833109,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Pája</name>
+				<description><![CDATA[Odkaz na FB: https//www.facebook.com/pavel.luxa<br>Email: pajan.luxa@seznam.cz<br>Dron: Phantom 3 advanced]]></description>
+				<styleUrl>#icon-1603-097138</styleUrl>
+				<Point>
+					<coordinates>14.4255745,49.810677,0.0</coordinates>
+				</Point>
+			</Placemark>
+		</Folder>
+		<Folder>
+			<name>Místa na létání </name>
+			<Placemark>
+				<name>Pardubice</name>
+				<description><![CDATA[Vhodné pro FPV:  ANO<br>Případná nebezpečí: Dráty vedení po levé straně]]></description>
+				<styleUrl>#icon-1504-4E342E</styleUrl>
+				<Point>
+					<coordinates>15.8180594,50.048018,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Létání Lomnice</name>
+				<description><![CDATA[Vhodné pro FPV: ANO<br>Případná nebezpečí: Silnice]]></description>
+				<styleUrl>#icon-1504-4E342E</styleUrl>
+				<Point>
+					<coordinates>17.4159908,49.8765921,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Jamolice</name>
+				<description><![CDATA[Vhodné pro FPV: Ano<br>Nebezpeční: V blízkosti les]]></description>
+				<styleUrl>#icon-1504-4E342E</styleUrl>
+				<Point>
+					<coordinates>16.2539077,49.0820427,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Luby u Chebu</name>
+				<description><![CDATA[Vhodné pro FPV<br>Nedaleko dráty]]></description>
+				<styleUrl>#icon-1504-4E342E</styleUrl>
+				<Point>
+					<coordinates>12.3950297,50.2562981,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Orlík nad Vltavou</name>
+				<description><![CDATA[Vhodné pro FPV<br>Nebezpečí: řeka]]></description>
+				<styleUrl>#icon-1504-4E342E</styleUrl>
+				<Point>
+					<coordinates>14.1577935,49.525466,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Pardubice</name>
+				<description><![CDATA[Vhodné pro FPV]]></description>
+				<styleUrl>#icon-1504-4E342E</styleUrl>
+				<Point>
+					<coordinates>15.8312559,50.0350365,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Brno</name>
+				<description><![CDATA[Vhodné pro FPV<br>Nebezpeční: Dráty, lom, za stromy silnice]]></description>
+				<styleUrl>#icon-1504-4E342E</styleUrl>
+				<Point>
+					<coordinates>16.6938329,49.2238058,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Zábřeh</name>
+				<description><![CDATA[Vhodné pro FPV<br>Nebezpečí: Dráty]]></description>
+				<styleUrl>#icon-1504-4E342E</styleUrl>
+				<Point>
+					<coordinates>16.8405712,49.890515,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Česká Třebová</name>
+				<styleUrl>#icon-1504-4E342E-nodesc</styleUrl>
+				<Point>
+					<coordinates>16.455186,49.9083828,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Nezvěstice</name>
+				<description><![CDATA[Nebezpečí: Dráty]]></description>
+				<styleUrl>#icon-1504-4E342E</styleUrl>
+				<Point>
+					<coordinates>13.5355747,49.649084,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Děčín</name>
+				<styleUrl>#icon-1504-4E342E-nodesc</styleUrl>
+				<Point>
+					<coordinates>14.2400247,50.7835822,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Třebíz</name>
+				<description><![CDATA[Vhodné pro FPV]]></description>
+				<styleUrl>#icon-1504-4E342E</styleUrl>
+				<Point>
+					<coordinates>13.9965391,50.2719661,0.0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>Revúca</name>
+				<description><![CDATA[Vhodné pro FPV]]></description>
+				<styleUrl>#icon-1504-4E342E</styleUrl>
+				<Point>
+					<coordinates>20.1326609,48.6726563,0.0</coordinates>
+				</Point>
+			</Placemark>
+		</Folder>
+		<Style id='icon-1504-4E342E-normal'>
+			<IconStyle>
+				<color>ff2E344E</color>
+				<scale>1.0</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>0.0</scale>
+			</LabelStyle>
+		</Style>
+		<Style id='icon-1504-4E342E-highlight'>
+			<IconStyle>
+				<color>ff2E344E</color>
+				<scale>1.0</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>1.0</scale>
+			</LabelStyle>
+		</Style>
+		<StyleMap id='icon-1504-4E342E'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#icon-1504-4E342E-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#icon-1504-4E342E-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Style id='icon-1504-4E342E-nodesc-normal'>
+			<IconStyle>
+				<color>ff2E344E</color>
+				<scale>1.0</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>0.0</scale>
+			</LabelStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<Style id='icon-1504-4E342E-nodesc-highlight'>
+			<IconStyle>
+				<color>ff2E344E</color>
+				<scale>1.0</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>1.0</scale>
+			</LabelStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<StyleMap id='icon-1504-4E342E-nodesc'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#icon-1504-4E342E-nodesc-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#icon-1504-4E342E-nodesc-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Style id='icon-1603-097138-normal'>
+			<IconStyle>
+				<color>ff387109</color>
+				<scale>1.0</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>0.0</scale>
+			</LabelStyle>
+		</Style>
+		<Style id='icon-1603-097138-highlight'>
+			<IconStyle>
+				<color>ff387109</color>
+				<scale>1.0</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>1.0</scale>
+			</LabelStyle>
+		</Style>
+		<StyleMap id='icon-1603-097138'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#icon-1603-097138-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#icon-1603-097138-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Style id='icon-1603-FF5252-normal'>
+			<IconStyle>
+				<color>ff5252FF</color>
+				<scale>1.0</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>0.0</scale>
+			</LabelStyle>
+		</Style>
+		<Style id='icon-1603-FF5252-highlight'>
+			<IconStyle>
+				<color>ff5252FF</color>
+				<scale>1.0</scale>
+				<Icon>
+					<href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>1.0</scale>
+			</LabelStyle>
+		</Style>
+		<StyleMap id='icon-1603-FF5252'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#icon-1603-FF5252-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#icon-1603-FF5252-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+	</Document>
+</kml>

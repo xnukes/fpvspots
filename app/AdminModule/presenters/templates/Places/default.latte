@@ -1,0 +1,25 @@
+{block content}
+{define pagetitle}{_administrator.menu.places}{/define}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+		<span class="title elipsis">
+			<strong>{_administrator.places.title.list}</strong>
+		</span>
+                <ul class="options pull-right list-inline">
+                    <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Sbalit"></a></li>
+                    <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Celá obrazovka"><i class="fa fa-expand"></i></a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                {control placesGrid}
+            </div>
+            <div class="panel-footer">
+                <a n:href=":create" class="btn btn-success btn-sm pull-right">{_administrator.places.buttons.create}</a>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>

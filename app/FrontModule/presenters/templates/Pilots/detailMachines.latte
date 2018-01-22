@@ -1,0 +1,101 @@
+{block content}
+
+{define title}
+    {if !empty($pilot->firstName && $pilot->lastName)}
+        {$pilot->firstName} {$pilot->lastName} - Seznam strojů
+    {else}
+        {$pilot->username} - Seznam strojů
+    {/if}
+{/define}
+
+<main role="main">
+
+    <div class="album">
+        <div class="container">
+
+            <h1 class="jumbotron-heading text-dark">
+                <i class="fa fa-wheelchair-alt"></i> Pilot <strong>„{$pilot->username}“</strong>
+                <a n:href="Pilots:default" class="float-right btn btn-sm btn-outline-secondary">
+                    {_default.buttons.backToList} <i class="fa fa-times"></i>
+                </a>
+            </h1>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-12 col-lg-4 mb-2">
+                    <div class="card bg-light">
+                        <div class="card-header"><h4><i class="fa fa-photo"></i> Fotografie</h4></div>
+                        <div class="card-body">
+                            {if $pilot->photo}
+                                <a data-fancybox="gallery" href="{$basePath}/files/photos/{$pilot->photo->filehash}">
+                                    <img class="w-100 img-thumbnail" src="{$basePath}/files/photos/thumbs/{$pilot->photo->filehash}" alt="{$pilot->username}">
+                                </a>
+                            {else}
+                                <img class="w-100 img-thumbnail" src="{$basePath}/Front/images/noimage.png" alt="{$pilot->username}">
+                            {/if}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                    <div class="card bg-light">
+                        <div class="card-header">
+                            {if !empty($pilot->firstName && $pilot->lastName)}
+                                <h4><i class="fa fa-user"></i> {$pilot->firstName} {$pilot->lastName}</h4>
+                            {else}
+                                <h4><i class="fa fa-user"></i> {$pilot->username}</h4>
+                            {/if}
+                            {plink //this}
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <ul class="list-group w-100">
+                                        <a href="mailto:{$pilot->email}" n:if="!empty($pilot->email)" class="list-group-item list-group-item-action"><i class="fa fa-envelope-o"></i> {$pilot->email}</a>
+                                        <a href="{$pilot->pageWebsite}" n:if="!empty($pilot->pageWebsite)" target="_blank" class="list-group-item list-group-item-action"><i class="fa fa-external-link"></i> {$pilot->pageWebsite}</a>
+                                        <a href="{$pilot->pageFacebook}" n:if="!empty($pilot->pageFacebook)" target="_blank" class="list-group-item list-group-item-action"><i class="fa fa-facebook-official"></i> {$pilot->pageFacebook}</a>
+                                        <a href="{$pilot->pageGoogleplus}" n:if="!empty($pilot->pageGoogleplus)" target="_blank" class="list-group-item list-group-item-action"><i class="fa fa-google-plus"></i> {$pilot->pageGoogleplus}</a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" n:snippet="footerCardButtons">
+                            <div class="row">
+                                <div class="col-12 col-lg-5 d-none d-lg-block">
+                                    <nav class="nav">
+                                        <small class="text-muted nav-link px-0"><i class="fa fa-eye"></i> Naposledy aktivní {$pilot->visitedOn|date:'d.m.Y H:i'}</small>
+                                    </nav>
+                                </div>
+                                <div class="col-12 col-lg-7">
+                                    <nav class="nav justify-content-center justify-content-lg-end">
+                                        <a class="btn btn-primary btn-sm mb-1 ajax" n:href="Pilots:detail $pilot->username"><i class="fa fa-home"></i> Veřejná stránka</a>
+                                        <a class="btn btn-primary btn-sm mb-1 ml-2 ajax" n:href="Pilots:places $pilot->username"><i class="fa fa-map-signs"></i> Seznam spotů ({count($pilot->places)})</a>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            {snippet pilotContent}
+                <div class="card bg-light">
+                    <div class="card-header">
+                        <h4><i class="fa fa-rocket"></i> Seznam strojů</h4>
+                    </div>
+                    <div class="card-body p-0">
+
+                        {control machinesGrid}
+
+                    </div>
+                </div>
+            {/snippet}
+
+        </div>
+    </div>
+
+</main>
+
+{include '../@footer-back.latte'}

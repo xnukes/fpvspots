@@ -1,0 +1,69 @@
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+session:
+	savePath: '%tempDir%/sessions'
+	expiration: 14 days
+
+extensions:
+	replicator: Kdyby\Replicator\DI\ReplicatorExtension
+	translation: Kdyby\Translation\DI\TranslationExtension
+	console: Kdyby\Console\DI\ConsoleExtension
+	events: Kdyby\Events\DI\EventsExtension
+	annotations: Kdyby\Annotations\DI\AnnotationsExtension
+	doctrine: Kdyby\Doctrine\DI\OrmExtension
+	ajaxHistory: VojtechDobes\NetteAjax\HistoryExtension
+
+doctrine:
+	metadata:
+		App: %appDir%
+
+translation:
+	default: cs
+	whitelist: [cs, en]
+
+services:
+	cacheStorage:
+		class: Nette\Caching\Storages\DevNullStorage
+
+	router: App\RouterFactory::createRouter
+	authorizator:
+		class: Nette\Security\Permission
+		setup:
+			- addRole('guest')
+			- addRole('user', 'guest')
+			- addRole('manager', 'user')
+			- addRole('admin', 'manager')
+
+			- addResource('Admin:Dashboard')
+			- addResource('Admin:Sign')
+			- addResource('Admin:Users')
+			- addResource('Admin:Groups')
+			- addResource('Admin:Register')
+			- addResource('Admin:Drones')
+			- addResource('Admin:Places')
+			- addResource('Admin:Events')
+			- addResource('Admin:Messages')
+			- addResource('Admin:Buddies')
+
+			- allow('guest', ['Admin:Sign'])
+			- allow('guest', ['Admin:Register'])
+
+			- allow('user', ['Admin:Dashboard'])
+			- allow('user', ['Admin:Users'])
+			- allow('user', ['Admin:Drones'])
+			- allow('user', ['Admin:Places'])
+			- allow('user', ['Admin:Events'])
+			- allow('user', ['Admin:Messages'])
+			- allow('user', ['Admin:Buddies'])
+
+			- allow('admin', ['Admin:Dashboard'])
+			- allow('admin', ['Admin:Users'])
+			- allow('admin', ['Admin:Groups'])
+
+includes:
+	- parameters.neon
+	- services.neon
+	- forms.neon

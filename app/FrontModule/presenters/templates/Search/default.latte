@@ -1,0 +1,29 @@
+{block content}
+
+{define title}Vyhledávání na webu{/define}
+
+<main role="main">
+
+    <div class="album">
+        <div class="container">
+            <h1 class="jumbotron-heading text-dark">
+                <i class="fa fa-search"></i> Vyhledávání na webu
+            </h1>
+
+            <script>
+                (function() {
+                    var cx = '012734011519209040515:of9ztbnz5go';
+                    var gcse = document.createElement('script');
+                    gcse.type = 'text/javascript';
+                    gcse.async = true;
+                    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(gcse, s);
+                })();
+            </script>
+            <gcse:search></gcse:search>
+
+        </div>
+    </div>
+
+</main>

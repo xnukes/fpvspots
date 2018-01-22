@@ -1,0 +1,14 @@
+{
+	"name": "nette.ajax.js",
+	"license": "MIT",
+	"keywords": ["nette", "ajax", "jquery"],
+	"main": "nette.ajax.js",
+	"ignore": [
+		"CONTRIBUTING.md",
+		"example.js",
+		"readme.md"
+	],
+	"dependencies": {
+		"jquery": ">=1.7.0"
+	}
+}

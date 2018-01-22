@@ -1,0 +1,51 @@
+/*
+* custom stylesheet file
+*/
+
+body {
+    background: none;
+    background-image: url(../images/background.jpg);
+    background-size: cover;
+    background-position: center;
+    background-color: #2a2e39;
+    background-blend-mode: screen;
+    background-attachment: fixed;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    border-color: #ec3030;
+    color: rgba(0,0,0,0.4);
+}
+
+body.bg-bw {
+    background-blend-mode: luminosity;
+}
+
+span.logo span.title {
+    font-weight: bold;
+    font-size: 22px;
+    margin: 5px 0px;
+    display: block;
+    color: white;
+}
+
+.datagrid-row-inline-add-hidden {
+    display: none;
+}
+
+.select2-container--default .select2-selection--multiple {
+    border: 2px solid #ddd;
+    height: 40px;
+}
+
+.sky-form .btn {
+     margin: 0px;
+}
+
+/* databgrid ublaboo table admin */
+div.panel-body tbody, div.panel-body thead {
+    border: 1px solid #ddd;
+}
+.datagrid form {
+     margin-bottom: 0px;
+}

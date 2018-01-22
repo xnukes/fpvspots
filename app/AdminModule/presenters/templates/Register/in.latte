@@ -1,0 +1,55 @@
+{block content}
+
+{form registerForm, class => 'sky-form boxed'}
+
+    <header><i class="fa fa-users"></i> Registrace do systému</header>
+
+    {snippet flashes}
+        <div n:foreach="$flashes as $flash" class="{$flash->type} alert alert-{$flash->type} noborder text-center weight-400 nomargin noradius">{$flash->message|noescape}</div>
+    {/snippet}
+    {if $form->hasErrors()}
+        <div n:foreach="$form->errors as $error" class="alert alert-danger noborder text-center weight-400 nomargin noradius">{$error|noescape}</div>
+    {/if}
+
+    <fieldset>
+        <section>
+            {label username, class => 'label' /}
+            <label class="input">
+                <i class="icon-append fa fa-user"></i>
+                {input username}
+                <span class="tooltip tooltip-top-right">Zadejte vaše přihlašovací jméno</span>
+            </label>
+        </section>
+        <section>
+            {label email, class => 'label' /}
+            <label class="input">
+                <i class="icon-append fa fa-envelope"></i>
+                {input email}
+                <span class="tooltip tooltip-top-right">Zadejte váš e-mail</span>
+            </label>
+        </section>
+        <section>
+            {label password, class => 'label' /}
+            <label class="input">
+                <i class="icon-append fa fa-key"></i>
+                {input password}
+                <span class="tooltip tooltip-top-right">Zadejte vaše přihlašovací heslo. Minimálně 5 znaků.</span>
+            </label>
+        </section>
+        <section>
+            {label passwordVerify, class => 'label' /}
+            <label class="input">
+                <i class="icon-append fa fa-key"></i>
+                {input passwordVerify}
+                <span class="tooltip tooltip-top-right">Zadejte znovu vaše heslo. Minimálně 5 znaků.</span>
+            </label>
+        </section>
+    </fieldset>
+
+    <footer>
+        <div class="row">
+            <div class="col-md-6 text-left"><a n:href="Sign:in" class="btn btn-sm btn-primary pull-left"><i class="fa fa-user-o"></i> Přihlásit se</a></div>
+            <div class="col-md-6 text-right"><button n:name="send" class="btn btn-sm btn-warning pull-right"><i class="fa fa-sign-in"></i> Odeslat registraci</button></div>
+        </div>
+    </footer>
+{/form}

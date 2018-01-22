@@ -1,0 +1,122 @@
+{block content}
+
+{define title}{$place->name}{/define}
+
+<main role="main">
+
+    <div class="album">
+        <div class="container">
+
+            <h1 class="jumbotron-heading text-dark">
+                <i class="fa fa-map-signs"></i> {$place->name}
+                <a n:href="Places:default" class="float-right btn btn-outline-secondary btn-sm">
+                    {_default.buttons.backToMap} <i class="fa fa-times"></i>
+                </a>
+            </h1>
+
+            <div class="clearfix"></div>
+
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card bg-light">
+                        <div class="card-header"><h4><i class="fa fa-map-marker"></i> Mapa spotu</h4></div>
+                        <div class="card-body p-0">
+                            <div class="map" id="gmaps-container" style="width: 100%; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card bg-light">
+                        <div class="card-header"><h4><i class="fa fa-balance-scale"></i> Shrnutí</h4></div>
+                        <div class="card-body">
+                            <h4 class="card-title">Vlastník <i class="fa fa-user"></i></h4>
+                            <p class="card-text">{$place->user->username}</p>
+
+                            <h4 class="card-title" n:if="!empty($place->plusDesc)">Plusy <i class="fa fa-plus"></i></h4>
+                            <p class="card-text" n:if="!empty($place->plusDesc)">{$place->plusDesc}</p>
+
+                            <h4 class="card-title" n:if="!empty($place->minusDesc)">Mínusy <i class="fa fa-minus"></i></h4>
+                            <p class="card-text" n:if="!empty($place->minusDesc)">{$place->minusDesc}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-8 mb-4">
+                    <div class="card bg-light">
+                        <div class="card-header"><h4><i class="fa fa-info"></i> Popis</h4></div>
+                        <div class="card-body">
+                            {$place->description|noescape}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {if count($place->photos)}
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card bg-light">
+                            <div class="card-header"><h4><i class="fa fa-photo"></i> Fotogalerie</h4></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    {foreach $place->photos as $photo}
+                                        <div class="col-2">
+                                            <a href="{$basePath}/files/photos/{$photo->filehash}" data-fancybox="gallery">
+                                                <img src="{$basePath}/files/photos/thumbs/{$photo->filehash}" class="img-thumbnail" alt="">
+                                            </a>
+                                        </div>
+                                    {/foreach}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            {/if}
+
+        </div>
+    </div>
+
+</main>
+
+{define js}
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+            values = {$place->mapPlace};
+            var vars = values.split(';');
+            selLat = vars[0];
+            selLng = vars[1];
+            selZoom = Number(vars[2]);
+            var map = new GMaps({
+                el: '#gmaps-container',
+                lat: selLat,
+                lng: selLng,
+                zoom: selZoom,
+                cursor: 'pointer',
+                mapType: 'hybrid',
+//                click: function(e) {
+//                    googleMapInput.val(e.latLng.lat() + ';' + e.latLng.lng() + ';' + map.getZoom());
+//                    if(map.markers[0] !== undefined) {
+//                        map.markers[0].setPosition(new google.maps.LatLng(e.latLng.lat(), e.latLng.lng()));
+//                    } else {
+//                        map.addMarker({
+//                            lat: e.latLng.lat(),
+//                            lng: e.latLng.lng(),
+//                            title: 'Označené místo'
+//                        });
+//                    }
+//                }
+            });
+
+            map.addMarker({
+                lat: selLat,
+                lng: selLng,
+                title: 'Označené místo'
+            });
+        });
+    </script>
+{/define}
+
+{include '../@footer-back.latte'}
