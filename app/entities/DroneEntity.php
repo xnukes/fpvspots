@@ -108,16 +108,19 @@ class DroneEntity extends BaseEntity
 		return $this->photos->get($photoKey);
 	}
 
+	// TODO: rename to getCalculatedRatingFormat
 	public function getCalculatedRating()
 	{
+		$calculated_rating = 0;
+
 		if (count($this->ratings)) {
 			$rates = [];
 			foreach ($this->ratings as $rating)
 				$rates[] = $rating->rate;
-			return number_format(array_sum($rates) / count($rates), 2, '.', ' ');
-		} else {
-			return 0;
+			$calculated_rating = array_sum($rates) / count($rates);
 		}
+
+		return number_format($calculated_rating, 2, '.', ' ');
 	}
 
 	public function hasIpRating()
