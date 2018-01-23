@@ -7,4 +7,3 @@ config.local.neon
 /.idea/*
 !.gitignore
 /.htaccess
-/www/files/photos/
