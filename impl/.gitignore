@@ -4,6 +4,5 @@
 /temp/sessions/*
 /vendor/*
 config.local.neon
-/.idea/*
 !.gitignore
 /.htaccess
