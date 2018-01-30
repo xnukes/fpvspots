@@ -39,9 +39,11 @@ class PlacesPresenter extends BasePresenter
 
 		$places = $qb->getQuery()->getArrayResult();
 
+        $detailLink = $this->link('Places:detail');
+
 		foreach ($places as $place) {
 			$data['places'][] = [
-				'url' => $this->link('Places:detail', $place['id']),
+				'url' => $detailLink . '/' . $place['id'],
 				'name' => $place['name'],
 				'desc' => $place['description'],
 				'plus' => $place['plusDesc'],
