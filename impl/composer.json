@@ -24,7 +24,9 @@
 		"kdyby/translation": "^2.4",
 		"kdyby/forms-replicator": "@dev",
 		"kdyby/doctrine": "^3.1",
-		"vojtech-dobes/nette-ajax-history": "@dev"
+		"vojtech-dobes/nette-ajax-history": "@dev",
+		"janmarek/webloader": "^2.5",
+		"joseki/webloader-filters": "^1.1"
 	},
 	"require-dev": {
 		"nette/tester": "^1.6"

@@ -9,13 +9,10 @@
     <link rel="icon" href="{$basePath}/Front/bootstrap/favicon.ico">
     <title n:inner-snippet="title">{ifset #title}{include title} | {/ifset}{$parameters->sitetitle}</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{$basePath}/Front/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="{$basePath}/Front/css/style.css?v={time()}" rel="stylesheet" type="text/css" />
-    <link href="{$basePath}/Front/css/album.css?v={time()}" rel="stylesheet" type="text/css" />
-    <link href="{$basePath}/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="{$basePath}/bower_components/ublaboo-datagrid/assets/dist/datagrid.css" rel="stylesheet" type="text/css" />
+    {* Add new CSS files into webloader.neon *}
+    {control css}
+
+    {control jsTop}
 
     <link rel="apple-touch-icon" sizes="57x57" href="{$basePath}/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="{$basePath}/apple-icon-60x60.png">
@@ -41,8 +38,6 @@
     <meta property="og:description"         content="CZ/SK Databáze spotů, buildů, pilotů atd ---" />
     {ifset #fbimg}<meta property="og:image" content="{$baseUrl}/Front/images/{include fbimg}" />{else}<meta property="og:image" content="{$baseUrl}/Front/images/fpvspots-fb-banner-2.png" />{/ifset}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css" />
-    <link rel="stylesheet" href="{$basePath}/css/font-awesome.min.css">
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <meta name="google-site-verification" content="hckjHgTyr-YwjAoDmsMMbOmaPflkZNmoVx5WhgVBotc" />
 </head>
@@ -144,25 +139,10 @@
     <div class="loader">Loading...</div>
 </div>
 
-<!-- Bootstrap core JavaScript -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="{$basePath}/bower_components/jquery/dist/jquery.js"></script>
-<script src="{$basePath}/Front/bootstrap/assets/js/vendor/popper.min.js"></script>
-<script src="{$basePath}/Front/bootstrap/js/bootstrap.min.js"></script>
-
-<script src="{$basePath}/bower_components/nette-forms/src/assets/netteForms.js"></script>
-<script src="{$basePath}/bower_components/nette.ajax.js/nette.ajax.js"></script>
-<script src="{$basePath}/bower_components/history.nette.ajax.js/client-side/history.ajax.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="{$basePath}/Front/bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
+{control jsBottom}
 
 <script src="http://maps.google.com/maps/api/js?key=AIzaSyBgK_mOnwuBJ9FeigD0vjn61B3X_gdQ3Xs"></script>
-<script type="text/javascript" src="{$basePath}/bower_components/gmaps/gmaps.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
-
-<script type="text/javascript" src="{$basePath}/js/main.js?v={time()}"></script>
-<script type="text/javascript" src="{$basePath}/Front/js/main.js?v={time()}"></script>
 <!-- Google Adsense - Initializing -->
 <script>
     if($('ins.adsbygoogle').length > 0) {

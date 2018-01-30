@@ -2,6 +2,7 @@
 /temp/cache/*
 /temp/proxies/*
 /temp/sessions/*
+/www/webtemp/*
 /vendor/*
 config.local.neon
 !.gitignore

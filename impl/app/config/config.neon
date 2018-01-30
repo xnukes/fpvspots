@@ -67,3 +67,4 @@ includes:
 	- parameters.neon
 	- services.neon
 	- forms.neon
+	- webloader.neon
