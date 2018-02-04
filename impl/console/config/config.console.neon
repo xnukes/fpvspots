@@ -1,0 +1,21 @@
+extensions:
+	console: Kdyby\Console\DI\ConsoleExtension
+	events: Kdyby\Events\DI\EventsExtension
+	annotations: Kdyby\Annotations\DI\AnnotationsExtension
+	doctrine: Kdyby\Doctrine\DI\OrmExtension
+	translation: Kdyby\Translation\DI\TranslationExtension
+
+doctrine:
+	metadata:
+		App: %appDir%
+	host: %database.host%
+	user: %database.user%
+	password: %database.password%
+	dbname: %database.database%
+
+services:
+	router: App\RouterFactory::createRouter
+
+includes:
+	- parameters.console.neon
+	- services.console.neon
