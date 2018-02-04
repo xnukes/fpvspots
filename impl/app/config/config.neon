@@ -19,6 +19,10 @@ extensions:
 doctrine:
 	metadata:
 		App: %appDir%
+	host: %database.host%
+	user: %database.user%
+	password: %database.password%
+	dbname: %database.database%
 
 translation:
 	default: cs
