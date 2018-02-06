@@ -1,8 +1,10 @@
 # Apache configuration file (see httpd.apache.org/docs/current/mod/quickreference.html)
 
-<filesMatch ".(css|jpg|jpeg|png|gif|js|ico)$">
-    Header set Cache-Control "max-age=518400, public"
-</filesMatch>
+<IfModule mod_headers.c>
+    <filesMatch ".(css|jpg|jpeg|png|gif|js|ico)$">
+        Header set Cache-Control "max-age=518400, public"
+    </filesMatch>
+</IfModule>
 
 # disable directory listing
 <IfModule mod_autoindex.c>
