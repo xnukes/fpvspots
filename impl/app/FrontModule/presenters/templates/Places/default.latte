@@ -26,7 +26,7 @@
                         lat: o['place'][0],
                         lng: o['place'][1],
                         title: o['name'],
-                        icon: {$basePath} + '/Front/images/map-icon.png',
+                        icon: {$basePath} + o['icon'],
                         infoWindow: {
                             content: '<h4><strong>' + o['name'] + '</strong> (' + o['username'] + ')</h4><hr>'
                                 + (o['desc'] ? '<p>Popis:</p><p>' + o['desc'] + '</p>' : '')
@@ -38,40 +38,6 @@
                 })
             }
         });
-
-        {*
-        {foreach $places as $place}
-            map.addMarker({
-                lat: {$place->mapPlace|latitude},
-                lng: {$place->mapPlace|longtitude},
-                title: {$place->name},
-                icon: {$basePath} + '/Front/images/map-icon.png',
-                infoWindow: {
-                    content : '<strong><u>' + {$place->name} + '</u></strong> (' + {$place->user->username}
-                    {if $place->description}
-                        + ')<br>Popis:' + {$place->description}
-                    {/if}
-                    {if $place->plusDesc}
-                        + '<br>Plusy: ' + {$place->plusDesc}
-                    {/if}
-                    {if $place->minusDesc}
-                        + '<br>Mínusy: ' + {$place->minusDesc}
-                    {/if}
-                        + '<br><br>GPS: ' + {$place->mapPlace|latitude} + ',' + {$place->mapPlace|latitude}
-                    {if count($place->photos)}
-                        + '<br><br>Fotka: <div>'
-                        {foreach $place->photos as $photo}
-                            + '<a data-fancybox="gallery" href="' +{$basePath} + '/files/photos/' + {$photo->filehash} + '" data-lightbox="image">'
-                            + '<img src="' + {$basePath} + '/files/photos/thumbs/' + {$photo->filehash} + '" alt="" class="image img-responsive img-thumbnail margin-bottom-6 margin-top-6">'
-                            + '</a>'
-                        {/foreach}
-                        + '</div>'
-                    {/if}
-                }
-            });
-        {/foreach}
-*}
-
     });
 </script>
 {/define}

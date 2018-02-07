@@ -5,7 +5,9 @@ namespace App\FrontModule\Presenters;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
+use Nette\Utils\DateTime;
 use Nette\Utils\Strings;
+use Tracy\Debugger;
 
 class PlacesPresenter extends BasePresenter
 {
@@ -42,6 +44,10 @@ class PlacesPresenter extends BasePresenter
         $detailLink = $this->link('Places:detail');
 
 		foreach ($places as $place) {
+			$icon = '/Front/images/map-icon.png';
+			if ($place['createdOn'] >= (new DateTime())->modify('- 1 month')) {
+				$icon = '/Front/images/map-icon-new.png';
+			}
 			$data['places'][] = [
 				'url' => $detailLink . '/' . $place['id'],
 				'name' => $place['name'],
@@ -50,6 +56,7 @@ class PlacesPresenter extends BasePresenter
 				'minus' => $place['minusDesc'],
 				'place' => $this->getGmapsPointer($place['mapPlace']),
 				'username' => $place['user']['username'],
+				'icon' => $icon
 			];
 		}
 
