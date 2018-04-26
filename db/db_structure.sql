@@ -242,11 +242,15 @@ DROP TABLE IF EXISTS `videos`;
 CREATE TABLE `videos` (
   `id` int(50) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(50) unsigned NOT NULL,
-  `yt_link` varchar(250) COLLATE utf8_czech_ci DEFAULT NULL,
-  `yt_title` varchar(250) COLLATE utf8_czech_ci DEFAULT NULL,
-  `yt_desc` varchar(250) COLLATE utf8_czech_ci DEFAULT NULL,
+  `link` varchar(250) COLLATE utf8_czech_ci NOT NULL,
+  `name` varchar(250) COLLATE utf8_czech_ci NOT NULL,
+  `desc` varchar(250) COLLATE utf8_czech_ci DEFAULT NULL,
+  `type` varchar(100) COLLATE utf8_czech_ci NOT NULL,
+  `created_on` datetime NOT NULL,
+  `changed_on` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
