@@ -13,6 +13,9 @@ class VideosPresenter extends BasePresenter
 {
 	public $videos;
 
+	/** @var \App\AdminModule\Forms\VideoForm @inject */
+	public $videoForm;
+
 	public function actionDefault()
 	{
 		$this->videos = [];
@@ -26,42 +29,35 @@ class VideosPresenter extends BasePresenter
 
 		$grid->addColumnText('name', 'Název', 'name')
 			->setSortable();
-//
-//		$grid->addColumnText('latitude', 'Latitude')
-//			->setFitContent()
-//			->setRenderer(function ($item) {
-//				return explode(';', $item->mapPlace)[0];
-//			});
-//
-//		$grid->addColumnText('longtitude', 'Longtitude')
-//			->setFitContent()
-//			->setRenderer(function ($item) {
-//				return explode(';', $item->mapPlace)[1];
-//			});
-//
-//		$grid->addColumnDateTime('createdOn', 'Vytvořeno')
-//			->setSortable()
-//			->setFitContent();
-//
-//		$grid->addColumnDateTime('changedOn', 'Změněno')
-//			->setSortable()
-//			->setFitContent();
-//
-//		$grid->addAction('edit', $this->getTranslator()->translate('default.buttons.edit'))
-//			->setIcon('edit');
-//
-//		$grid->addAction('remove', $this->getTranslator()->translate('default.buttons.remove'), 'remove!')
-//			->setClass('btn btn-danger btn-xs ajax')
-//			->setIcon('remove')
-//			->setConfirm(function($item) {
-//				return 'Opravdu chcete smazat položku ' . $item->name . '?';
-//			});
-//
-//		$grid->addFilterText('name', 'Hledat název:');
+
+		$grid->addColumnDateTime('createdOn', 'Vytvořeno')
+			->setSortable()
+			->setFitContent();
+
+		$grid->addColumnDateTime('changedOn', 'Změněno')
+			->setSortable()
+			->setFitContent();
+
+		$grid->addAction('edit', $this->getTranslator()->translate('default.buttons.edit'))
+			->setIcon('edit');
+
+		$grid->addAction('remove', $this->getTranslator()->translate('default.buttons.remove'), 'remove!')
+			->setClass('btn btn-danger btn-xs ajax')
+			->setIcon('remove')
+			->setConfirm(function($item) {
+				return 'Opravdu chcete smazat položku ' . $item->name . '?';
+			});
+
+		$grid->addFilterText('name', 'Hledat název:');
 
 		$grid->setOuterFilterRendering();
 		$grid->setRememberState(false);
 
 		return $grid;
+	}
+
+	public function createComponentVideoForm($name)
+	{
+		return $this->videoForm->create($this, $name);
 	}
 }

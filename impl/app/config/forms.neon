@@ -6,3 +6,4 @@ services:
 	- App\AdminModule\Forms\DroneForm
 	- App\AdminModule\Forms\PlaceForm
 	- App\AdminModule\Forms\EventForm
+	- App\AdminModule\Forms\VideoForm

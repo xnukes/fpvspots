@@ -44,7 +44,8 @@ class VideoForm extends Nette\Object implements IBaseForm
 		$form->addText('desc', 'Popis')
 			->setAttribute('class', 'form-control');
 
-		$form->addSelect('type', 'Typ videa', VideoEntity::TYPES);
+		$form->addSelect('type', 'Typ videa', VideoEntity::TYPES)
+			->setAttribute('class', 'form-control');
 
 		$form->addSubmit('send', 'default.buttons.save')
 			->setAttribute('class', 'btn btn-default btn-success btn-sm');
