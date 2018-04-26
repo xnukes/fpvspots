@@ -16,7 +16,7 @@ use Nette\Utils\DateTime;
  * @property integer $id
  * @property string $link
  * @property string $name
- * @property string $desc
+ * @property string $description
  * @property string $type
  * @property DateTime $createdOn
  * @property DateTime $changedOn
@@ -54,7 +54,7 @@ class VideoEntity extends BaseEntity
 	/**
 	 * @ORM\Column(type="string")
 	 */
-	protected $desc;
+	protected $description;
 
 	/**
 	 * @ORM\Column(type="string")

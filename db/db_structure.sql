@@ -244,7 +244,7 @@ CREATE TABLE `videos` (
   `user_id` int(50) unsigned NOT NULL,
   `link` varchar(250) COLLATE utf8_czech_ci NOT NULL,
   `name` varchar(250) COLLATE utf8_czech_ci NOT NULL,
-  `desc` varchar(250) COLLATE utf8_czech_ci DEFAULT NULL,
+  `description` varchar(250) COLLATE utf8_czech_ci DEFAULT NULL,
   `type` varchar(100) COLLATE utf8_czech_ci NOT NULL,
   `created_on` datetime NOT NULL,
   `changed_on` datetime NOT NULL,

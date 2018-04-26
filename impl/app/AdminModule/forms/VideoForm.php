@@ -41,7 +41,7 @@ class VideoForm extends Nette\Object implements IBaseForm
 			->setAttribute('class', 'form-control')
 			->setRequired($presenter->getTranslator()->translate('default.forms.messages.required'));
 
-		$form->addText('desc', 'Popis')
+		$form->addText('description', 'Popis')
 			->setAttribute('class', 'form-control');
 
 		$form->addSelect('type', 'Typ videa', VideoEntity::TYPES)
