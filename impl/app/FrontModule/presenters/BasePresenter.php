@@ -1,9 +1,9 @@
 <?php
-/**
- * Class BasePresenter.php , Last changed 18.1.17 22:18
- * This file is part of the drones-map
- * Copyright (c) 2017 Lukáš Vlček (http://www.vlceklukas.cz)
- */
+/**************************************************************************************************
+ * This file is part of the github-fpvspots.                                                      *
+ * Licence: GNU General Public License.                                                           *
+ * Copyright (c) 2018 Lukáš Vlček (http://www.vlceklukas.cz)                                      *
+ **************************************************************************************************/
 
 namespace App\FrontModule\Presenters;
 use WebLoader\Nette\CssLoader;

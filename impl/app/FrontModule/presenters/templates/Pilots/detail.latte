@@ -1,17 +1,17 @@
 {block content}
 
 {define title}
-    {if !empty($pilot->firstName && $pilot->lastName)}
+    {if isset($pilot) && !empty($pilot->firstName && $pilot->lastName)}
         {$pilot->firstName} {$pilot->lastName} - Veřejná stránka
     {else}
-        {$pilot->username} - Veřejná stránka
+        {if isset($pilot)}{$pilot->username} - Veřejná stránka{/if}
     {/if}
 {/define}
 
 <main role="main">
 
     <div class="album">
-        <div class="container">
+        <div class="container" n:if="isset($pilot)">
 
             <h1 class="jumbotron-heading text-dark">
                 <i class="fa fa-wheelchair-alt"></i> Pilot <strong>„{$pilot->username}“</strong>
@@ -22,7 +22,7 @@
 
             <div class="clearfix"></div>
 
-            <div class="row">
+            <div class="row" id="profile">
                 <div class="col-12 col-lg-4 mb-2">
                     <div class="card bg-light">
                         <div class="card-header"><h4><i class="fa fa-photo"></i> Fotografie</h4></div>
@@ -41,11 +41,11 @@
                     <div class="card bg-light">
                         <div class="card-header">
                             {if !empty($pilot->firstName && $pilot->lastName)}
-                                <h4><i class="fa fa-user"></i> {$pilot->firstName} {$pilot->lastName}</h4>
+                                <h4><i class="fa fa-user"></i> <a href="#profile">{$pilot->firstName} {$pilot->lastName}</a></h4>
                             {else}
-                                <h4><i class="fa fa-user"></i> {$pilot->username}</h4>
+                                <h4><i class="fa fa-user"></i> <a href="#profile">{$pilot->username}</a></h4>
                             {/if}
-                            {plink //this}
+                            <i class="fa fa-external-link"></i>&nbsp;&nbsp;<a n:href="this" target="_blank">{plink //this}</a>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -81,14 +81,27 @@
             <hr class="my-4">
 
             {snippet pilotContent}
-                <div class="card bg-light" n:if="!empty($pilot->pageContent)">
+
+                <div class="card bg-light" id="videos">
                     <div class="card-header">
-                        <h4><i class="fa fa-rss"></i> {$pilot->username} MicroBlog</h4>
+                        <h4><i class="fa fa-video-camera"></i> <a href="#videos">Nahrané videa</a></h4>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+
+
+                <hr class="my-4">
+
+                <div class="card bg-light" n:if="!empty($pilot->pageContent)" id="blog">
+                    <div class="card-header">
+                        <h4><i class="fa fa-rss"></i> <a href="#blog">{$pilot->username} MicroBlog</a></h4>
                     </div>
                     <div class="card-body">
                         {$pilot->pageContent|noescape}
                     </div>
                 </div>
+
                 <div n:if="empty($pilot->pageContent)">
                     <div class="alert alert-warning" role="alert">
                         Tento pilot zatím nemá vyplňený obsah své veřejné stránky.

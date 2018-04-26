@@ -1,8 +1,13 @@
 /*
- * Class style.css , Last changed 18.1.17 23:03
- * This file is part of the drones-map
- * Copyright (c) 2017 Lukáš Vlček (http://www.vlceklukas.cz)
+ * This file is part of the github-fpvspots.
+ * Licence: GNU General Public License.
+ * Copyright (c) 2018 Lukáš Vlček (http://www.vlceklukas.cz)
  */
+
+.datagrid table {
+	margin: 0;
+	margin-top: 10px !important;
+}
 
 body {
 	font-variant: small-caps;

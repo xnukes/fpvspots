@@ -7,6 +7,7 @@ menu:
 	logout: 'Odhlásit'
 	drones: 'Vaše drony'
 	places: 'Vaše místa'
+	videos: 'YT Videotéka'
 	events: 'Události'
 	buddies: 'Přátelé'
 
@@ -58,3 +59,10 @@ events:
 		create: 'Zadat novou událost'
 		join: 'Připojit se'
 		logout: 'Odhlásit'
+
+videos:
+	title:
+		list: 'Seznam YT videí'
+		create: 'Nové video'
+	buttons:
+		create: 'Nové video'

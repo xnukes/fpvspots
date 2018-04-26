@@ -1,4 +1,3 @@
-
 extensions:
 	webloader: WebLoader\Nette\Extension
 
@@ -6,10 +5,11 @@ services:
 	jwlCssMinFilter: Joseki\Webloader\CssMinFilter
 
 webloader:
+	debugger: false
 	cssDefaults:
-		joinFiles: %productionMode%
+		joinFiles: %productionMode% # debugMode | productionMode
 	jsDefaults:
-		joinFiles: %productionMode%
+		joinFiles: %productionMode% # debugMode | productionMode
 	css:
 		front:
 			remoteFiles:

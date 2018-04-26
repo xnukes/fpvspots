@@ -33,6 +33,11 @@
 						<i class="main-icon fa fa-map-o"></i> <span>{_administrator.menu.places}</span>
 					</a>
 				</li>
+				<li n:class="$presenter->isLinkCurrent('Videos:*') ? active">
+					<a class="places" n:href="Videos:default">
+						<i class="main-icon fa fa-youtube"></i> <span>{_administrator.menu.videos}</span>
+					</a>
+				</li>
 				<li n:class="$presenter->isLinkCurrent('Events:*') ? active">
 					<a class="events" n:href="Events:default">
 						<i class="main-icon fa fa-calendar"></i> <span>{_administrator.menu.events}</span>

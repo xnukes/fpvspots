@@ -31,7 +31,6 @@ translation:
 services:
 	cacheStorage:
 		class: Nette\Caching\Storages\DevNullStorage
-
 	router: App\RouterFactory::createRouter
 	authorizator:
 		class: Nette\Security\Permission
@@ -51,6 +50,7 @@ services:
 			- addResource('Admin:Events')
 			- addResource('Admin:Messages')
 			- addResource('Admin:Buddies')
+			- addResource('Admin:Videos')
 
 			- allow('guest', ['Admin:Sign'])
 			- allow('guest', ['Admin:Register'])
@@ -62,6 +62,7 @@ services:
 			- allow('user', ['Admin:Events'])
 			- allow('user', ['Admin:Messages'])
 			- allow('user', ['Admin:Buddies'])
+			- allow('user', ['Admin:Videos'])
 
 			- allow('admin', ['Admin:Dashboard'])
 			- allow('admin', ['Admin:Users'])

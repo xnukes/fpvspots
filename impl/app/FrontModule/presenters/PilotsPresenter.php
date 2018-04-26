@@ -1,11 +1,11 @@
 <?php
-/**
- * This file is part of the project FPVSpots.info.
- * Copyright (c) 2017 Lukáš Vlček (http://www.vlceklukas.cz)
- */
+/**************************************************************************************************
+ * This file is part of the github-fpvspots.                                                      *
+ * Licence: GNU General Public License.                                                           *
+ * Copyright (c) 2018 Lukáš Vlček (http://www.vlceklukas.cz)                                      *
+ **************************************************************************************************/
 
 namespace App\FrontModule\Presenters;
-
 
 use App\Models\Grid;
 use Nette\Utils\Html;
@@ -19,6 +19,12 @@ class PilotsPresenter extends BasePresenter
 
 	public $perPage = 10;
 
+	/** @var \App\Entities\UserEntity */
+	public $pilot;
+
+	/** @var array \App\Entities\PlaceEntity */
+	public $places;
+
 	public function actionDefault()
 	{
 		$this->template->pilots = $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())
@@ -27,7 +33,11 @@ class PilotsPresenter extends BasePresenter
 
 	public function actionDetail(string $username)
 	{
-		$this->template->pilot = $this->getPublicPilotByUsername($username);
+		try {
+			$this->template->pilot = $this->getPublicPilotByUsername($username);
+		} catch (\Nette\Application\BadRequestException $exception) {
+			$this->flashMessage($exception->getMessage(), 'error');
+		}
 
 		if($this->isAjax()) {
 			$this->redrawControl('pilotContent');
@@ -39,7 +49,12 @@ class PilotsPresenter extends BasePresenter
 	public function actionMachines(string $username)
 	{
 		$this->setView('detailMachines');
-		$this->template->pilot = $this->getPublicPilotByUsername($username);
+
+		try {
+			$this->template->pilot = $this->getPublicPilotByUsername($username);
+		} catch (\Nette\Application\BadRequestException $exception) {
+			$this->flashMessage($exception->getMessage(), 'error');
+		}
 
 		if($this->isAjax()) {
 			$this->redrawControl('pilotContent');
@@ -51,7 +66,12 @@ class PilotsPresenter extends BasePresenter
 	public function actionPlaces($username)
 	{
 		$this->setView('detailSpots');
-		$this->template->pilot = $this->getPublicPilotByUsername($username);
+
+		$this->pilot = $this->getPublicPilotByUsername($username);
+
+		$this->places = $this->pilot->places;
+
+		$this->template->pilot = $this->pilot;
 
 		if($this->isAjax()) {
 			$this->redrawControl('pilotContent');
@@ -66,7 +86,8 @@ class PilotsPresenter extends BasePresenter
 
 		$grid->setDataSource($this->template->pilot->drones);
 
-		$grid->addColumnLink('name', 'Název', 'Machines:detail');
+		$grid->addColumnLink('name', 'Název', 'Machines:detail')
+			->setFilterText('name');
 
 		$grid->addColumnText('ratings', 'Hodnocení')
 			->setFitContent()
@@ -93,6 +114,8 @@ class PilotsPresenter extends BasePresenter
 
 		$grid->setColumnReset(false);
 
+		$grid->setOuterFilterRendering(true);
+
 		$grid->setRememberState(false);
 
 		return $grid;
@@ -102,7 +125,7 @@ class PilotsPresenter extends BasePresenter
 	{
 		$grid = new Grid($this, $name);
 
-		$grid->setDataSource($this->template->pilot->places);
+		$grid->setDataSource($this->places);
 
 		$grid->addColumnLink('name', 'Název', 'Places:detail');
 
@@ -118,13 +141,21 @@ class PilotsPresenter extends BasePresenter
 		$grid->addColumnDateTime('createdOn', 'Vytvořeno')
 			->setFitContent();
 
-		$grid->setColumnReset(false);
+		$grid->addFilterText('name', 'Název', ['name']);
 
-		$grid->setRememberState(false);
+		$grid->setColumnReset(false);
+		$grid->setOuterFilterRendering(true);
+		$grid->setRememberState(true);
+		$grid->setRefreshUrl(false);
 
 		return $grid;
 	}
 
+	/**
+	 * @param string $username
+	 * @return mixed|null|object
+	 * @throws \Nette\Application\BadRequestException
+	 */
 	protected function getPublicPilotByUsername(string $username)
 	{
 		$pilot = $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())->findOneBy(['username' => $username, 'public' => true]);

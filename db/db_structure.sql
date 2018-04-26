@@ -235,6 +235,19 @@ CREATE TABLE `wall_messages` (
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 
+/*Table structure for table `videos` */
+
+DROP TABLE IF EXISTS `videos`;
+
+CREATE TABLE `videos` (
+  `id` int(50) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(50) unsigned NOT NULL,
+  `yt_link` varchar(250) COLLATE utf8_czech_ci DEFAULT NULL,
+  `yt_title` varchar(250) COLLATE utf8_czech_ci DEFAULT NULL,
+  `yt_desc` varchar(250) COLLATE utf8_czech_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
