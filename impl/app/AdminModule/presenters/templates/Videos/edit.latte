@@ -1,0 +1,43 @@
+{block content}
+{define pagetitle}{_administrator.menu.videos}{/define}
+
+{form videoForm}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <span class="title elipsis">
+                    <strong>{_administrator.videos.title.edit}</strong>
+                </span>
+                    <ul class="options pull-right list-inline">
+                        <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Sbalit"></a></li>
+                        <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Celá obrazovka"><i class="fa fa-expand"></i></a></li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {label name /} {input name}
+                        </div>
+                        <div class="col-md-6">
+                            {label description /} {input description}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {label type /} {input type}
+                        </div>
+                        <div class="col-md-6">
+                            {label link /} {input link}
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    {input send, class => 'btn btn-success btn-sm pull-right'}
+                    <a n:href=":default" class="btn btn-danger btn-sm pull-right">{_default.buttons.backToList}</a>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/form}

@@ -6,3 +6,4 @@ services:
 	- App\Managers\PhotoManager
 	- App\Managers\PlaceManager
 	- App\Managers\EventsManager
+	- App\Managers\VideoManager

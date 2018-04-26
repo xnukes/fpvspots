@@ -64,6 +64,7 @@ videos:
 	title:
 		list: 'Seznam videí'
 		create: 'Nové video'
+		edit: 'Změna videa'
 	buttons:
 		create: 'Nové video'
 	types:

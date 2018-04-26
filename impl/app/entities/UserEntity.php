@@ -35,6 +35,7 @@ use Nette\Utils\DateTime;
  * @property ArrayCollection $events
  * @property ArrayCollection $drones
  * @property ArrayCollection $places
+ * @property ArrayCollection $videos
  * @property ArrayCollection $buddies
  *
  * @ORM\Entity(repositoryClass="\App\Entities\UserEntity")
@@ -157,6 +158,11 @@ class UserEntity extends BaseEntity
 	 * @ORM\OneToMany(targetEntity="PlaceEntity", mappedBy="user", cascade={"persist", "remove"})
 	 */
 	protected $places;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="VideoEntity", mappedBy="user", cascade={"persist", "remove"})
+	 */
+	protected $videos;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="BuddyEntity", mappedBy="user")
