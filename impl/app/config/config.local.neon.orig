@@ -1,0 +1,7 @@
+parameters:
+    database:
+        host:
+        user: root
+        password:
+        dbname: fpvspots
+        driver: mysql

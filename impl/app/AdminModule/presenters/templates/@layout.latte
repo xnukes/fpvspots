@@ -1,0 +1,134 @@
+{include '@head.latte'}
+
+<body class="bg-bw">
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-51240862-7"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){
+		dataLayer.push(arguments)
+    };
+    gtag('js', new Date());
+
+    gtag('config', 'UA-51240862-7');
+</script>
+<!-- WRAPPER -->
+<div id="wrapper" class="clearfix">
+	<!-- ASIDE -->
+	<aside id="aside">
+		<nav id="sideNav">
+			<ul class="nav nav-list">
+				<li n:class="$presenter->isLinkCurrent('Dashboard:*') ? active">
+					<a class="dashboard" n:href="Dashboard:default">
+						<i class="main-icon fa fa-desktop"></i> <span>{_administrator.menu.dashboard}</span>
+					</a>
+				</li>
+				<li n:class="$presenter->isLinkCurrent('Drones:*') ? active">
+					<a class="drones" n:href="Drones:default">
+						<i class="main-icon fa fa-rocket"></i> <span>{_administrator.menu.drones}</span>
+					</a>
+				</li>
+				<li n:class="$presenter->isLinkCurrent('Places:*') ? active">
+					<a class="places" n:href="Places:default">
+						<i class="main-icon fa fa-map-o"></i> <span>{_administrator.menu.places}</span>
+					</a>
+				</li>
+				<li n:class="$presenter->isLinkCurrent('Videos:*') ? active">
+					<a class="places" n:href="Videos:default">
+						<i class="main-icon fa fa-youtube"></i> <span>{_administrator.menu.videos}</span>
+					</a>
+				</li>
+				<li n:class="$presenter->isLinkCurrent('Events:*') ? active">
+					<a class="events" n:href="Events:default">
+						<i class="main-icon fa fa-calendar"></i> <span>{_administrator.menu.events}</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
+	<!-- /ASIDE -->
+	<!-- HEADER -->
+	<header id="header">
+		<button id="mobileMenuBtn"></button>
+		<span class="logo pull-left">
+			{*<a n:href=":Front:Places:default">FPVSpots.info</a>*}
+			{*<a href="{$basePath}/"><img src="{$basePath}/Front/images/logo-fpvspots.png" alt="FPVSpots.info"></a>*}
+			{*<a href="{$basePath}/"><span class="title">FPVSpots.info</span></a>*}
+			<a href="{$basePath}/"><img class="img-responsive" src="{$basePath}/Front/images/web-logo-fpvspots.png" alt="FPVSpots.info"></a>
+			{*<span class="title">{_administrator.title}</span>*}
+		</span>
+		<nav>
+			<ul class="nav pull-right">
+				<li class="dropdown pull-left">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        {if empty($userEntity->photo)}
+							<img class="user-avatar" src="{$basePath}/Admin/assets/images/noavatar.jpg" height="34">
+                        {else}
+							<img class="user-avatar" src="{$basePath}/files/photos/thumbs/{$userEntity->photo->filehash}" height="34">
+                        {/if}
+						<span class="user-name">
+							<span class="hidden-xs">
+								{$userEntity->email} <i class="fa fa-angle-down"></i>
+							</span>
+						</span>
+					</a>
+					<ul class="dropdown-menu hold-on-click">
+						{*<li><a href="#"><i class="fa fa-envelope"></i> {_administrator.menu.messages}<span class="pull-right label label-default">0</span></a></li>*}
+						<li><a n:href="Users:profile"><i class="fa fa-cogs"></i> {_administrator.menu.settings}</a></li>
+						<li class="divider"></li>
+						<li><a n:href="Sign:out"><i class="fa fa-power-off"></i> {_administrator.menu.logout}</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<!-- /HEADER -->
+	<!-- MIDDLE	-->
+	<section id="middle">
+		{ifset #pagetitle}
+			<header id="page-header">
+				<h1>{include pagetitle}</h1>
+			</header>
+		{/ifset}
+		<div id="content" class="dashboard padding-20">
+			{snippetArea content}
+				{include content}
+			{/snippetArea}
+		</div>
+	</section>
+	<!-- /MIDDLE -->
+
+</div>
+<div class="ajax-loader" id="ajax-spinner">
+	<div class="loader">Loading...</div>
+</div>
+
+<!-- JAVASCRIPT FILES -->
+<script type="text/javascript" src="{$basePath}/Admin/assets/plugins/jquery/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">var plugin_path = {$basePath} + "/Admin/assets/plugins/";</script>
+
+<script type="text/javascript" src="{$basePath}/Admin/assets/js/app.js"></script>
+
+<script src="{$basePath}/bower_components/nette-forms/src/assets/netteForms.js"></script>
+<script src="{$basePath}/bower_components/nette.ajax.js/nette.ajax.js"></script>
+<script src="{$basePath}/bower_components/happy/dist/happy.js"></script>
+<script src="{$basePath}/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+<script src="{$basePath}/bower_components/jquery-ui-sortable/jquery-ui-sortable.js"></script>
+<script src="{$basePath}/bower_components/ublaboo-datagrid/assets/dist/datagrid.js"></script>
+<script src="{$basePath}/bower_components/ublaboo-datagrid/assets/dist/datagrid-spinners.js"></script>
+{*<!--<script src="{$basePath}/bower_components/bootstrap/dist/js/bootstrap.js"></script>-->*}
+
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyBgK_mOnwuBJ9FeigD0vjn61B3X_gdQ3Xs"></script>
+<script type="text/javascript" src="{$basePath}/bower_components/gmaps/gmaps.min.js"></script>
+
+<script type="text/javascript" src="{$basePath}/js/main.js?v={time()}"></script>
+
+{snippet flashes}
+    {foreach $flashes as $flash}
+		<script type="text/javascript">
+            _toastr('{$flash->message|noescape}', 'top-right', {$flash->type}, false);
+		</script>
+    {/foreach}
+{/snippet}
+</body>
+</html>

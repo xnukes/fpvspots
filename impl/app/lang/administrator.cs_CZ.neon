@@ -1,0 +1,71 @@
+title: 'Ovládací Panel'
+
+menu:
+	dashboard: 'Dashboard'
+	messages: 'Přijaté zprávy'
+	settings: 'Nastavení'
+	logout: 'Odhlásit'
+	drones: 'Vaše drony'
+	places: 'Vaše místa'
+	videos: 'Videotéka'
+	events: 'Události'
+	buddies: 'Přátelé'
+
+users:
+	profile: 'Nastavení profilu'
+	profilepage: 'Nastavení vaší stránky'
+	changePassword: 'Změna vašeho hesla (Vyplňte v případě, že chcete změnit heslo)'
+
+dashboard:
+	titleUsers: 'Pilotů celkem'
+	titleNewUsers: 'Nových pilotů'
+
+buddies:
+	title:
+		mylist: Můj seznam přátel
+		melist: Mají mě v přátelích
+		addbuddy: Najít a přidat přítele
+	buttons:
+		add: Přidat přítele
+
+drones:
+    title:
+        create: 'Nový dron'
+        edit: 'Změna dronu'
+        list: 'Seznam dronů'
+        photos: 'Fotografie'
+    buttons:
+        create: 'Zadat nový dron'
+    type:
+        race: 'Závodní Dron - Miniquad'
+        video: 'Filmařský Dron - Foto/Video'
+        whoop: 'Miniaturní Dron - Tiny Whoop'
+places:
+	title:
+		create: 'Nové místo'
+		edit: 'Změna místa'
+		list: 'Seznam míst'
+		photos: 'Fotografie'
+	buttons:
+		create: 'Zadat nové místo'
+
+events:
+	title:
+		publiclist: 'Veřejné události'
+		list: 'Moje události'
+		create: 'Nová událost'
+		photos: 'Fotografie'
+	buttons:
+		create: 'Zadat novou událost'
+		join: 'Připojit se'
+		logout: 'Odhlásit'
+
+videos:
+	title:
+		list: 'Seznam videí'
+		create: 'Nové video'
+		edit: 'Změna videa'
+	buttons:
+		create: 'Nové video'
+	types:
+		youtube: 'YouTube'

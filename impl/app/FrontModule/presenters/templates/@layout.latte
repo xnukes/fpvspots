@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Fpvspots.info database of pilots, spots, drones, events and more.">
+    <meta name="author" content="Lukáš Vlček, xnukes@gmail.com">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="{$basePath}/Front/bootstrap/favicon.ico">
+    <title n:inner-snippet="title">{ifset #title}{include title} | {/ifset}{$parameters->sitetitle}</title>
+
+    {* Add new CSS files into webloader.neon *}
+    {control css}
+
+    {control jsTop}
+
+    <link rel="apple-touch-icon" sizes="57x57" href="{$basePath}/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="{$basePath}/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{$basePath}/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{$basePath}/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{$basePath}/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="{$basePath}/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="{$basePath}/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="{$basePath}/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{$basePath}/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{$basePath}/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{$basePath}/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="{$basePath}/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{$basePath}/favicon-16x16.png">
+    <link rel="manifest" href="{$basePath}/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{$basePath}/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta property="og:url"                 content="{link //this}" />
+    <meta property="og:type"                content="article" />
+    <meta property="og:title"               content="{$parameters->sitename}" />
+    <meta property="og:description"         content="CZ/SK Databáze spotů, buildů, pilotů atd ---" />
+    {ifset #fbimg}<meta property="og:image" content="{$baseUrl}/Front/images/{include fbimg}" />{else}<meta property="og:image" content="{$baseUrl}/Front/images/fpvspots-fb-banner-2.png" />{/ifset}
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="google-site-verification" content="hckjHgTyr-YwjAoDmsMMbOmaPflkZNmoVx5WhgVBotc" />
+</head>
+<body>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-51240862-7"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){
+        dataLayer.push(arguments)
+    };
+    gtag('js', new Date());
+    gtag('config', 'UA-51240862-7');
+</script>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="{*navbar-brand*}" href="{$basePath}/">
+        <img src="{$basePath}/Front/images/web-logo-fpvspots.png" alt="FPVSpots.info">
+    </a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarHeaderMain" aria-controls="navbarHeaderMain" aria-expanded="false" aria-label="Navigace">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarHeaderMain">
+
+        {* navbar - left - main menu *}
+        <ul class="navbar-nav mr-auto">
+            <li class="divider-vertical"></li>
+            <li n:class="$presenter->isLinkCurrent('Places:*') ? active, 'nav-item'">
+                <a class="nav-link" n:href="Places:default"><i class="fa fa-map-signs"></i> <span class="d-md-none d-lg-inline">Mapa spotů</span></a>
+            </li>
+            <li class="divider-vertical"></li>
+            <li n:class="$presenter->isLinkCurrent('Events:*') ? active, 'nav-item'">
+                <a class="nav-link" n:href="Events:default"><i class="fa fa-calendar"></i> <span class="d-md-none d-lg-inline">Plánované události</span></a>
+            </li>
+            <li class="divider-vertical"></li>
+            <li n:class="$presenter->isLinkCurrent('Pilots:*') ? active, 'nav-item'">
+                <a class="nav-link" n:href="Pilots:default"><i class="fa  fa-address-book-o"></i> <span class="d-md-none d-lg-inline">Seznam pilotů</span></a>
+            </li>
+            <li class="divider-vertical"></li>
+            <li n:class="$presenter->isLinkCurrent('Machines:default') || $presenter->isLinkCurrent('Machines:detail') ? active, 'nav-item'">
+                <a class="nav-link" n:href="Machines:default"><i class="fa fa-rocket"></i> <span class="d-md-none d-lg-inline">Seznam Strojů</span></a>
+            </li>
+            <li class="divider-vertical"></li>
+            <li n:class="$presenter->isLinkCurrent('Machines:top5') ? active, 'nav-item'">
+                <a class="nav-link" n:href="Machines:top5"><i class="fa fa-trophy"></i> <span class="d-md-none d-lg-inline">TOP5 Strojů</span></a>
+            </li>
+            <li class="divider-vertical"></li>
+            <li n:class="$presenter->isLinkCurrent('Search:*') ? active, 'nav-item'">
+                <a class="nav-link" n:href="Search:default"><i class="fa fa-search"></i> <span class="d-md-none d-lg-inline">Hledání</span></a>
+            </li>
+        </ul>
+
+        {* navbar - right - only for logged in *}
+        <ul class="navbar-nav">
+            {if !$user->isLoggedIn()}
+                <li n:class="'nav-item'">
+                    <a class="nav-link" n:href=":Admin:Sign:in"><i class="fa fa-sign-in"></i> Přihlášení</a>
+                </li>
+                <li class="divider-vertical"></li>
+                <li class="nav-item">
+                    <a class="nav-link" n:href=":Admin:Register:in"><i class="fa fa-user-plus"></i> Registrace</a>
+                </li>
+            {/if}
+            <li class="nav-item" n:if="$user->isLoggedIn()">
+                <a class="nav-link" n:href=":Admin:Users:profile">
+                    {if empty($userEntity->photo)}
+                        <img class="user-avatar" src="{$basePath}/Admin/assets/images/noavatar.jpg" height="34">
+                    {else}
+                        <img class="user-avatar" src="{$basePath}/files/photos/thumbs/{$userEntity->photo->filehash}" height="34">
+                    {/if}
+                    &nbsp;{$userEntity->email}
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+{snippet flashes}
+<main role="main">
+    {foreach $flashes as $flash}
+        {var $type = $flash->type}
+        {if $flash->type == 'error'}{var $type = 'danger'}{/if}
+        <div class="alert alert-{$type} mt-3 mb-0">
+            {$flash->message|noescape}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {/foreach}
+</main>
+{/snippet}
+
+{import '@blocks.latte'}
+
+{include content}
+
+<div class="ajax-loader" id="ajax-spinner">
+    <div class="loader">Loading...</div>
+</div>
+
+{control jsBottom}
+{*{include '@scripts.latte'}*}
+
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyBgK_mOnwuBJ9FeigD0vjn61B3X_gdQ3Xs"></script>
+
+<!-- Google Adsense - Initializing -->
+<script>
+    if($('ins.adsbygoogle').length > 0) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+</script>
+
+{block js /}
+
+</body>
+</html>

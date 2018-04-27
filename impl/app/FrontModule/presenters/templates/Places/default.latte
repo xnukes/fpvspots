@@ -1,0 +1,52 @@
+{block content}
+
+<div class="places-map" id="places-map" style="width: 100%; height: 94%; display: inline-block; position: absolute">
+</div>
+
+{define js}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var map = new GMaps({
+            el: '#places-map', //49.366099 17.3211333
+            lat: 49.396099,
+            lng: 17.3211333,
+            zoom: 8,
+            cursor: 'pointer',
+            mapType: 'hybrid'
+        });
+
+        $.ajax({
+            url: {link getGmapsMarkers!},
+            success: function(data) {
+
+                $.each(data['places'], function (i, o) {
+
+                    map.addMarker({
+                        lat: o['place'][0],
+                        lng: o['place'][1],
+                        title: o['name'],
+                        icon: {$basePath} + o['icon'],
+                        infoWindow: {
+                            content: '<h4><strong>' + o['name'] + '</strong> (' + o['username'] + ')</h4><hr>'
+                                + (o['desc'] ? '<p>Popis:</p><p>' + o['desc'] + '</p>' : '')
+                                + (o['plus'] ? '<p>Plusy:</p><p>' + o['plus'] + '</p>' : '')
+                                + (o['minus'] ? '<p>Mínusy:</p><p>' + o['minus'] + '</p>' : '')
+                                + ('<p><a href="' + o['url'] + '" class="btn btn-primary w-100">Detail spotu</a></p>')
+                        }
+                    });
+                })
+            }
+        });
+    });
+</script>
+{/define}
+<style>
+    .gm-style img {
+        max-width: none;
+    }
+    .gm-style img.image {
+        max-width: 75px;
+        margin: 5px 5px 5px 0px;
+    }
+</style>

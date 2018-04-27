@@ -1,0 +1,44 @@
+extensions:
+	webloader: WebLoader\Nette\Extension
+
+services:
+	jwlCssMinFilter: Joseki\Webloader\CssMinFilter
+
+webloader:
+	debugger: false
+	cssDefaults:
+		joinFiles: %productionMode% # debugMode | productionMode
+	jsDefaults:
+		joinFiles: %productionMode% # debugMode | productionMode
+	css:
+		front:
+			remoteFiles:
+			    - https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css
+			files:
+				- %wwwDir%/Front/bootstrap/css/bootstrap.min.css
+				- %wwwDir%/Front/css/style.css
+				- %wwwDir%/Front/css/album.css
+				- %wwwDir%/css/main.css
+				- %wwwDir%/bower_components/ublaboo-datagrid/assets/dist/datagrid.css
+				- %wwwDir%/css/font-awesome.min.css
+			filters:
+				- @jwlCssMinFilter
+
+	js:
+		top:
+			files:
+				- %wwwDir%/bower_components/jquery/dist/jquery.js
+
+		bottom:
+			files:
+				- %wwwDir%/bower_components/gmaps/gmaps.min.js
+				- %wwwDir%/Front/bootstrap/assets/js/vendor/popper.min.js
+				- %wwwDir%/Front/bootstrap/js/bootstrap.min.js
+				- %wwwDir%/bower_components/nette-forms/src/assets/netteForms.js
+				- %wwwDir%/bower_components/nette.ajax.js/nette.ajax.js
+				- %wwwDir%/bower_components/history.nette.ajax.js/client-side/history.ajax.js
+				- %wwwDir%/Front/bootstrap/assets/js/ie10-viewport-bug-workaround.js
+				- %wwwDir%/js/main.js
+				- %wwwDir%/Front/js/main.js
+			remoteFiles:
+				- https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js

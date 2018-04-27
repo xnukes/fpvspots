@@ -1,0 +1,9 @@
+services:
+	- App\Models\ConfigRepository(@container::getParameters())
+	- App\Models\Authenticator
+	- App\Managers\UserManager
+	- App\Managers\DroneManager
+	- App\Managers\PhotoManager
+	- App\Managers\PlaceManager
+	- App\Managers\EventsManager
+	- App\Managers\VideoManager
