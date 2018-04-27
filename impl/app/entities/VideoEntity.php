@@ -82,4 +82,20 @@ class VideoEntity extends BaseEntity
 		$this->createdOn = new DateTime();
 		$this->changedOn = new DateTime();
 	}
+
+	public function getLinkParams()
+	{
+		$params = [];
+		$query = explode('&', parse_url($this->link, PHP_URL_QUERY));
+		foreach ($query as $item) {
+			$p = explode('=', $item);
+			$params[$p[0]] = $p[1];
+		}
+		return $params;
+	}
+
+	public function getVideoCode()
+	{
+		return $this->getLinkParams()['v'];
+	}
 }

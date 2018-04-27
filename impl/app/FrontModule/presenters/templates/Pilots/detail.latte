@@ -82,14 +82,22 @@
 
             {snippet pilotContent}
 
-                <div class="card bg-light" id="videos">
+                <div class="card bg-light" id="videos" n:if="count($pilot->videos)">
                     <div class="card-header">
                         <h4><i class="fa fa-video-camera"></i> <a href="#videos">Nahrané videa</a></h4>
                     </div>
                     <div class="card-body">
+                        <div class="row text-center">
+                            {foreach $pilot->videos as $video}
+                                <div class="col-md-4">
+                                    <iframe id="player" type="text/html" width="100%"
+                                            src="http://www.youtube.com/embed/{$video->getVideoCode()}?enablejsapi=1&origin=http://fpvspots.info"
+                                            frameborder="0"></iframe>
+                                </div>
+                            {/foreach}
+                        </div>
                     </div>
                 </div>
-
 
                 <hr class="my-4">
 
