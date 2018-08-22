@@ -51,10 +51,11 @@ places:
 
 events:
 	title:
-		publiclist: 'Veřejné události'
 		list: 'Moje události'
 		create: 'Nová událost'
+		edit: 'Změna události'
 		photos: 'Fotografie'
+		users: 'Piloti přihlašené k události'
 	buttons:
 		create: 'Zadat novou událost'
 		join: 'Připojit se'

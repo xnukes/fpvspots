@@ -5,6 +5,7 @@ use App\Models\BaseEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Nette\Utils\DateTime;
+use Nette\Utils\Strings;
 
 /**
  * @property integer $id
@@ -15,6 +16,7 @@ use Nette\Utils\DateTime;
  * @property integer $maxUsers
  * @property EventTypeEntity $eventType
  * @property UserEntity $user
+ * @property \Doctrine\ORM\PersistentCollection $users
  * @property DateTime $eventDate
  * @property DateTime $createdOn
  * @property DateTime $changedOn
@@ -71,6 +73,12 @@ class EventEntity extends BaseEntity
 	protected $user;
 
 	/**
+	 * @ORM\OneToMany(targetEntity="EventUserEntity", mappedBy="event")
+	 * @ORM\JoinTable(name="events_users")
+	 */
+	protected $users;
+
+	/**
 	 * @ORM\ManyToMany(targetEntity="PhotoEntity", inversedBy="events")
 	 * @ORM\JoinTable(name="events_photos")
 	 */
@@ -104,5 +112,63 @@ class EventEntity extends BaseEntity
 	public function getPhotos()
 	{
 		return $this->photos;
+	}
+
+	public function getSlug()
+	{
+		return Strings::webalize($this->name);
+	}
+
+	public function isJoined($user)
+	{
+		if(!$user) return false;
+		$joined = $this->users->exists(function($index, $eventUser) use ($user) {
+			return $eventUser->user == $user;
+		});
+		return $joined;
+	}
+
+	public function hasOwner($user)
+	{
+		return ($this->user == $user);
+	}
+
+	public function hasStaff($user)
+	{
+		if(!$user) return false;
+		$eventuser = $this->users->filter(function ($eventUser) use ($user) {
+			return $eventUser->user == $user;
+		});
+		if(count($eventuser))
+			return ($eventuser->get(0)->state > 0 ? true : false);
+		else
+			false;
+	}
+
+	public function getJoinedStatus($user)
+	{
+		if(!$user) return false;
+		$eventuser = $this->users->filter(function ($eventUser) use ($user) {
+			return $eventUser->user == $user;
+		});
+		if(count($eventuser))
+			return ($eventuser->get(0)->state > 0 ? true : false);
+		else
+			false;
+	}
+
+	public function getStaffUsers()
+	{
+		return $this->users->filter(function ($entity) { return $entity->state == 2; });
+	}
+
+	public function getConfirmedUsers()
+	{
+		return $this->users->filter(function ($entity) { return $entity->state == 1; });
+	}
+
+	public function getUnConfirmedUsers()
+	{
+		return $this->users->filter(function ($entity) { return $entity->state == 0; });
 	}
 }

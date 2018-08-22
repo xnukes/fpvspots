@@ -7,6 +7,8 @@
 
 namespace App\AdminModule\Presenters;
 
+use App\Entities\EventEntity;
+use App\Entities\EventUserEntity;
 use App\Models\Grid;
 
 class EventsPresenter extends BasePresenter
@@ -17,6 +19,7 @@ class EventsPresenter extends BasePresenter
 	/** @var \App\AdminModule\Forms\EventForm @inject */
 	public $eventForm;
 
+	/** @var EventEntity */
 	private $event;
 
 	public function actionEdit($id)
@@ -27,18 +30,12 @@ class EventsPresenter extends BasePresenter
 			throw new \Exception($this->getTranslator()->translate('default.messages.itemNotFind'));
 		}
 
-		$this->eventForm->setDefaultData($this->event);
-
-		$this->template->event = $this->event;
-	}
-
-	public function actionDisplay($id)
-	{
-		$this->event = $this->eventsManager->getEvent($id);
-
-		if(!$this->event) {
-			throw new \Exception($this->getTranslator()->translate('default.messages.itemNotFind'));
+		if(!$this->event->hasOwner($this->userEntity)) {
+			$this->flashMessage('Tato událost není ve vaší správě.', 'danger');
+			$this->redirect('default');
 		}
+
+		$this->eventForm->setDefaultData($this->event);
 
 		$this->template->event = $this->event;
 	}
@@ -48,53 +45,7 @@ class EventsPresenter extends BasePresenter
 		return $this->eventForm->create($this, $name);
 	}
 
-	public function createComponentPublicEventsGrid($name)
-	{
-		$grid = new Grid($this, $name);
-
-		$grid->setDataSource($this->eventsManager->getEvents(true));
-
-		$grid->addColumnDateTime('eventDate', 'Začátek události')
-			->setFitContent(true);
-
-		$grid->addColumnText('name', 'Název')
-			->getElementPrototype('th')->setAttribute('class', 'col-md-2');
-
-		$grid->addColumnText('user.username', 'Pořadatel')
-			->getElementPrototype('th')->setAttribute('class', 'col-md-2');
-
-		$grid->addColumnText('user.email', 'Kontakt')
-			->getElementPrototype('th')->setAttribute('class', 'col-md-2');
-
-		$grid->addColumnText('eventType.name', 'Typ')
-			->getElementPrototype('th')->setAttribute('class', 'col-md-2');
-
-		$grid->addColumnText('maxUsers', 'Počet přihlášek')
-			->setRenderer(function ($item) {
-				return $item->maxUsers > 0 ? $item->maxUsers : 'neomezeně';
-			})
-			->getElementPrototype('th')->setAttribute('class', 'col-md-2');
-
-		$grid->addAction('join', $this->getTranslator()->translate('administrator.events.buttons.join'), 'join!')
-			->setClass('btn btn-blue btn-xs');
-
-		$grid->addAction('logout', $this->getTranslator()->translate('administrator.events.buttons.logout'), 'logout!')
-			->setClass('btn btn-danger btn-xs');
-
-		$grid->addAction('display', $this->getTranslator()->translate('default.buttons.display'))
-			->setClass('btn btn-success btn-xs');
-
-		$grid->allowRowsAction('join', function ($item) {
-			return $this->hasUserJoined($item->id) ? false : true;
-		});
-		$grid->allowRowsAction('logout', function ($item) {
-			return $this->hasUserJoined($item->id) ? true : false;
-		});
-
-		return $grid;
-	}
-
-	public function createComponentUserEventsGrid($name)
+	public function createComponentMyEventsGrid($name)
 	{
 		$grid = new Grid($this, $name);
 
@@ -118,8 +69,9 @@ class EventsPresenter extends BasePresenter
 			})
 			->getElementPrototype('th')->setAttribute('class', 'col-md-2');
 
-		$grid->addAction('display', $this->getTranslator()->translate('default.buttons.display'))
-			->setClass('btn btn-success btn-xs');
+		$grid->addAction('remove', $this->getTranslator()->translate('default.buttons.remove'))
+			->setClass('btn btn-danger btn-xs')
+			->setConfirm('Opravdu chcete odstranit událost %s', 'name');
 
 		$grid->addAction('edit', $this->getTranslator()->translate('default.buttons.edit'))
 			->setClass('btn btn-blue btn-xs');
@@ -127,37 +79,41 @@ class EventsPresenter extends BasePresenter
 		return $grid;
 	}
 
-	public function handleJoin($id)
+	public function createComponentEventUsersGrid($name)
 	{
-		try {
-			$this->eventsManager->joinUser($id, $this->userEntity);
-			$this->flashMessage($this->getTranslator()->translate('default.messages.weJoined'));
-		} catch (\Exception $exception) {
-			$this->flashMessage($exception->getMessage(), 'error');
-		}
+		$grid = new Grid($this, $name);
 
-		$this->redirect('this');
+		$grid->setPrimaryKey('id');
+
+		$grid->setDataSource($this->event->users);
+
+		$grid->addColumnText('user.username','Pilot');
+
+		$grid->addColumnText('user.email','E-mail');
+
+		$grid->addColumnDateTime('created','Vytvořeno');
+
+		$grid->addColumnStatus('state', 'Status')
+			->addOption(EventUserEntity::STATE_WAIT, 'Čekající')->setIcon('check')->setClass('btn-info fullwidth')->endOption()
+			->addOption(EventUserEntity::STATE_JOIN, 'Potvrzen')->setIcon('check')->setClass('btn-success fullwidth')->endOption()
+			->addOption(EventUserEntity::STATE_STAFF, 'Pořadatel')->setIcon('check')->setClass('btn-danger fullwidth')->endOption()
+			->onChange[] = [$this, 'eventUserStateChange'];
 	}
 
-	public function handleLogout($id)
+	public function eventUserStateChange($identificator, $state)
 	{
-		try {
-			$this->eventsManager->logoutUser($id, $this->userEntity);
-			$this->flashMessage($this->getTranslator()->translate('default.messages.weLogout'));
-		} catch (\Exception $exception) {
-			$this->flashMessage($exception->getMessage(), 'error');
+		$eventUser = $this->entityManager->getRepository(EventUserEntity::class)->find($identificator);
+
+		if($eventUser) {
+			$eventUser->state = $state;
+			$this->entityManager->persist($eventUser)->flush();
 		}
 
-		$this->redirect('this');
+		$this['eventUsersGrid']->reload();
 	}
 
 	public function handleRemoveEventPhoto($photoId)
 	{
 
-	}
-
-	private function hasUserJoined($eventId)
-	{
-		return $this->eventsManager->hasUserJoined($eventId, $this->userEntity);
 	}
 }

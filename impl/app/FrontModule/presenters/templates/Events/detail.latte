@@ -1,0 +1,154 @@
+{block content}
+
+{define title}Nadcházející závody, turnaje, soutěže{/define}
+
+<main role="main">
+
+    <div class="album text-muted">
+        <div class="container">
+
+            <h1 class="jumbotron-heading text-dark">
+                <i class="fa fa-calendar"></i> {$event->name}
+                <a n:href=":default" class="pull-right" title="Zpět na seznam"><i class="fa fa-close text-danger"></i></a>
+            </h1>
+
+            <div class="clearfix"></div>
+
+            {if !$user->isLoggedIn()}
+            {include googleAdsenseEvents}
+            {/if}
+
+            <div class="row margin-bottom-20">
+
+                <div class="col-md-3">
+                    <div class="card bg-primary">
+                        <div class="card-header text-white text-center">
+                            <i class="fa fa-calendar"></i> Začátek {$event->eventDate|date:'d.m.Y'}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-primary">
+                        <div class="card-header text-white text-center">
+                            {if $event->maxUsers > 0}
+                                <i class="fa fa-user-o"></i> Volných přihlášek {$event->maxUsers} z {$event->maxUsers}
+                            {else}
+                                <i class="fa fa-user-o"></i> Neomezený počet přihlášek
+                            {/if}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-primary">
+                        <div class="card-header text-white text-center">
+                            <i class="fa fa-address-card-o"></i> Založil {$event->user->username}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-primary">
+                        <div class="card-header text-white text-center">
+                            <i class="fa fa-mail-forward"></i> {$event->user->email}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-md-8">
+                    <div class="card margin-bottom-20">
+                        <div class="card-header">Popis události a další informace</div>
+                        <div class="card-body">
+                            {$event->description|noescape}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card margin-bottom-20">
+                        <div class="card-header">Přihlášení / Odhlášení</div>
+                        <div class="card-body">
+                            {if $user->isLoggedIn()}
+                                <a n:href="sendJoin!" class="btn btn-sm btn-success fullwidth" n:if="!$isJoined"><i class="fa fa-send-o"></i> Zaslat přihlášku</a>
+                                <a href="#" class="btn btn-sm btn-info fullwidth" n:if="$isJoined & !$joinedStatus"><i class="fa fa-clock-o"></i> Čeká na schválení</a>
+                                <a n:href="cancelJoin!" class="btn btn-sm btn-danger fullwidth" n:if="$isJoined & $joinedStatus"><i class="fa fa-remove"></i> Zrušit přihlášku</a>
+                            {else}
+                                <a n:href=":Admin:Sign:in" class="btn btn-sm btn-danger fullwidth"><i class="fa fa-sign-in"></i> Přihlašte se prosím</a>
+                            {/if}
+                        </div>
+                    </div>
+                    <div class="card margin-bottom-20">
+                        <div class="card-header">Zůčastní se</div>
+                        <div class="card-body">
+                            <div class="text-center" n:if="!count($event->users)">Zatím nikdo</div>
+                            {if count($staffUsers)}
+                                <div class="d-block margin-bottom-10">Pořadatelé:</div>
+                                {foreach $staffUsers as $eUser}
+                                    <div class="d-block bg-danger text-white text-center margin-bottom-2">
+                                        <span class="weight-600">{$eUser->user->username}</span> {if $eUser->user->firstName}({$eUser->user->firstName} {$eUser->user->lastName}){/if}
+                                    </div>
+                                {/foreach}
+                            {/if}
+                            {if count($confirmedUsers)}
+                                <div class="d-block margin-top-10 margin-bottom-10">Potvrzeni účastníci:</div>
+                                {foreach $confirmedUsers as $eUser}
+                                    <div class="d-block bg-primary text-white text-center margin-bottom-2">
+                                        <span class="weight-600">{$eUser->user->username}</span> {if $eUser->user->firstName}({$eUser->user->firstName} {$eUser->user->lastName}){/if}
+                                    </div>
+                                {/foreach}
+                            {/if}
+                            {if count($unconfirmedUsers)}
+                                <div class="d-block margin-top-10">Čeká na schválení:</div>
+                                {foreach $unconfirmedUsers as $eUser}
+                                    <div class="d-block bg-dark text-white text-center margin-bottom-2">
+                                        <span class="weight-600">{$eUser->user->username}</span> {if $eUser->user->firstName}({$eUser->user->firstName} {$eUser->user->lastName}){/if}
+                                    </div>
+                                {/foreach}
+                            {/if}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card bg-light">
+                        <div class="card-header"><h4><i class="fa fa-map-marker"></i> Mapa kde se událost koná</h4></div>
+                        <div class="card-body p-0">
+                            <div class="map" id="gmaps-container" style="width: 100%; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+{define js}
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+            values = {$event->mapPlace};
+            var vars = values.split(';');
+            selLat = vars[0];
+            selLng = vars[1];
+            selZoom = Number(vars[2]);
+            var map = new GMaps({
+                el: '#gmaps-container',
+                lat: selLat,
+                lng: selLng,
+                zoom: selZoom,
+                cursor: 'pointer',
+                mapType: 'hybrid'
+            });
+
+            map.addMarker({
+                lat: selLat,
+                lng: selLng,
+                title: 'Označené místo'
+            });
+        });
+    </script>
+{/define}
+
+{include '../@footer-back.latte'}
