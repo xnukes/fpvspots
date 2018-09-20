@@ -117,7 +117,8 @@
 </nav>
 
 {snippet flashes}
-<main role="main">
+<main role="main" style="background-color: #f7f7f7">
+    <div class="container">
     {foreach $flashes as $flash}
         {var $type = $flash->type}
         {if $flash->type == 'error'}{var $type = 'danger'}{/if}
@@ -128,6 +129,7 @@
             </button>
         </div>
     {/foreach}
+    </div>
 </main>
 {/snippet}
 

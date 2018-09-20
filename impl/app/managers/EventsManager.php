@@ -8,10 +8,23 @@
 namespace App\Managers;
 
 
+use App\Entities\EventEntity;
+use App\Entities\EventUserEntity;
 use App\Entities\UserEntity;
+use App\Models\ConfigRepository;
+use Kdyby\Doctrine\EntityManager;
+use Nette\InvalidStateException;
 
 class EventsManager extends BaseManager
 {
+	public $systemMailer;
+
+	public function __construct(EntityManager $entityManager, \Kdyby\Translation\Translator $translator, ConfigRepository $configRepository, \App\Helpers\SystemMailerHelper $systemMailerHelper)
+	{
+		parent::__construct($entityManager, $translator, $configRepository);
+		$this->systemMailer = $systemMailerHelper;
+	}
+
 	/**
 	 * @param UserEntity $userEntity
 	 * @return array
@@ -51,16 +64,23 @@ class EventsManager extends BaseManager
 		return $this->entityManager->getRepository(\App\Entities\EventTypeEntity::class)->findPairs([], 'name', [], 'id');
 	}
 
-	public function joinUser($eventId, UserEntity $userEntity)
+	public function joinUser(EventEntity $event, UserEntity $userEntity)
 	{
-		$event = $this->getEvent($eventId);
-		if(!$event) {
-			throw new \Exception('Event not find.');
+		if(!$event->isJoined($userEntity)) {
+			$eventUserEntity = new EventUserEntity();
+			$eventUserEntity->event = $event;
+			$eventUserEntity->user = $userEntity;
+			$eventUserEntity->state = EventUserEntity::STATE_WAIT;
+			$this->entityManager->persist($eventUserEntity);
+			$event->users[] = $eventUserEntity;
+			$this->entityManager->persist($event);
+
+			$this->systemMailer->sendMailEventRequestJoin($event, $userEntity);
+
+			return $this->entityManager->flush();
+		} else {
+			throw new InvalidStateException('Tento pilot je již přihlášen k události.');
 		}
-
-		$event->getUsers()->add($userEntity);
-
-		return $this->entityManager->persist($event)->flush();
 	}
 
 	public function logoutUser($eventId, UserEntity $userEntity)
@@ -70,14 +90,17 @@ class EventsManager extends BaseManager
 			throw new \Exception('Event not find.');
 		}
 
-		$event->getUsers()->remove($userEntity);
+		$eventUserEntity = $event->removeFromUsers($userEntity);
 
-		return $this->entityManager->persist($event)->flush();
+		$this->entityManager->remove($eventUserEntity);
+
+		$this->entityManager->flush();
+
+		return $event;
 	}
 
 	public function hasUserJoined($eventId, UserEntity $userEntity)
 	{
-		return false;
 		$event = $this->getEvent($eventId);
 		if(!$event) {
 			throw new \Exception('Event not find.');

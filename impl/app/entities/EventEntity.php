@@ -5,6 +5,7 @@ use App\Models\BaseEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Nette\Utils\DateTime;
+use Nette\Utils\Strings;
 
 /**
  * @property integer $id
@@ -15,6 +16,7 @@ use Nette\Utils\DateTime;
  * @property integer $maxUsers
  * @property EventTypeEntity $eventType
  * @property UserEntity $user
+ * @property \Doctrine\ORM\PersistentCollection $users
  * @property DateTime $eventDate
  * @property DateTime $createdOn
  * @property DateTime $changedOn
@@ -71,6 +73,12 @@ class EventEntity extends BaseEntity
 	protected $user;
 
 	/**
+	 * @ORM\OneToMany(targetEntity="EventUserEntity", mappedBy="event")
+	 * @ORM\JoinTable(name="events_users")
+	 */
+	protected $users;
+
+	/**
 	 * @ORM\ManyToMany(targetEntity="PhotoEntity", inversedBy="events")
 	 * @ORM\JoinTable(name="events_photos")
 	 */
@@ -104,5 +112,99 @@ class EventEntity extends BaseEntity
 	public function getPhotos()
 	{
 		return $this->photos;
+	}
+
+	/**
+	 * generate slug of this event name
+	 * @return string
+	 */
+	public function getSlug()
+	{
+		return Strings::webalize($this->name);
+	}
+
+	/**
+	 * get all joined users in collection
+	 * @return \Doctrine\ORM\PersistentCollection
+	 */
+	public function getUsers()
+	{
+		return $this->users;
+	}
+
+	/**
+	 * return 0 if is unlimited
+	 * @return int
+	 */
+	public function getMaxUsers()
+	{
+		return $this->maxUsers;
+	}
+
+	/**
+	 * get count of all joined users with staff's
+	 * @return int
+	 */
+	public function getJoinedCount()
+	{
+		return $this->getUsers()->count();
+	}
+
+	public function isJoined(UserEntity $user)
+	{
+		if(!$user) return false;
+		$joined = $this->users->exists(function($index, $eventUser) use ($user) {
+			return $eventUser->user == $user;
+		});
+		return $joined;
+	}
+
+	public function hasOwner(UserEntity $user)
+	{
+		return ($this->user == $user);
+	}
+
+	public function hasStaff(UserEntity $user)
+	{
+		if(!$this->isJoined($user)) return false;
+		if($this->getJoinedStatus($user) == 2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getJoinedStatus(UserEntity $user)
+	{
+		if(!$this->isJoined($user)) return false;
+		foreach ($this->getUsers() as $eventUser) {
+			if($eventUser->user == $user) return $eventUser->state;
+		}
+	}
+
+	public function getStaffUsers()
+	{
+		return $this->users->filter(function ($entity) { return $entity->state == 2; });
+	}
+
+	public function getConfirmedUsers()
+	{
+		return $this->users->filter(function ($entity) { return $entity->state == 1; });
+	}
+
+	public function getUnConfirmedUsers()
+	{
+		return $this->users->filter(function ($entity) { return $entity->state == 0; });
+	}
+
+	public function removeFromUsers(UserEntity $userEntity)
+	{
+		/** @var EventUserEntity $eventUser */
+		foreach ($this->getUsers() as $key=>$eventUser) {
+			if($eventUser->user == $userEntity) {
+				return $this->users->remove($key);
+			}
+		}
+		return false;
 	}
 }

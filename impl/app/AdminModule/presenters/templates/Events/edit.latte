@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                 <span class="title elipsis">
-                    <strong>{_administrator.places.title.edit}</strong>
+                    <strong>{_administrator.events.title.edit}</strong>
                 </span>
                     <ul class="options pull-right list-inline">
                         <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Sbalit"></a></li>
@@ -55,6 +55,28 @@
         </div>
     </div>
 {/form}
+
+<div class="row nomargin">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+		<span class="title elipsis">
+			<strong>{_administrator.events.title.users}</strong>
+		</span>
+                <ul class="options pull-right list-inline">
+                    <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Sbalit"></a></li>
+                    <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Celá obrazovka"><i class="fa fa-expand"></i></a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                {control eventUsersGrid}
+            </div>
+            <div class="panel-footer">
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
 {if count($event->photos)}
     <div class="row nomargin">
         <div class="col-md-12">

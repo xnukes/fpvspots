@@ -16,6 +16,9 @@ use Nette;
  */
 class SignPresenter extends BasePresenter
 {
+	/** @var \App\Managers\UserManager @inject */
+	public $userManager;
+
 	public function actionIn()
     {
 		if ($this->user->isLoggedIn() && $this->user->isAllowed($this->name, $this->action)) {
@@ -100,7 +103,7 @@ class SignPresenter extends BasePresenter
 	{
 		// TODO: dodělat obnovu hesla
 		try {
-			$message = $this->usersRepository->createLostPswLink($vars->username, $vars->email);
+			$message = $this->userManager->createLostPsw($vars->username, $vars->email);
 			$this->flashMessage($message, 'info');
 			$this->redirect('Sign:in');
 		} catch (Nette\Application\BadRequestException $e) {
