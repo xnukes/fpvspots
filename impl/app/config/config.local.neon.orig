@@ -5,3 +5,8 @@ parameters:
         password:
         dbname: fpvspots
         driver: mysql
+	mailerFrom: 'noreply@fpvspots.info'
+	mailerHost: '81.2.250.43'
+	mailerUsername: 'noreply@fpvspots.info'
+	mailerPassword: ''
+	mailerSecurity: ''

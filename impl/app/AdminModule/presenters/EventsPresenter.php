@@ -9,6 +9,7 @@ namespace App\AdminModule\Presenters;
 
 use App\Entities\EventEntity;
 use App\Entities\EventUserEntity;
+use App\Helpers\SystemMailerHelper;
 use App\Models\Grid;
 
 class EventsPresenter extends BasePresenter
@@ -21,6 +22,9 @@ class EventsPresenter extends BasePresenter
 
 	/** @var EventEntity */
 	private $event;
+
+	/** @var SystemMailerHelper @inject */
+	public $systemMailerHelper;
 
 	public function actionEdit($id)
 	{
@@ -102,10 +106,14 @@ class EventsPresenter extends BasePresenter
 
 	public function eventUserStateChange($identificator, $state)
 	{
+		/** @var EventUserEntity $eventUser */
 		$eventUser = $this->entityManager->getRepository(EventUserEntity::class)->find($identificator);
 
 		if($eventUser) {
 			$eventUser->state = $state;
+			if($state == EventUserEntity::STATE_JOIN) {
+				$this->systemMailerHelper->sendMailEventAcceptJoin($eventUser->event, $eventUser->user);
+			}
 			$this->entityManager->persist($eventUser)->flush();
 		}
 

@@ -11,10 +11,20 @@ namespace App\Managers;
 use App\Entities\EventEntity;
 use App\Entities\EventUserEntity;
 use App\Entities\UserEntity;
+use App\Models\ConfigRepository;
+use Kdyby\Doctrine\EntityManager;
 use Nette\InvalidStateException;
 
 class EventsManager extends BaseManager
 {
+	public $systemMailer;
+
+	public function __construct(EntityManager $entityManager, \Kdyby\Translation\Translator $translator, ConfigRepository $configRepository, \App\Helpers\SystemMailerHelper $systemMailerHelper)
+	{
+		parent::__construct($entityManager, $translator, $configRepository);
+		$this->systemMailer = $systemMailerHelper;
+	}
+
 	/**
 	 * @param UserEntity $userEntity
 	 * @return array
@@ -63,7 +73,11 @@ class EventsManager extends BaseManager
 			$eventUserEntity->state = EventUserEntity::STATE_WAIT;
 			$this->entityManager->persist($eventUserEntity);
 			$event->users[] = $eventUserEntity;
-			return $this->entityManager->persist($event)->flush();
+			$this->entityManager->persist($event);
+
+			$this->systemMailer->sendMailEventRequestJoin($event, $userEntity);
+
+			return $this->entityManager->flush();
 		} else {
 			throw new InvalidStateException('Tento pilot je již přihlášen k události.');
 		}
