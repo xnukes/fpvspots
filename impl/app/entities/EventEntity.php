@@ -159,12 +159,12 @@ class EventEntity extends BaseEntity
 		return $joined;
 	}
 
-	public function hasOwner(UserEntity $user)
+	public function hasOwner($user)
 	{
 		return ($this->user == $user);
 	}
 
-	public function hasStaff(UserEntity $user)
+	public function hasStaff($user)
 	{
 		if(!$this->isJoined($user)) return false;
 		if($this->getJoinedStatus($user) == 2) {
@@ -174,7 +174,7 @@ class EventEntity extends BaseEntity
 		}
 	}
 
-	public function getJoinedStatus(UserEntity $user)
+	public function getJoinedStatus($user)
 	{
 		if(!$this->isJoined($user)) return false;
 		foreach ($this->getUsers() as $eventUser) {
