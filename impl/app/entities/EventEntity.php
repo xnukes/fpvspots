@@ -150,9 +150,9 @@ class EventEntity extends BaseEntity
 		return $this->getUsers()->count();
 	}
 
-	public function isJoined(UserEntity $user)
+	public function isJoined($user)
 	{
-		if(!$user) return false;
+		if(!$user instanceof UserEntity) return false;
 		$joined = $this->users->exists(function($index, $eventUser) use ($user) {
 			return $eventUser->user == $user;
 		});
