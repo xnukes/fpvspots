@@ -8,10 +8,14 @@
 namespace App\FrontModule\Presenters;
 
 use App\Entities\EventEntity;
+use App\Managers\EventsManager;
 use Nette;
 
 class EventsPresenter extends BasePresenter
 {
+	/** @var EventsManager @inject */
+	public $eventsManager;
+
 	/** @var EventEntity $event */
 	public $event;
 
@@ -30,6 +34,7 @@ class EventsPresenter extends BasePresenter
 		$this->template->staffUsers = $this->event->getStaffUsers();
 		$this->template->confirmedUsers = $this->event->getConfirmedUsers();
 		$this->template->unconfirmedUsers = $this->event->getUnConfirmedUsers();
+		$this->template->joinedCount = $this->event->getJoinedCount();
 	}
 
 	public function renderDefault()
@@ -40,15 +45,45 @@ class EventsPresenter extends BasePresenter
 
 	public function handleCancelJoin()
 	{
-		if($this->event->hasOwner($this->userEntity) || $this->event->hasStaff($this->userEntity)) {
-			$this->flashMessage('Nemůžete se odhlásit z události, protože jste pořadatelem nebo vlastníkem.', 'danger');
-			$this->redirect('this');
+		$cantLogout = false;
+		if($this->event->hasOwner($this->userEntity)) {
+			$this->flashMessage('Nemůžete se odhlásit z události, protože jste vlastníkem.', 'danger');
+			$cantLogout = true;
 		}
+		if($this->event->hasStaff($this->userEntity)) {
+			$this->flashMessage('Nemůžete se odhlásit z události, protože jste pořadatelem.', 'danger');
+			$cantLogout = true;
+		}
+		if(!$cantLogout) {
+			try {
+				$this->eventsManager->logoutUser($this->event->id, $this->userEntity);
+				$this->flashMessage('Byl jste odhlášen z události.');
+			} catch (\Exception $exception) {
+				$this->flashMessage($exception->getMessage(), 'danger');
+			}
+		}
+		$this->redirect('this');
 	}
 
 	public function handleSendJoin()
 	{
-
+		try {
+			$joined = false;
+			if($this->event->getMaxUsers() > 0) {
+				if($this->event->getJoinedCount() < $this->event->getMaxUsers()) {
+					$joined = $this->eventsManager->joinUser($this->event, $this->userEntity);
+				} else {
+					$this->flashMessage('Počet přihlášek byl překročen. Nemůžete zaslat přihlášku.', 'danger');
+				}
+			} else {
+				$joined = $this->eventsManager->joinUser($this->event, $this->userEntity);
+			}
+			if($joined) {
+				$this->flashMessage('Zaslali jste přihlášku k události. Prosím vyčkejte na potvrzení pořadatelem.');
+			}
+		} catch (\Exception $e) {
+			$this->flashMessage($e->getMessage(), 'danger');
+		}
+		$this->redirect('this');
 	}
-	// TODO: udelat i zvlast komentare ci diskuzi k eventu
 }

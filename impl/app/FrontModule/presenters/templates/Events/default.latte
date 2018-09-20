@@ -44,37 +44,32 @@
                                 <div class="col-md-8 text-dark">
                                     <div class="row">
                                         <div class="col-md-12 padding-20 padding-top-10 padding-bottom-10">
-                                            <h4 class="font-weight-bold"><a n:href="Events:detail $event->id, $event->getSlug()"><i class="fa fa-star"></i> {$event->name}</a></h4>
+                                            <h4 class="font-weight-bold">
+                                                <a n:href="Events:detail $event->id, $event->getSlug()"><i class="fa fa-star"></i> {$event->name}</a>
+                                                {if $event->getMaxUsers() > 0}
+                                                    {if ($event->getMaxUsers() - $event->getJoinedCount()) == 0}
+                                                        <span class="badge badge-warning pull-right">Plný stav přihlášek</span>
+                                                    {/if}
+                                                {/if}
+                                            </h4>
 
                                             <div class="height-50">
                                                 <small><span class="text-mutted">Pro podání přihlášky je třeba se přihlásit do svého účtu.</span></small>
                                             </div>
 
                                             <div class="footer bottom">
-                                                {if $event->maxUsers > 0}
-                                                    <i class="fa fa-user"></i> Počet volných přihlášek {$event->maxUsers} z {$event->maxUsers}
+                                                {if $event->getMaxUsers() > 0}
+                                                    <i class="fa fa-user"></i> Počet volných přihlášek {($event->getMaxUsers() - $event->getJoinedCount())} z {$event->getMaxUsers()}
                                                 {else}
                                                     <i class="fa fa-user"></i> Neomezený počet přihlášek
                                                 {/if}
                                                 <i class="fa fa-calendar"></i> Datum akce {$event->eventDate|date:'d.m.Y'}
                                                 <i class="fa fa-filter"></i> {$event->eventType->name}
                                             </div>
+
                                         </div>
                                     </div>
 
-                                    {*{dump $event}*}
-
-                                    {*<h4>
-                                        <a href="">
-                                            <i class="fa fa-calendar"></i> {$event->name}<span class="badge badge-light float-right d-none d-sm-block">{$event->eventType->name}</span>
-                                        </a>
-                                    </h4>
-                                    <ul class="list-unstyled">
-                                        <li><span>Pořadatel: </span>{$event->user->username} {$event->user->firstName} {$event->user->lastName}</li>
-                                        <li><span>Kapacita: </span>{$event->maxUsers}</li>
-                                        <li><span>Termín: </span>{$event->eventDate|date:'d.m.Y'}</li>
-                                        <li><span>Kontakt: </span><a href="mailto:{$event->user->email}">{$event->user->email}</a></li>
-                                    </ul>*}
                                 </div>
 
                             </div>
@@ -83,19 +78,6 @@
 
                 {/foreach}
             {/if}
-
-            {*<p class="mt-5">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <ins class="adsbygoogle"
-                     style="display:block; text-align:center;"
-                     data-ad-layout="in-article"
-                     data-ad-format="fluid"
-                     data-ad-client="ca-pub-6145936523743265"
-                     data-ad-slot="9849574755"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </p>*}
 
         </div>
     </div>

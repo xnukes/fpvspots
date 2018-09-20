@@ -29,6 +29,7 @@ class EventUserEntity extends BaseEntity
 
 	/**
 	 * @ORM\Id
+	 * @ORM\GeneratedValue
 	 * @ORM\Column(name="event_user_id")
 	 */
 	protected $id;
@@ -52,4 +53,9 @@ class EventUserEntity extends BaseEntity
 	 * @ORM\Column(type="datetime", name="created")
 	 */
 	protected $created;
+
+	public function __construct()
+	{
+		$this->created = new DateTime();
+	}
 }

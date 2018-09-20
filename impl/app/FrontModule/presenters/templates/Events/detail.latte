@@ -30,8 +30,8 @@
                 <div class="col-md-3">
                     <div class="card bg-primary">
                         <div class="card-header text-white text-center">
-                            {if $event->maxUsers > 0}
-                                <i class="fa fa-user-o"></i> Volných přihlášek {$event->maxUsers} z {$event->maxUsers}
+                            {if $event->getMaxUsers() > 0}
+                                <i class="fa fa-user-o"></i> Volných přihlášek {($event->getMaxUsers() - $joinedCount)} z {$event->getMaxUsers()}
                             {else}
                                 <i class="fa fa-user-o"></i> Neomezený počet přihlášek
                             {/if}
@@ -70,8 +70,8 @@
                         <div class="card-body">
                             {if $user->isLoggedIn()}
                                 <a n:href="sendJoin!" class="btn btn-sm btn-success fullwidth" n:if="!$isJoined"><i class="fa fa-send-o"></i> Zaslat přihlášku</a>
-                                <a href="#" class="btn btn-sm btn-info fullwidth" n:if="$isJoined & !$joinedStatus"><i class="fa fa-clock-o"></i> Čeká na schválení</a>
-                                <a n:href="cancelJoin!" class="btn btn-sm btn-danger fullwidth" n:if="$isJoined & $joinedStatus"><i class="fa fa-remove"></i> Zrušit přihlášku</a>
+                                <a href="#" class="btn btn-sm btn-info fullwidth" n:if="$isJoined & ($joinedStatus == \App\Entities\EventUserEntity::STATE_WAIT)"><i class="fa fa-clock-o"></i> Čeká na schválení</a>
+                                <a n:href="cancelJoin!" class="btn btn-sm btn-danger fullwidth" n:if="$isJoined & ($joinedStatus > \App\Entities\EventUserEntity::STATE_WAIT)"><i class="fa fa-remove"></i> Zrušit přihlášku</a>
                             {else}
                                 <a n:href=":Admin:Sign:in" class="btn btn-sm btn-danger fullwidth"><i class="fa fa-sign-in"></i> Přihlašte se prosím</a>
                             {/if}
@@ -110,6 +110,9 @@
                 </div>
 
             </div>
+
+            {include googleAdsenseEvents}
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="card bg-light">

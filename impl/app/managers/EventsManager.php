@@ -8,7 +8,10 @@
 namespace App\Managers;
 
 
+use App\Entities\EventEntity;
+use App\Entities\EventUserEntity;
 use App\Entities\UserEntity;
+use Nette\InvalidStateException;
 
 class EventsManager extends BaseManager
 {
@@ -51,16 +54,19 @@ class EventsManager extends BaseManager
 		return $this->entityManager->getRepository(\App\Entities\EventTypeEntity::class)->findPairs([], 'name', [], 'id');
 	}
 
-	public function joinUser($eventId, UserEntity $userEntity)
+	public function joinUser(EventEntity $event, UserEntity $userEntity)
 	{
-		$event = $this->getEvent($eventId);
-		if(!$event) {
-			throw new \Exception('Event not find.');
+		if(!$event->isJoined($userEntity)) {
+			$eventUserEntity = new EventUserEntity();
+			$eventUserEntity->event = $event;
+			$eventUserEntity->user = $userEntity;
+			$eventUserEntity->state = EventUserEntity::STATE_WAIT;
+			$this->entityManager->persist($eventUserEntity);
+			$event->users[] = $eventUserEntity;
+			return $this->entityManager->persist($event)->flush();
+		} else {
+			throw new InvalidStateException('Tento pilot je již přihlášen k události.');
 		}
-
-		$event->getUsers()->add($userEntity);
-
-		return $this->entityManager->persist($event)->flush();
 	}
 
 	public function logoutUser($eventId, UserEntity $userEntity)
@@ -70,14 +76,17 @@ class EventsManager extends BaseManager
 			throw new \Exception('Event not find.');
 		}
 
-		$event->getUsers()->remove($userEntity);
+		$eventUserEntity = $event->removeFromUsers($userEntity);
 
-		return $this->entityManager->persist($event)->flush();
+		$this->entityManager->remove($eventUserEntity);
+
+		$this->entityManager->flush();
+
+		return $event;
 	}
 
 	public function hasUserJoined($eventId, UserEntity $userEntity)
 	{
-		return false;
 		$event = $this->getEvent($eventId);
 		if(!$event) {
 			throw new \Exception('Event not find.');
