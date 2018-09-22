@@ -84,11 +84,9 @@
 {define js}
     <script type="text/javascript">
         $(document).ready(function ($) {
-            values = {$place->mapPlace};
-            var vars = values.split(';');
-            selLat = vars[0];
-            selLng = vars[1];
-            selZoom = Number(vars[2]);
+            selLat = {$place->latitude};
+            selLng = {$place->longitude};
+            selZoom ={$place->zoom};
             var map = new GMaps({
                 el: '#gmaps-container',
                 lat: selLat,
