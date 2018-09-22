@@ -58,12 +58,12 @@
                 success: function(data) {
 
                     $.each(data['places'], function (key, item) {
-                        if(map.showedPlaces && map.showedPlaces[key] !== undefined)
+                        if(map.showedPlaces && map.showedPlaces[item.id] === true)
                         {
                             return;
                         }
 
-                        map.showedPlaces[key] = true;
+                        map.showedPlaces[item.id] = true;
 
                         map.addMarker({
                             lat: item['latitude'],
