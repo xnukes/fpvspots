@@ -15,8 +15,10 @@ use Nette;
  * Class BaseManager
  * @package App\Managers
  */
-class BaseManager extends Nette\Object
+class BaseManager
 {
+    use Nette\SmartObject;
+
 	/** @var EntityManager */
 	public $entityManager;
 

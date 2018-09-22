@@ -13,8 +13,10 @@ use App\Managers\EventsManager;
 use Kdyby\Events\Event;
 use Nette;
 
-class EventForm extends Nette\Object implements IBaseForm
+class EventForm implements IBaseForm
 {
+    use Nette\SmartObject;
+
 	/** @var BaseForm */
 	public $form;
 

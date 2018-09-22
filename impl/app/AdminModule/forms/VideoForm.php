@@ -11,8 +11,10 @@ namespace App\AdminModule\Forms;
 use App\Entities\VideoEntity;
 use Nette;
 
-class VideoForm extends Nette\Object implements IBaseForm
+class VideoForm implements IBaseForm
 {
+    use Nette\SmartObject;
+
 	/** @var BaseForm */
 	public $form;
 
