@@ -17,8 +17,10 @@ use	Nette\Security\Passwords;
  * @package App\Models
  * @author Lukáš Vlček
  */
-class Authenticator extends Nette\Object implements Nette\Security\IAuthenticator
+class Authenticator  implements Nette\Security\IAuthenticator
 {
+    use Nette\SmartObject;
+
 	/** @var EntityManager */
 	public $entityManager;
 

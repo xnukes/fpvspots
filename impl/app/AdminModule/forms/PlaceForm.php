@@ -10,8 +10,10 @@ namespace App\AdminModule\Forms;
 use App\Entities\PlaceEntity;
 use Nette;
 
-class PlaceForm extends Nette\Object implements IBaseForm
+class PlaceForm implements IBaseForm
 {
+    use Nette\SmartObject;
+
 	/** @var BaseForm */
 	public $form;
 
@@ -23,6 +25,9 @@ class PlaceForm extends Nette\Object implements IBaseForm
 		$this->form = $baseForm;
 	}
 
+	/**
+	 * @param PlaceEntity $entity
+	 */
 	public function setDefaultData($entity)
 	{
 		$this->defaultData = $entity;
@@ -56,7 +61,9 @@ class PlaceForm extends Nette\Object implements IBaseForm
 
 		if (!$form->isSubmitted() && $this->defaultData)
 		{
-			$form->setDefaults($this->defaultData->toArray());
+			$defaultData = $this->defaultData->toArray();
+			$defaultData['mapPlace'] = implode(';', [$defaultData['latitude'], $defaultData['longitude'], $defaultData['zoom']]);
+			$form->setDefaults($defaultData);
 		}
 
 		$form->onSuccess[] = [$this, 'onSuccess'];
@@ -78,10 +85,12 @@ class PlaceForm extends Nette\Object implements IBaseForm
 
 		$vars->description = Nette\Utils\Strings::normalize($vars->description);
 
+		list($vars->latitude, $vars->longitude, $vars->zoom) = explode(';', $vars->mapPlace);
+		unset($vars->mapPlace);
+
 		$place->setEntityValues($vars);
 
 		$place->user = $form->getPresenter()->getUserEntity();
-
 
 		if ($photo->isOk()) {
 			if ($photo->isImage()) {
@@ -107,7 +116,6 @@ class PlaceForm extends Nette\Object implements IBaseForm
 		}
 
 		$form->getPresenter()->entityManager->persist($place)->flush();
-
 
 		$form->getPresenter()->flashMessage($form->getTranslator()->translate('default.messages.itemSaved'));
 		$form->getPresenter()->redirect(':edit', ['id' => $place->id]);

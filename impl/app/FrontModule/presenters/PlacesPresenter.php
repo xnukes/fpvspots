@@ -11,11 +11,15 @@ namespace App\FrontModule\Presenters;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
 use Nette\Utils\DateTime;
+use Nette\Utils\Json;
 use Nette\Utils\Strings;
 use Tracy\Debugger;
 
 class PlacesPresenter extends BasePresenter
 {
+	/**
+	 *
+	 */
 	public function beforeRender()
 	{
 		parent::beforeRender();
@@ -23,6 +27,10 @@ class PlacesPresenter extends BasePresenter
 		//$this->template->places = $this->entityManager->getRepository(\App\Entities\PlaceEntity::getClassName())->findAll();
 	}
 
+	/**
+	 * @param $id
+	 * @throws \Nette\Application\AbortException
+	 */
 	public function actionDetail($id)
 	{
 		$place = $this->entityManager->getRepository(\App\Entities\PlaceEntity::getClassName())->findOneBy(['id' => $id]);
@@ -35,14 +43,30 @@ class PlacesPresenter extends BasePresenter
 		$this->template->place = $place;
 	}
 
+	/**
+	 * @throws \Nette\Application\AbortException
+	 * @throws \Nette\Application\UI\InvalidLinkException
+	 */
 	public function handleGetGmapsMarkers()
 	{
 		$data = [];
 
-		$qb = $this->entityManager->getRepository(\App\Entities\PlaceEntity::getClassName())->createQueryBuilder('p');
-		$qb->select('p,ph,u');
-		$qb->join('p.user', 'u');
-		$qb->leftJoin('p.photos', 'ph');
+		$qb = $this->entityManager->getRepository(\App\Entities\PlaceEntity::getClassName())->createQueryBuilder('places');
+		$qb->select('places, photos, users');
+		$qb->join('places.user', 'users');
+		$qb->leftJoin('places.photos', 'photos');
+
+		$qb->where('places.latitude > ?1 AND places.latitude < ?3 AND places.longitude > ?2 AND places.longitude < ?4');
+
+		if($viewport = json_decode($this->getRequest()->getPost('viewport')))
+		{
+			$viewport = (array)$viewport;
+			$qb->setParameter(1, $viewport[0]->latitude);
+			$qb->setParameter(2, $viewport[0]->longitude);
+
+			$qb->setParameter(3, $viewport[1]->latitude);
+			$qb->setParameter(4, $viewport[1]->longitude);
+		}
 
 		$places = $qb->getQuery()->getArrayResult();
 
@@ -54,14 +78,18 @@ class PlacesPresenter extends BasePresenter
 				$icon = '/Front/images/map-icon-new.png';
 			}
 			$data['places'][] = [
-				'url' => $detailLink . '/' . $place['id'],
-				'name' => $place['name'],
-				'desc' => $place['description'],
-				'plus' => $place['plusDesc'],
-				'minus' => $place['minusDesc'],
-				'place' => $this->getGmapsPointer($place['mapPlace']),
-				'username' => $place['user']['username'],
-				'icon' => $icon
+				'url'       => $detailLink . '/' . $place['id'],
+				'name'      => $place['name'],
+				'desc'      => $place['description'],
+				'plus'      => $place['plusDesc'],
+				'minus'     => $place['minusDesc'],
+				'latitude'  => $place['latitude'],
+				'longitude' => $place['longitude'],
+				'zoom'      => $place['zoom'],
+				'username'  => $place['user']['username'],
+				'icon'      => $icon,
+				'id'        => $place['id'],
+
 			];
 		}
 

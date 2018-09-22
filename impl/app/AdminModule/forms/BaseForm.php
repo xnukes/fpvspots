@@ -16,9 +16,11 @@ use Nette;
  * @package App\AdminModule\Forms
  * @author Lukáš Vlček
  */
-class BaseForm extends Nette\Object
+class BaseForm
 {
-	/** @var Form */
+    use Nette\SmartObject;
+
+    /** @var Form */
 	protected $form;
 
 	public function create(\App\AdminModule\Presenters\BasePresenter $presenter, $name)

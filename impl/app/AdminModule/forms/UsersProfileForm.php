@@ -10,15 +10,17 @@ use App\Entities\UserEntity;
 use Nette;
 use App\Models\Form;
 use Nette\Http\FileUpload;
-use Nette\Object;
+use Nette\SmartObject;
 
 /**
  * Class UsersProfileForm
  * @package App\AdminModule\Forms
  * @author Lukáš Vlček
  */
-class UsersProfileForm extends Object implements IBaseForm
+class UsersProfileForm implements IBaseForm
 {
+    use Nette\SmartObject;
+
 	/** @var BaseForm */
 	public $form;
 

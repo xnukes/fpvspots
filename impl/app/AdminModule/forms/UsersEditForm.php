@@ -15,8 +15,10 @@ use Nette;
  * @package App\AdminModule\Forms
  * @author Lukáš Vlček
  */
-class UsersEditForm extends Nette\Object implements IBaseForm
+class UsersEditForm implements IBaseForm
 {
+    use Nette\SmartObject;
+
 	/** @var BaseForm */
 	public $form;
 
