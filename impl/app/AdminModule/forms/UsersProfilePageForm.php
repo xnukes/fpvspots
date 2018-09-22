@@ -9,8 +9,10 @@ namespace App\AdminModule\Forms;
 use App\Entities\UserEntity;
 use Nette;
 
-class UsersProfilePageForm extends Nette\Object implements IBaseForm
+class UsersProfilePageForm implements IBaseForm
 {
+    use Nette\SmartObject;
+
 	/** @var BaseForm */
 	public $form;
 

@@ -10,8 +10,10 @@ namespace App\AdminModule\Forms;
 use App\Entities\PlaceEntity;
 use Nette;
 
-class PlaceForm extends Nette\Object implements IBaseForm
+class PlaceForm implements IBaseForm
 {
+    use Nette\SmartObject;
+
 	/** @var BaseForm */
 	public $form;
 

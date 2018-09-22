@@ -14,8 +14,10 @@ use Nette;
  * @package App\Models
  * @author Lukáš Vlček
  */
-abstract class SystemRepository extends Nette\Object
+abstract class SystemRepository
 {
+    use Nette\SmartObject;
+
 	const SystemApp			= 'FPVSpots.info';
 
 	const SystemVersion 	= '1.0';
