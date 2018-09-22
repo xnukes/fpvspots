@@ -25,6 +25,9 @@ class PlaceForm implements IBaseForm
 		$this->form = $baseForm;
 	}
 
+	/**
+	 * @param PlaceEntity $entity
+	 */
 	public function setDefaultData($entity)
 	{
 		$this->defaultData = $entity;
@@ -58,7 +61,9 @@ class PlaceForm implements IBaseForm
 
 		if (!$form->isSubmitted() && $this->defaultData)
 		{
-			$form->setDefaults($this->defaultData->toArray());
+			$defaultData = $this->defaultData->toArray();
+			$defaultData['mapPlace'] = implode(';', [$defaultData['latitude'], $defaultData['longitude'], $defaultData['zoom']]);
+			$form->setDefaults($defaultData);
 		}
 
 		$form->onSuccess[] = [$this, 'onSuccess'];
@@ -79,6 +84,9 @@ class PlaceForm implements IBaseForm
 		$photo = $vars->photo;
 
 		$vars->description = Nette\Utils\Strings::normalize($vars->description);
+
+		list($vars->latitude, $vars->longitude, $vars->zoom) = explode(';', $vars->mapPlace);
+		unset($vars->mapPlace);
 
 		$place->setEntityValues($vars);
 
