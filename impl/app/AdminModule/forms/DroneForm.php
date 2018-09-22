@@ -10,8 +10,10 @@ namespace App\AdminModule\Forms;
 use App\Entities\DroneEntity;
 use Nette;
 
-class DroneForm extends Nette\Object implements IBaseForm
+class DroneForm implements IBaseForm
 {
+    use Nette\SmartObject;
+
     /** @var BaseForm */
     public $form;
 

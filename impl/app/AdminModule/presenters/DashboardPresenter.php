@@ -43,16 +43,19 @@ class DashboardPresenter extends BasePresenter
 
 	public function createComponentMessages($name)
 	{
-		return new Messages($this, $name);
+		$messages = new Messages();
+		$this->addComponent($messages, $name);
 	}
 
 	public function createComponentEvents($name)
 	{
-		return new Events($this, $name);
+		$events = new Events();
+		$this->addComponent($events, $name);
 	}
 
 	public function createComponentWall($name)
 	{
-		return new Wall($this, $name);
+		$wall = new Wall();
+		$this->addComponent($wall, $name);
 	}
 }

@@ -52,9 +52,19 @@ class PlaceEntity extends BaseEntity
 	protected $minusDesc;
 
 	/**
-	 * @ORM\Column(type="string")
+	 * @ORM\Column(type="float")
 	 */
-	protected $mapPlace;
+	protected $latitude;
+
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	protected $zoom;
+
+	/**
+	 * @ORM\Column(type="float")
+	 */
+	protected $longitude;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="UserEntity")
@@ -82,6 +92,7 @@ class PlaceEntity extends BaseEntity
 	{
 		$this->createdOn = new DateTime();
 		$this->changedOn = new DateTime();
+		$this->photos    = new ArrayCollection();
 	}
 
 	public function addPhoto(PhotoEntity $photoEntity)

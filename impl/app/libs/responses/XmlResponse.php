@@ -99,8 +99,10 @@ class XmlResponse implements IResponse
 	}
 }
 
-class XmlResponseTemplate extends Nette\Object
+class XmlResponseTemplate
 {
+    use Nette\SmartObject;
+
 	private $rootElement;
 
 	private $rootElementAttributes = null;
