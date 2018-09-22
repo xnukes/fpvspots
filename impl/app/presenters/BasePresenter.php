@@ -57,7 +57,7 @@ class BasePresenter extends Presenter
 		$this->template->addFilter('latitude', function ($mapPlace){
 			return explode(';', $mapPlace)[0];
 		});
-		$this->template->addFilter('longtitude', function ($mapPlace){
+		$this->template->addFilter('longitude', function ($mapPlace){
 			return explode(';', $mapPlace)[1];
 		});
 	}

@@ -4,40 +4,86 @@
 
 {define js}
 <script type="text/javascript">
+
     $(document).ready(function () {
 
         var map = new GMaps({
             el: '#places-map', //49.366099 17.3211333
             lat: 49.396099,
             lng: 17.3211333,
-            zoom: 8,
+            zoom: 12,
             cursor: 'pointer',
-            mapType: 'hybrid'
+            mapType: 'hybrid',
+            success: function(position) {
+                map.setCenter(position.coords.latitude, position.coords.longitude);
+            },
+            zoom_changed: updateMarkers,
+            dragend: updateMarkers,
         });
 
-        $.ajax({
-            url: {link getGmapsMarkers!},
-            success: function(data) {
+        map.showedPlaces = {};
 
-                $.each(data['places'], function (i, o) {
-
-                    map.addMarker({
-                        lat: o['place'][0],
-                        lng: o['place'][1],
-                        title: o['name'],
-                        icon: {$basePath} + o['icon'],
-                        infoWindow: {
-                            content: '<h4><strong>' + o['name'] + '</strong> (' + o['username'] + ')</h4><hr>'
-                                + (o['desc'] ? '<p>Popis:</p><p>' + o['desc'] + '</p>' : '')
-                                + (o['plus'] ? '<p>Plusy:</p><p>' + o['plus'] + '</p>' : '')
-                                + (o['minus'] ? '<p>Mínusy:</p><p>' + o['minus'] + '</p>' : '')
-                                + ('<p><a href="' + o['url'] + '" class="btn btn-primary w-100">Detail spotu</a></p>')
-                        }
-                    });
-                })
+        GMaps.geolocate({
+            success: function(position) {
+                map.setCenter(position.coords.latitude, position.coords.longitude);
+            },
+            error: function(error) {
+                console.log('Geolocation failed: '+error.message);
+            },
+            not_supported: function() {
+                console.log("Your browser does not support geolocation");
+            },
+            always: function() {
+                updateMarkers();
             }
         });
+
+        function updateMarkers(){
+            var bounds = map.getBounds();
+
+            $.ajax({
+                url: {link getGmapsMarkers!},
+                dataType: 'json',
+                data: { viewport: JSON.stringify([
+                    {
+                        latitude: bounds['f']['b'],
+                        longitude: bounds['b']['b'],
+                    },
+                    {
+                        latitude:  bounds['f']['f'],
+                        longitude: bounds['b']['f'],
+                    }
+                ])},
+                method: 'POST',
+                success: function(data) {
+
+                    $.each(data['places'], function (key, item) {
+                        if(map.showedPlaces && map.showedPlaces[key] !== undefined)
+                        {
+                            return;
+                        }
+
+                        map.showedPlaces[key] = true;
+
+                        map.addMarker({
+                            lat: item['latitude'],
+                            lng: item['longitude'],
+                            title: item['name'],
+                            icon: {$basePath} + item['icon'],
+                            infoWindow: {
+                                content: '<h4><strong>' + item['name'] + '</strong> (' + item['username'] + ')</h4><hr>'
+                                    + (item['desc'] ? '<p>Popis:</p><p>' + item['desc'] + '</p>' : '')
+                                    + (item['plus'] ? '<p>Plusy:</p><p>' + item['plus'] + '</p>' : '')
+                                    + (item['minus'] ? '<p>Mínusy:</p><p>' + item['minus'] + '</p>' : '')
+                                    + ('<p><a href="' + item['url'] + '" class="btn btn-primary w-100" target="_blank">Detail spotu</a></p>')
+                            }
+                        });
+                    })
+                }
+            });
+        };
     });
+
 </script>
 {/define}
 <style>

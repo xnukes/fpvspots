@@ -50,12 +50,12 @@ class DashboardPresenter extends BasePresenter
 	public function createComponentEvents($name)
 	{
 		$events = new Events();
-        $this->addComponent($events, $name);
+		$this->addComponent($events, $name);
 	}
 
 	public function createComponentWall($name)
 	{
 		$wall = new Wall();
-        $this->addComponent($wall, $name);
+		$this->addComponent($wall, $name);
 	}
 }
