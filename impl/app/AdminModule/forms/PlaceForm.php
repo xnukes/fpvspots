@@ -92,7 +92,6 @@ class PlaceForm implements IBaseForm
 
 		$place->user = $form->getPresenter()->getUserEntity();
 
-
 		if ($photo->isOk()) {
 			if ($photo->isImage()) {
 				$placePhoto = new \App\Entities\PhotoEntity();
@@ -117,7 +116,6 @@ class PlaceForm implements IBaseForm
 		}
 
 		$form->getPresenter()->entityManager->persist($place)->flush();
-
 
 		$form->getPresenter()->flashMessage($form->getTranslator()->translate('default.messages.itemSaved'));
 		$form->getPresenter()->redirect(':edit', ['id' => $place->id]);

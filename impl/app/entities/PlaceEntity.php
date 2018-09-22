@@ -92,6 +92,7 @@ class PlaceEntity extends BaseEntity
 	{
 		$this->createdOn = new DateTime();
 		$this->changedOn = new DateTime();
+		$this->photos    = new ArrayCollection();
 	}
 
 	public function addPhoto(PhotoEntity $photoEntity)
