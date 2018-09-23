@@ -70,7 +70,7 @@
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Events:*') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Events:default"><i class="fa fa-calendar"></i> <span class="d-md-none d-lg-inline">Plánované události</span></a>
+                <a class="nav-link" n:href="Events:default"><i class="fa fa-calendar"></i> <span class="d-md-none d-lg-inline">Události</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Pilots:*') ? active, 'nav-item'">
@@ -83,6 +83,10 @@
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Machines:top5') ? active, 'nav-item'">
                 <a class="nav-link" n:href="Machines:top5"><i class="fa fa-trophy"></i> <span class="d-md-none d-lg-inline">TOP5 Strojů</span></a>
+            </li>
+            <li class="divider-vertical"></li>
+            <li n:class="$presenter->isLinkCurrent('Eshop:*') ? active, 'nav-item'">
+                <a class="nav-link" n:href="Eshop:default"><i class="fa fa-shopping-cart"></i> <span class="d-md-none d-lg-inline">Obchody</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Search:*') ? active, 'nav-item'">

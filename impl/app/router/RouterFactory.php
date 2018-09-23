@@ -25,6 +25,8 @@ class RouterFactory
 
 		$router[] = new Route('sitemap.xml', array('module' => 'Front', 'presenter' => 'Sitemap', 'action' => 'default'));
 
+		$router[] = new Route('obchody/[<locale [a-z]{2}>/]', array('module' => 'Front', 'presenter' => 'Eshop', 'action' => 'default'));
+
 		$router[] = new Route('u/<username>', array('module' => 'Front', 'presenter' => 'Pilots', 'action' => 'detail'));
 
 		$router[] = new Route('u/<username>/machines', array('module' => 'Front', 'presenter' => 'Pilots', 'action' => 'machines'));

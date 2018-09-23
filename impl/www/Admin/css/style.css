@@ -2,7 +2,7 @@
 * custom stylesheet file
 */
 
-body {
+body.img-bg {
     background: none;
     background-image: url(../images/background.jpg);
     background-size: cover;

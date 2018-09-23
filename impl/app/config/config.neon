@@ -51,6 +51,7 @@ services:
 			- addResource('Admin:Messages')
 			- addResource('Admin:Buddies')
 			- addResource('Admin:Videos')
+			- addResource('Admin:Eshop')
 
 			- allow('guest', ['Admin:Sign'])
 			- allow('guest', ['Admin:Register'])
@@ -64,6 +65,7 @@ services:
 			- allow('user', ['Admin:Buddies'])
 			- allow('user', ['Admin:Videos'])
 
+			- allow('admin', ['Admin:Eshop'])
 			- allow('admin', ['Admin:Dashboard'])
 			- allow('admin', ['Admin:Users'])
 			- allow('admin', ['Admin:Groups'])

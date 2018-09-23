@@ -30,7 +30,7 @@
                         <img class="avatar" src="{$basePath}/Admin/assets/images/noavatar.jpg" width="50" height="50" alt="avatar">
                     {/if}
                     <div class="comment-body">
-                        <a href="#" class="comment-author">
+                        <a href="#" class="comment-author" onclick="appendUsernameIntoMessage({$message->user->username});">
                             <small class="text-muted pull-right">
                                 {$message->createdOn|date:'d.m.Y H:i:s'}
                             </small>
@@ -48,3 +48,9 @@
 
     </div>
 </div>
+<script type="text/javascript">
+    function appendUsernameIntoMessage(name)
+    {
+        $('textarea[name="message"]').append(name + ': ');
+    }
+</script>

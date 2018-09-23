@@ -40,6 +40,12 @@ class BasePresenter extends Presenter
 	/** @var UserEntity */
 	public $userEntity;
 
+	/**
+	 * @var string
+	 * @persistent
+	 */
+	public $backlink = '';
+
 	protected function startup()
 	{
 		parent::startup();

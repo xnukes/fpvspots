@@ -54,17 +54,17 @@ class PlaceEntity extends BaseEntity
 	/**
 	 * @ORM\Column(type="float")
 	 */
-	protected $latitude;
-
-	/**
-	 * @ORM\Column(type="integer")
-	 */
-	protected $zoom;
+	protected $placeLatitude;
 
 	/**
 	 * @ORM\Column(type="float")
 	 */
-	protected $longitude;
+	protected $placeLongitude;
+
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	protected $placeZoom;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="UserEntity")

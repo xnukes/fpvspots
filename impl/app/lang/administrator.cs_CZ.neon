@@ -10,6 +10,7 @@ menu:
 	videos: 'Videotéka'
 	events: 'Události'
 	buddies: 'Přátelé'
+	eshop: 'Obchod'
 
 users:
 	profile: 'Nastavení profilu'
@@ -70,3 +71,10 @@ videos:
 		create: 'Nové video'
 	types:
 		youtube: 'YouTube'
+
+eshop:
+	title:
+		list: 'Seznam produktů'
+		settings: 'Nastavení obchodu'
+	buttons:
+		create: 'Vytvořit produkt'

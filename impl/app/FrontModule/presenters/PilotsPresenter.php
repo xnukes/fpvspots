@@ -17,7 +17,7 @@ class PilotsPresenter extends BasePresenter
 	/** @persistent */
 	public $page = 0;
 
-	public $perPage = 10;
+	public $perPage = 100;
 
 	/** @var \App\Entities\UserEntity */
 	public $pilot;
@@ -27,6 +27,7 @@ class PilotsPresenter extends BasePresenter
 
 	public function actionDefault()
 	{
+		// TODO: please create component paginator for this
 		$this->template->pilots = $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())
 			->findBy(['public' => true], ['createdOn' => 'DESC'], $this->perPage, $this->page * $this->perPage);
 	}

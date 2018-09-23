@@ -75,6 +75,7 @@ class SignPresenter extends BasePresenter
 		}
 		try {
 			$this->user->login($vars->username, $vars->password);
+			$this->restoreRequest($this->backlink);
 			$this->redirect('Dashboard:');
 		} catch (Nette\Security\AuthenticationException $e) {
 			$form->addError($e->getMessage());
