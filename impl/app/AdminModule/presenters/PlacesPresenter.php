@@ -65,10 +65,10 @@ class PlacesPresenter extends BasePresenter
 		$grid->addColumnText('name', 'Název', 'name')
 			->setSortable();
 
-		$grid->addColumnText('latitude', 'Latitude', 'latitude')
+		$grid->addColumnText('latitude', 'Latitude', 'placeLatitude')
 			->setFitContent();
 
-		$grid->addColumnText('longitude', 'Longitude', 'longitude')
+		$grid->addColumnText('longitude', 'Longitude', 'placeLongitude')
 			->setFitContent();
 
 		$grid->addColumnDateTime('createdOn', 'Vytvořeno')

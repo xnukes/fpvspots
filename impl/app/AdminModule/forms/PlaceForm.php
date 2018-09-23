@@ -62,7 +62,7 @@ class PlaceForm implements IBaseForm
 		if (!$form->isSubmitted() && $this->defaultData)
 		{
 			$defaultData = $this->defaultData->toArray();
-			$defaultData['mapPlace'] = implode(';', [$defaultData['latitude'], $defaultData['longitude'], $defaultData['zoom']]);
+			$defaultData['mapPlace'] = implode(';', [$defaultData['placeLatitude'], $defaultData['placeLongitude'], $defaultData['placeZoom']]);
 			$form->setDefaults($defaultData);
 		}
 
@@ -85,7 +85,7 @@ class PlaceForm implements IBaseForm
 
 		$vars->description = Nette\Utils\Strings::normalize($vars->description);
 
-		list($vars->latitude, $vars->longitude, $vars->zoom) = explode(';', $vars->mapPlace);
+		list($vars->placeLatitude, $vars->placeLongitude, $vars->placeZoom) = explode(';', $vars->mapPlace);
 		unset($vars->mapPlace);
 
 		$place->setEntityValues($vars);
