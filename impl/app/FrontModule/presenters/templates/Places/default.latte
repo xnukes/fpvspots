@@ -1,5 +1,13 @@
 {block content}
 
+{*<form method="post" id="geocoding_form">
+    <label for="address">Address:</label>
+    <div class="input">
+        <input type="text" id="address" name="address">
+        <input type="submit" class="btn" value="Search">
+    </div>
+</form>*}
+
 <div class="places-map" id="places-map" style="width: 100%; height: 94%; display: inline-block; position: absolute"></div>
 
 {define js}
@@ -16,7 +24,8 @@
             mapType: 'hybrid',
             markerClusterer: function(map) {
                 options = {
-                    gridSize: 40
+                    gridSize: 40,
+                    imagePath: {$basePath} + "/images/m"
                 };
 
                 return new MarkerClusterer(map, [], options);
@@ -27,8 +36,21 @@
             zoom_changed: updateMarkers,
             dragend: updateMarkers,
         });
-
         map.showedPlaces = {};
+
+        $('#geocoding_form').submit(function(e){
+            e.preventDefault();
+            GMaps.geocode({
+                address: $('#address').val().trim(),
+                callback: function(results, status){
+                    if(status=='OK'){
+                        var latlng = results[0].geometry.location;
+                        map.setCenter(latlng.lat(), latlng.lng());
+                        updateMarkers();
+                    }
+                }
+            });
+        });
 
         GMaps.geolocate({
             success: function(position) {
