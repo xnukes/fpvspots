@@ -14,6 +14,13 @@
             zoom: 12,
             cursor: 'pointer',
             mapType: 'hybrid',
+            markerClusterer: function(map) {
+                options = {
+                    gridSize: 40
+                };
+
+                return new MarkerClusterer(map, [], options);
+            },
             success: function(position) {
                 map.setCenter(position.coords.latitude, position.coords.longitude);
             },
@@ -58,12 +65,12 @@
                 success: function(data) {
 
                     $.each(data['places'], function (key, item) {
-                        if(map.showedPlaces && map.showedPlaces[item.id] === true)
+                        if(map.showedPlaces && map.showedPlaces[item['latitude'] + '' + item['longitude']] === true)
                         {
                             return;
                         }
 
-                        map.showedPlaces[item.id] = true;
+                        map.showedPlaces[item['latitude'] + '' + item['longitude']] = true;
 
                         map.addMarker({
                             lat: item['latitude'],
