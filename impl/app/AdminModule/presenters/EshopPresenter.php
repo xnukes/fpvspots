@@ -19,18 +19,24 @@ class EshopPresenter extends BasePresenter
 
 		$form->setTranslator($this->getTranslator());
 
-		$form->addCheckbox('shop_enabled', 'Obchod Povolen')
+		$form->addCheckbox('shopEnabled', 'Obchod Povolen')
 			->setDefaultValue(false);
 
-		$form->addText('shop_title', 'Název obchodu')
+		$form->addText('shopTitle', 'Název obchodu')
 			->setAttribute('class', 'form-control');
 
-		$form->addUploadInput('shop_cover_bg', 'Úvodní fotka');
+		$form->addUploadInput('shopCoverBg', 'Úvodní fotka');
 
 
-		$form->addTextArea('shop_desc', 'Popis a informace o obchodování', null, 8)
+		$form->addTextArea('shopDesc', 'Popis a informace o obchodování', null, 8)
 			->setAttribute('placeholder', 'Popis a informace o obchodování')
 			->setAttribute('class', 'summernote form-control word-count');
+
+		$form->addSubmit('send', 'Uložit nastavení')
+			->setAttribute('class', 'btn btn-sm btn-success pull-right')
+			->onClick[] = [$this, 'eshopSettingFormSuccess'];
+
+		$form->setDefaults($this->userEntity->toArray());
 
 		return $form;
 	}
@@ -50,5 +56,17 @@ class EshopPresenter extends BasePresenter
 		$grid->addColumnText('product_price','Cena');
 
 		$grid->addColumnDateTime('shipment_price','Poštovné');
+	}
+
+	public function eshopSettingFormSuccess($submitBtn, $vars)
+	{
+		$this->userEntity->shopEnabled = $vars->shopEnabled;
+		$this->userEntity->shopTitle = $vars->shopTitle;
+		$this->userEntity->shopDesc = $vars->shopDesc;
+
+		$this->entityManager->persist($this->userEntity)->flush();
+
+		$this->flashMessage('Vaše obchodní nastavení bylo uloženo.');
+		$this->redirect('this');
 	}
 }

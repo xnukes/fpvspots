@@ -1,12 +1,11 @@
 {block content}
 
-{*<form method="post" id="geocoding_form">
-    <label for="address">Address:</label>
-    <div class="input">
-        <input type="text" id="address" name="address">
-        <input type="submit" class="btn" value="Search">
+<form method="post" id="geocoding_form">
+    <div class="input row">
+        <input type="text" id="address" name="address" class="form-control col-md-8">
+        <input type="submit" class="btn btn-light col-md-4" value="Hledej ..." style="font-weight: 700;">
     </div>
-</form>*}
+</form>
 
 <div class="places-map" id="places-map" style="width: 100%; height: 94%; display: inline-block; position: absolute"></div>
 
@@ -19,7 +18,7 @@
             el: '#places-map', //49.366099 17.3211333
             lat: 49.396099,
             lng: 17.3211333,
-            zoom: 12,
+            zoom: 8,
             cursor: 'pointer',
             mapType: 'hybrid',
             markerClusterer: function(map) {
@@ -46,6 +45,7 @@
                     if(status=='OK'){
                         var latlng = results[0].geometry.location;
                         map.setCenter(latlng.lat(), latlng.lng());
+                        map.setZoom(12);
                         updateMarkers();
                     }
                 }
@@ -54,6 +54,7 @@
 
         GMaps.geolocate({
             success: function(position) {
+                console.log('Geolocation to: '+position.coords.latitude + ' - ' + position.coords.longitude);
                 map.setCenter(position.coords.latitude, position.coords.longitude);
             },
             error: function(error) {

@@ -24,27 +24,25 @@ abstract class SystemRepository
 
 	const SystemSubVersion	= '0';
 
-	const SystemYear		= '2016 - 2017';
+	const SystemYear		= '2016 - 2018';
 
 	const SystemAuthorName 	= 'Lukáš Vlček';
 
 	const SystemAuthorEmail = 'xnukes@gmail.com';
 
-	const SystemName 		= '<a href="mailto:' . self::SystemAuthorEmail . '" target="_blank">' .self::SystemApp . '</a> powered by Nette.';
+	const SystemName 		= '<a href="mailto:' . self::SystemAuthorEmail . '" target="_blank">' .self::SystemApp . '</a> powered by Nette Framework.';
 
 	public static function getSystemVersion(\Kdyby\Translation\Translator $translator)
 	{
 		return self::SystemName
-			. '<p>Copyright © '
+			. '<br />'
+			. 'Copyright © '
 			. self::SystemYear
-			. ' <a href="mailto:' . self::SystemAuthorEmail . '" target="_blank">'
-			. self::SystemAuthorName
-			. '</a>.<br/>'
+			. ' all rights reserved. '
 			. $translator->translate('language.default.version')
 			. ': '
 			. self::SystemVersion
 			. '.'
-			. self::SystemSubVersion
-			. '</p>';
+			. self::SystemSubVersion;
 	}
 }

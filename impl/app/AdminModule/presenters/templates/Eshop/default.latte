@@ -25,6 +25,7 @@
     </div>
 </div>
 
+{form eshopSettingsForm}
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
@@ -38,32 +39,35 @@
                 </ul>
             </div>
             <div class="panel-body">
-                {form eshopSettingsForm}
-                    <div class="row">
-                        <div class="col-md-6">
-                            {label shop_title /}
-                            {input shop_title}
-                        </div>
-                        <div class="col-md-4">
-                            {label shop_cover_bg /}
-                            {input shop_cover_bg}
-                        </div>
-                        <div class="col-md-2">
-                            <hr>
-                            <label class="checkbox">
-                                <input type="checkbox" value="1" n:name="shop_enabled">
-                                <i></i> Obchodní modul povolen
-                            </label>
-                        </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {label shopTitle /}
+                        {input shopTitle}
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            {label shop_desc /}
-                            {input shop_desc}
-                        </div>
+                    <div class="col-md-4">
+                        {label shopCoverBg /}
+                        {input shopCoverBg}
                     </div>
-                {/form}
+                    <div class="col-md-2">
+                        <hr>
+                        <label class="checkbox">
+                            <input type="checkbox" value="1" n:name="shopEnabled">
+                            <i></i> Obchodní modul povolen
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {label shopDesc /}
+                        {input shopDesc}
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                {input send}
+                <div class="clear"></div>
             </div>
         </div>
     </div>
 </div>
+{/form}

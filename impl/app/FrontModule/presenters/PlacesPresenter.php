@@ -56,10 +56,10 @@ class PlacesPresenter extends BasePresenter
 		$qb->join('places.user', 'users');
 		$qb->leftJoin('places.photos', 'photos');
 
-		$qb->where('places.placeLatitude > ?1 AND places.placeLatitude < ?3 AND places.placeLongitude > ?2 AND places.placeLongitude < ?4');
-
 		if($viewport = json_decode($this->getRequest()->getPost('viewport')))
 		{
+			$qb->where('places.placeLatitude > ?1 AND places.placeLatitude < ?3 AND places.placeLongitude > ?2 AND places.placeLongitude < ?4');
+
 			$viewport = (array)$viewport;
 			$qb->setParameter(1, $viewport[0]->latitude);
 			$qb->setParameter(2, $viewport[0]->longitude);
