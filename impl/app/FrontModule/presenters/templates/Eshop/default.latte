@@ -1,1 +1,27 @@
 {block content}
+
+{define title}Seznam obchodníků{/define}
+
+<main role="main">
+
+    <div class="clear"></div>
+
+    <div class="container">
+    {foreach $shops as $shop}
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a n:href=":detail $shop->username"><h2>{$shop->shopTitle}</h2></a>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {/foreach}
+    </div>
+</main>

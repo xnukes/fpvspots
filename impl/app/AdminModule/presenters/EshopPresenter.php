@@ -8,11 +8,13 @@
 namespace App\AdminModule\Presenters;
 
 
+use App\Entities\UserEntity;
 use App\Models\Form;
 use App\Models\Grid;
 
 class EshopPresenter extends BasePresenter
 {
+
 	public function createComponentEshopSettingsForm($name)
 	{
 		$form = new Form($this, $name);
