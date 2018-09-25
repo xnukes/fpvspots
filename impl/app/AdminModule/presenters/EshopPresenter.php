@@ -113,9 +113,14 @@ class EshopPresenter extends BasePresenter
 		$this->redirect('this');
 	}
 
-	public function handleDeleteProductPhoto($key)
+	public function handleDeleteProductPhoto($id)
 	{
+		$result = $this->eshopManager->deleteUserProductPhoto($id);
 
+		if($result)
+			$this->flashMessage($this->getTranslator()->translate('default.messages.fileIsDeleted'));
+
+		$this->redirect('this');
 	}
 
 	public function handleDeleteProduct($id)

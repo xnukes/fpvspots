@@ -16,11 +16,13 @@ use Doctrine\ORM\Mapping as ORM;
  * @property UserEntity $user
  * @property string $productTitle
  * @property string $productDesc
+ * @property string $productDescShort
  * @property float $productPrice
  * @property float $productShipment
  * @property integer $productStock
  * @property integer $productState
  * @property ArrayCollection $photos
+ * @property integer $published
  *
  * @ORM\Entity(repositoryClass="\App\Entities\UserProductEntity")
  * @ORM\Entity
@@ -60,6 +62,11 @@ class UserProductEntity extends BaseEntity
 	protected $productDesc;
 
 	/**
+	 * @ORM\Column(type="text", name="product_desc_short")
+	 */
+	protected $productDescShort;
+
+	/**
 	 * @ORM\Column(type="float", name="product_price")
 	 */
 	protected $productPrice;
@@ -84,6 +91,11 @@ class UserProductEntity extends BaseEntity
 	 * @ORM\JoinTable(name="users_products_photos")
 	 */
 	protected $photos;
+
+	/**
+	 * @ORM\Column(type="integer", name="published")
+	 */
+	protected $published;
 
 	public function __construct()
 	{

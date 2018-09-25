@@ -38,4 +38,19 @@ class EshopManager extends BaseManager
 		}
 		return $product;
 	}
+
+	public function deleteUserProductPhoto($photo_id)
+	{
+		$photo = $this->entityManager->getRepository(\App\Entities\PhotoEntity::class)->find($photo_id);
+
+		$moreFilehashExists = count($this->entityManager->getRepository(\App\Entities\PhotoEntity::class)->findBy(['filehash' => $photo->filehash])) > 1 ? true : false;
+
+		if(!$moreFilehashExists) {
+			\Nette\Utils\FileSystem::delete($this->configRepository->photosPath . DIRECTORY_SEPARATOR . $photo->filehash);
+		}
+
+		$this->entityManager->remove($photo)->flush();
+
+		return true;
+	}
 }

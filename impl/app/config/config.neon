@@ -64,12 +64,11 @@ services:
 			- allow('user', ['Admin:Messages'])
 			- allow('user', ['Admin:Buddies'])
 			- allow('user', ['Admin:Videos'])
+			- allow('user', ['Admin:Eshop'])
 
-			- allow('admin', ['Admin:Eshop'])
 			- allow('admin', ['Admin:Dashboard'])
 			- allow('admin', ['Admin:Users'])
 			- allow('admin', ['Admin:Groups'])
-			- allow('user', ['Admin:Eshop'])
 
 includes:
 	- parameters.neon

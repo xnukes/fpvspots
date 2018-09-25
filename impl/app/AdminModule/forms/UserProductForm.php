@@ -36,15 +36,20 @@ class UserProductForm implements IBaseForm
 
 		$form->addText('productTitle', 'Název produktu')
 			->setAttribute('class', 'form-control')
-			->setRequired();
+			->setRequired('Prosím zadejte název produktu.');
 
 		$form->addTextArea('productDesc', 'Popis produktu')
 			->setAttribute('class', 'form-control summernote');
 
+		$form->addTextArea('productDescShort', 'Krátký popis')
+			->setAttribute('class', 'form-control')
+			->setAttribute('rows', '12')
+			->setMaxLength(255);
+
 		$form->addText('productPrice', 'Cena za jednotku (Kč)')
 			->setDefaultValue('0.0000')
 			->setAttribute('class', 'form-control')
-			->setRequired();
+			->setRequired('Prosím zadejte cenu.');
 
 		$form->addText('productShipment', 'Cena poštovného (Kč)')
 			->setDefaultValue('0.0000')
@@ -59,6 +64,14 @@ class UserProductForm implements IBaseForm
 				\App\Entities\UserProductEntity::STATE_NEWEST => 'Nové',
 				\App\Entities\UserProductEntity::STATE_USED => 'Použité',
 			])
+			->setAttribute('class', 'form-control')
+			->setRequired();
+
+		$form->addSelect('published', 'Publikováno', [
+				0 => 'Ne',
+				1 => 'Ano',
+			])
+			->setDefaultValue(1)
 			->setAttribute('class', 'form-control')
 			->setRequired();
 

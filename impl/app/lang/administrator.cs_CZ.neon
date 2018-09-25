@@ -78,5 +78,6 @@ eshop:
 		settings: 'Nastavení obchodu'
 		createProduct: 'Vytvořit produkt'
 		editProduct: 'Změnit produkt'
+		photos: 'Galerie produktu'
 	buttons:
 		create: 'Vytvořit produkt'

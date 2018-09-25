@@ -34,4 +34,14 @@ class EshopPresenter extends BasePresenter
 			$this->flashMessage($e->getMessage(), 'danger');
 		}
 	}
+
+	public function actionProduct($slug, $pid)
+	{
+		try {
+			$this->template->shop = $this->eshopManager->getBySlug($slug);
+			$this->template->product = $this->eshopManager->getUserProductById($pid);
+		} catch (BadRequestException $e) {
+			$this->flashMessage($e->getMessage(), 'danger');
+		}
+	}
 }

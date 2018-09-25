@@ -22,9 +22,13 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             {label productTitle /}
                             {input productTitle}
+                        </div>
+                        <div class="col-md-1">
+                            {label published /}
+                            {input published}
                         </div>
                         <div class="col-md-1">
                             {label productState /}
@@ -48,9 +52,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-10">
                             {label productDesc /}
                             {input productDesc}
+                        </div>
+                        <div class="col-md-2">
+                            {label productDescShort /}
+                            {input productDescShort}
                         </div>
                     </div>
                 </div>
@@ -84,7 +92,7 @@
                                 <a class="lightbox" href="{$basePath}/files/photos/{$photo->filehash}" data-lightbox="image" data-plugin-options='{"type":"image", "closeOnBgClick":false}'>
                                     <img src="{$basePath}/files/photos/thumbs/{$photo->filehash}" alt="" class="img-responsive img-thumbnail margin-bottom-6">
                                 </a>
-                                <a n:href="deleteProductPhoto! $key" class="btn btn-danger btn-xs fullwidth"><i class="fa fa-recycle"></i> {_default.buttons.remove}</a>
+                                <a n:href="deleteProductPhoto! $photo->id" class="btn btn-danger btn-xs fullwidth"><i class="fa fa-recycle"></i> {_default.buttons.remove}</a>
                             </div>
                         {/foreach}
                     </div>

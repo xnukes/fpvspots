@@ -27,6 +27,8 @@
 
                 {foreach $shop->shopProducts as $product}
 
+                    {continueIf !$product->published}
+
                     {if count($product->photos)}
                         {var $photo = reset($product->photos)}
                         {var $productPhoto = $basePath . '/files/photos/thumbs/' . $photo->filehash}
@@ -47,7 +49,7 @@
                                 <div class="col-md-8">
                                     <h3>{$product->productTitle}</h3>
                                     <div class="product-desc">
-                                        {$product->productDesc}
+                                        {$product->productDescShort}
                                     </div>
                                     <hr>
                                     <div class="product-info navbar-collapse navbar navbar-expand-md p-0">
@@ -72,7 +74,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <a href="" class="btn btn-success btn-sm w-100 mb-1"><i class="fa fa-shopping-cart"></i> Poptat u prodejce</a>
-                                    <a href="" class="btn btn-primary btn-sm w-100 mb-1"><i class="fa fa-image"></i> Galerie</a>
+                                    <a n:href="Eshop:product, 'slug' => $userEntity->username, 'pid' => $product->id" class="btn btn-primary btn-sm w-100 mb-1"><i class="fa fa-image"></i> Galerie & Popis</a>
                                     <a href="" class="btn btn-danger btn-sm w-100 mt-2"><i class="fa fa-warning"></i> Nahlásit produkt</a>
                                 </div>
                             </div>
@@ -88,4 +90,3 @@
 </main>
 
 {include '../@footer-back.latte'}
-{dump $shop}

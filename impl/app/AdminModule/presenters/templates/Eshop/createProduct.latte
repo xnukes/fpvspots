@@ -12,9 +12,9 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-            <span class="title elipsis">
-                <strong>{_administrator.eshop.title.createProduct}</strong>
-            </span>
+                    <span class="title elipsis">
+                        <strong>{_administrator.eshop.title.editProduct}</strong>
+                    </span>
                     <ul class="options pull-right list-inline">
                         <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Sbalit"></a></li>
                         <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Celá obrazovka"><i class="fa fa-expand"></i></a></li>
@@ -22,9 +22,13 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             {label productTitle /}
                             {input productTitle}
+                        </div>
+                        <div class="col-md-1">
+                            {label published /}
+                            {input published}
                         </div>
                         <div class="col-md-1">
                             {label productState /}
@@ -48,9 +52,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-10">
                             {label productDesc /}
                             {input productDesc}
+                        </div>
+                        <div class="col-md-2">
+                            {label productDescShort /}
+                            {input productDescShort}
                         </div>
                     </div>
                 </div>
