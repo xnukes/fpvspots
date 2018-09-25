@@ -86,15 +86,15 @@
             }
         });
 
-        var bounds
+        var xhr;
         function updateMarkers(){
-            bounds = map.getBounds();
+            var bounds = map.getBounds();
             if(bounds){
                 if(xhr){
                     xhr.abort()
                 }
 
-                var xhr = $.ajax({
+                xhr = $.ajax({
                     url: {link getGmapsMarkers!},
                     dataType: 'json',
                     data: { viewport: JSON.stringify([
