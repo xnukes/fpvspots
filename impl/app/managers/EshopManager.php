@@ -7,6 +7,7 @@
 
 namespace App\Managers;
 use App\Entities\UserEntity;
+use App\Entities\UserProductEntity;
 use Nette\Application\BadRequestException;
 
 /**
@@ -22,5 +23,19 @@ class EshopManager extends BaseManager
 			throw new BadRequestException('Tento obchod neexistuje.');
 		}
 		return $shop;
+	}
+
+	/**
+	 * @param $id
+	 * @return mixed|null|UserProductEntity
+	 * @throws BadRequestException
+	 */
+	public function getUserProductById($id)
+	{
+		$product = $this->entityManager->getRepository(UserProductEntity::class)->findOneBy(['id' => $id]);
+		if(!$product) {
+			throw new BadRequestException('Tato položka neexistuje.');
+		}
+		return $product;
 	}
 }

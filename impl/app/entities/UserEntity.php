@@ -35,6 +35,7 @@ use Nette\Utils\DateTime;
  * @property string $shopTitle
  * @property string $shopCoverBg
  * @property string $shopDesc
+ * @property ArrayCollection $shopProducts
  * @property string $role
  * @property ArrayCollection $events
  * @property ArrayCollection $drones

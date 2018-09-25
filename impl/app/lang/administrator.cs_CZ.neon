@@ -76,5 +76,7 @@ eshop:
 	title:
 		list: 'Seznam produktů'
 		settings: 'Nastavení obchodu'
+		createProduct: 'Vytvořit produkt'
+		editProduct: 'Změnit produkt'
 	buttons:
 		create: 'Vytvořit produkt'

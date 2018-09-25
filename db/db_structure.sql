@@ -269,6 +269,14 @@ CREATE TABLE `users_products`(
   FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS `users_products_photos`;
+
+CREATE TABLE `users_products_photos`(
+  `user_product_entity_id` INT(50) NOT NULL,
+  `photo_entity_id` INT(50) NOT NULL,
+  PRIMARY KEY (`user_product_entity_id`, `photo_entity_id`)
+);
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -55,6 +55,11 @@ class PhotoEntity extends BaseEntity
 	 */
 	protected $events;
 
+	/**
+	 * @ORM\ManyToMany(targetEntity="UserProductEntity", mappedBy="photos")
+	 */
+	protected $usersProducts;
+
 	public function __construct()
 	{
 		$this->drones = new \Doctrine\Common\Collections\ArrayCollection();

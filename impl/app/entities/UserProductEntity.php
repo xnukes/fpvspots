@@ -8,6 +8,7 @@
 namespace App\Entities;
 
 use App\Models\BaseEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,6 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @property float $productShipment
  * @property integer $productStock
  * @property integer $productState
+ * @property ArrayCollection $photos
  *
  * @ORM\Entity(repositoryClass="\App\Entities\UserProductEntity")
  * @ORM\Entity
@@ -76,4 +78,42 @@ class UserProductEntity extends BaseEntity
 	 * @ORM\Column(type="integer", name="product_state")
 	 */
 	protected $productState;
+
+	/**
+	 * @ORM\ManyToMany(targetEntity="PhotoEntity", inversedBy="usersProducts")
+	 * @ORM\JoinTable(name="users_products_photos")
+	 */
+	protected $photos;
+
+	public function __construct()
+	{
+		$this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+
+	public function addPhoto(PhotoEntity $photoEntity)
+	{
+		$this->photos->add($photoEntity);
+	}
+
+	public function removePhoto($photoKey)
+	{
+		$this->photos->remove($photoKey);
+	}
+
+	public function getPhoto($photoKey)
+	{
+		return $this->photos->get($photoKey);
+	}
+
+	public function getState()
+	{
+		$state = null;
+
+		if($this->productState == self::STATE_NEWEST)
+			$state = 'Nové';
+		if($this->productState == self::STATE_USED)
+			$state = 'Použité';
+
+		return $state;
+	}
 }

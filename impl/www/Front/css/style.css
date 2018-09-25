@@ -54,6 +54,21 @@ form#geocoding_form {
 	display: block;
 }
 
+.shop-cover-bg .desc {
+	color: white;
+	padding: 20px 30px;
+	display: block;
+	text-shadow: #000000 4px 3px 10px;
+}
+
+.shop-product-img {
+	width: 100%;
+}
+
+.product-item {
+	/*max-height: 160px;*/
+}
+
 /* header */
 .navbar-header {
 	color: white;
