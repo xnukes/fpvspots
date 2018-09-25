@@ -14,6 +14,7 @@
 
     $(document).ready(function () {
 
+        var marksFirstStart = true;
         var map = new GMaps({
             el: '#places-map', //49.366099 17.3211333
             lat: 49.396099,
@@ -34,6 +35,12 @@
             },
             zoom_changed: updateMarkers,
             dragend: updateMarkers,
+            bounds_changed: function(){
+                if(marksFirstStart){
+                    marksFirstStart = false;
+                    updateMarkers();
+                }
+            },
         });
         map.showedPlaces = {};
 
@@ -54,9 +61,20 @@
 
         GMaps.geolocate({
             success: function(position) {
-                console.log('Geolocation to: '+position.coords.latitude + ' - ' + position.coords.longitude);
                 map.setCenter(position.coords.latitude, position.coords.longitude);
                 map.setZoom(12);
+
+                new google.maps.Marker({
+                    position: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    },
+                    animation: google.maps.Animation.DROP,
+                    title: 'Your are here',
+                    icon: {$basePath} + '/Front/images/map-icon-home.png',
+                    map: map.map
+                });
+
             },
             error: function(error) {
                 console.log('Geolocation failed: '+error.message);
@@ -65,53 +83,59 @@
                 console.log("Your browser does not support geolocation");
             },
             always: function() {
-                updateMarkers();
             }
         });
 
+        var bounds
         function updateMarkers(){
-            var bounds = map.getBounds();
-
-            $.ajax({
-                url: {link getGmapsMarkers!},
-                dataType: 'json',
-                data: { viewport: JSON.stringify([
-                    {
-                        latitude: bounds['f']['b'],
-                        longitude: bounds['b']['b'],
-                    },
-                    {
-                        latitude:  bounds['f']['f'],
-                        longitude: bounds['b']['f'],
-                    }
-                ])},
-                method: 'POST',
-                success: function(data) {
-
-                    $.each(data['places'], function (key, item) {
-                        if(map.showedPlaces && map.showedPlaces[item['latitude'] + '' + item['longitude']] === true)
-                        {
-                            return;
-                        }
-
-                        map.showedPlaces[item['latitude'] + '' + item['longitude']] = true;
-
-                        map.addMarker({
-                            lat: item['latitude'],
-                            lng: item['longitude'],
-                            title: item['name'],
-                            icon: {$basePath} + item['icon'],
-                            infoWindow: {
-                                content: '<h4><strong>' + item['name'] + '</strong> (' + item['username'] + ')</h4><hr>'
-                                    + (item['desc'] ? '<p>Popis:</p><p>' + item['desc'] + '</p>' : '')
-                                    + (item['plus'] ? '<p>Plusy:</p><p>' + item['plus'] + '</p>' : '')
-                                    + (item['minus'] ? '<p>Mínusy:</p><p>' + item['minus'] + '</p>' : '')
-                                    + ('<p><a href="' + item['url'] + '" class="btn btn-primary w-100" target="_blank">Detail spotu</a></p>')
-                            }
-                        });
-                    })
+            bounds = map.getBounds();
+            if(bounds){
+                if(xhr){
+                    xhr.abort()
                 }
-            });
+
+                var xhr = $.ajax({
+                    url: {link getGmapsMarkers!},
+                    dataType: 'json',
+                    data: { viewport: JSON.stringify([
+                            {
+                                latitude: bounds['f']['b'],
+                                longitude: bounds['b']['b'],
+                            },
+                            {
+                                latitude:  bounds['f']['f'],
+                                longitude: bounds['b']['f'],
+                            }
+                        ])},
+                    method: 'POST',
+                    success: function(data) {
+
+                        $.each(data['places'], function (key, item) {
+                            if(map.showedPlaces && map.showedPlaces[item['latitude'] + '' + item['longitude']] === true)
+                            {
+                                return;
+                            }
+
+                            map.showedPlaces[item['latitude'] + '' + item['longitude']] = true;
+
+                            map.addMarker({
+                                lat: item['latitude'],
+                                lng: item['longitude'],
+                                title: item['name'],
+                                icon: {$basePath} + item['icon'],
+                                infoWindow: {
+                                    content: '<h4><strong>' + item['name'] + '</strong> (' + item['username'] + ')</h4><hr>'
+                                        + (item['desc'] ? '<p>Popis:</p><p>' + item['desc'] + '</p>' : '')
+                                        + (item['plus'] ? '<p>Plusy:</p><p>' + item['plus'] + '</p>' : '')
+                                        + (item['minus'] ? '<p>Mínusy:</p><p>' + item['minus'] + '</p>' : '')
+                                        + ('<p><a href="' + item['url'] + '" class="btn btn-primary w-100" target="_blank">Detail spotu</a></p>')
+                                }
+                            });
+                        })
+                    }
+                });
+            }
+
         };
     });
 

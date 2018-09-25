@@ -69,6 +69,7 @@ services:
 			- allow('admin', ['Admin:Dashboard'])
 			- allow('admin', ['Admin:Users'])
 			- allow('admin', ['Admin:Groups'])
+			- allow('user', ['Admin:Eshop'])
 
 includes:
 	- parameters.neon
