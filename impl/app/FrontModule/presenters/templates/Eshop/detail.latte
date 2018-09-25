@@ -1,1 +1,15 @@
 {block content}
+
+{define title}{$shop->shopTitle}{/define}
+
+{if !empty($shop->shopCoverBg)}
+    {var $bgImage = $shop->shopCoverBg}
+{else}
+    {var $bgImage = $basePath . '/Front/images/default_shop_bg.jpg'}
+{/if}
+
+<div class="shop-cover-bg" style="background-image: url({$bgImage})">
+    <span class="title">{$shop->shopTitle}</span>
+</div>
+
+{dump $shop}

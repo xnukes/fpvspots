@@ -4,24 +4,42 @@
 
 <main role="main">
 
-    <div class="clear"></div>
+    <div class="album text-muted">
+        <div class="container">
 
-    <div class="container">
-    {foreach $shops as $shop}
+            <h1 class="jumbotron-heading text-dark">
+                <i class="fa fa-shopping-cart"></i> Seznam obchodníků
+            </h1>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <a n:href=":detail $shop->username"><h2>{$shop->shopTitle}</h2></a>
-                    </div>
-                    <div class="card-body">
+            <div class="clearfix"></div>
 
+            {include googleAdsenseEvents}
+
+            {foreach $shops as $shop}
+
+                {dump $shop->shopProducts}
+
+                {if !empty($shop->shopCoverBg)}
+                    {var $bgImage = $shop->shopCoverBg}
+                {else}
+                    {var $bgImage = $basePath . '/Front/images/default_shop_bg.jpg'}
+                {/if}
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card bg-dark text-light">
+                            <div class="card-header">
+                                <a n:href=":detail $shop->username" class="text-light"><h2><i class="fa fa-shopping-basket"></i> {$shop->shopTitle}</h2></a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="shop-cover-bg-small p-4" style="background-image: url({$bgImage|noescape})">
+                                    {$shop->shopDesc|noescape}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {/foreach}
         </div>
-
-    {/foreach}
     </div>
 </main>

@@ -252,6 +252,24 @@ CREATE TABLE `videos` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 
+/*Table structure for table `users_products` */
+
+DROP TABLE IF EXISTS `users_products`;
+
+CREATE TABLE `users_products`(
+  `id` INT(50) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` INT(50) UNSIGNED NOT NULL,
+  `product_title` VARCHAR(255) NOT NULL,
+  `product_desc` TEXT,
+  `product_price` FLOAT(15,4) NOT NULL DEFAULT 0,
+  `product_shipment` FLOAT(15,4) NOT NULL DEFAULT 0,
+  `product_stock` INT(50) NOT NULL DEFAULT 1,
+  `product_state` INT(50) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

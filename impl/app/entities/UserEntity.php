@@ -164,6 +164,11 @@ class UserEntity extends BaseEntity
 	protected $shopDesc;
 
 	/**
+	 * @ORM\OneToMany(targetEntity="UserProductEntity", mappedBy="user", cascade={"persist", "remove"})
+	 */
+	protected $shopProducts;
+
+	/**
 	 * @ORM\Column(type="string")
 	 */
 	protected $role;

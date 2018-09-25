@@ -5,33 +5,22 @@
  * Copyright (c) 2018 Lukáš Vlček (http://www.vlceklukas.cz)                                      *
  **************************************************************************************************/
 
-namespace App\FrontModule\Presenters;
-
-
+namespace App\Managers;
 use App\Entities\UserEntity;
-use App\Managers\EshopManager;
 use Nette\Application\BadRequestException;
 
-class EshopPresenter extends BasePresenter
+/**
+ * Class EshopManager
+ * @package App\Managers
+ */
+class EshopManager extends BaseManager
 {
-	public $shops;
-
-	/** @var EshopManager @inject */
-	public $eshopManager;
-
-	public function actionDefault()
+	public function getBySlug($slug)
 	{
-		$this->shops = $this->entityManager->getRepository(UserEntity::class)->findBy(['shopEnabled' => true]);
-
-		$this->template->shops = $this->shops;
-	}
-
-	public function actionDetail($slug)
-	{
-		try {
-			$this->template->shop = $this->eshopManager->getBySlug($slug);
-		} catch (BadRequestException $e) {
-			$this->flashMessage($e->getMessage(), 'danger');
+		$shop = $this->entityManager->getRepository(UserEntity::class)->findOneBy(['username' => $slug, 'shopEnabled' => true]);
+		if(!$shop) {
+			throw new BadRequestException('Tento obchod neexistuje.');
 		}
+		return $shop;
 	}
 }

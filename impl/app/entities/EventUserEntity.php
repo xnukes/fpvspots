@@ -18,7 +18,6 @@ use Nette\Utils\Strings;
  * @ORM\Entity
  * @ORM\Table(name="events_users")
  */
-
 class EventUserEntity extends BaseEntity
 {
 	const STATE_WAIT = 0;
