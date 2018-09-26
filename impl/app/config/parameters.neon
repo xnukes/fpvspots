@@ -2,6 +2,7 @@ parameters:
 	filesPath: '%wwwDir%/files'
 	photosPath: '%wwwDir%/files/photos'
 	photosThumbsPath: '%wwwDir%/files/photos/thumbs'
+	coversPath: '%wwwDir%/files/covers'
 	encoding: 'cs-CZ'
 	charset: 'UTF-8'
 	sitename: 'FPVSpots.info'

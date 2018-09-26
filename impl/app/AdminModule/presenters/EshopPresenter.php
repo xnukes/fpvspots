@@ -13,6 +13,7 @@ use App\Entities\UserEntity;
 use App\Managers\EshopManager;
 use App\Models\Form;
 use App\Models\Grid;
+use Nette\Http\FileUpload;
 
 class EshopPresenter extends BasePresenter
 {
@@ -56,6 +57,7 @@ class EshopPresenter extends BasePresenter
 
 		$form->addUploadInput('shopCoverBg', 'Úvodní fotka');
 
+		$form->addCheckbox('removeCoverBg', 'Odstranit úvodní fotku');
 
 		$form->addTextArea('shopDesc', 'Popis a informace o obchodování', null, 8)
 			->setAttribute('placeholder', 'Popis a informace o obchodování')
@@ -106,6 +108,18 @@ class EshopPresenter extends BasePresenter
 		$this->userEntity->shopEnabled = $vars->shopEnabled;
 		$this->userEntity->shopTitle = $vars->shopTitle;
 		$this->userEntity->shopDesc = $vars->shopDesc;
+
+		/** @var FileUpload $photo */
+		$photo = $vars->shopCoverBg;
+		if ($photo->isOk()) {
+			if($photo->isImage()) {
+				$photo->move($this->configRepository->coversPath . DIRECTORY_SEPARATOR . $this->userEntity->username);
+				$this->userEntity->shopCoverBg = $this->userEntity->username;
+			}
+		}
+		if(isset($vars->removeCoverBg) && $vars->removeCoverBg) {
+			$this->userEntity->shopCoverBg = null;
+		}
 
 		$this->entityManager->persist($this->userEntity)->flush();
 
