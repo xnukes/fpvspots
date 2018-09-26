@@ -16,6 +16,11 @@ use Nette\Application\BadRequestException;
  */
 class EshopManager extends BaseManager
 {
+	/**
+	 * @param $slug
+	 * @return mixed|null|UserEntity
+	 * @throws BadRequestException
+	 */
 	public function getBySlug($slug)
 	{
 		$shop = $this->entityManager->getRepository(UserEntity::class)->findOneBy(['username' => $slug, 'shopEnabled' => true]);

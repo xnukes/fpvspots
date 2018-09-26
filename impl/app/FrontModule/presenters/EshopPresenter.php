@@ -9,7 +9,9 @@ namespace App\FrontModule\Presenters;
 
 
 use App\Entities\UserEntity;
+use App\Helpers\SystemMailerHelper;
 use App\Managers\EshopManager;
+use App\Models\Form;
 use Nette\Application\BadRequestException;
 
 class EshopPresenter extends BasePresenter
@@ -18,6 +20,9 @@ class EshopPresenter extends BasePresenter
 
 	/** @var EshopManager @inject */
 	public $eshopManager;
+
+	/** @var SystemMailerHelper @inject */
+	public $systemMailerHelper;
 
 	public function actionDefault()
 	{
@@ -43,5 +48,40 @@ class EshopPresenter extends BasePresenter
 		} catch (BadRequestException $e) {
 			$this->flashMessage($e->getMessage(), 'danger');
 		}
+	}
+
+	public function createComponentUserProductBuyForm($name)
+	{
+		$form = new Form($this, $name);
+
+		$form->addText('buyerName', 'Vaše jméno')
+			->setAttribute('class', 'form-control')
+			->setRequired('Prosím zadejte vaše jméno.');
+
+		$form->addText('buyerEmail', 'Váš e-mail')
+			->setAttribute('class', 'form-control')
+			->addRule(Form::EMAIL, 'Prosím zadejte platný e-mail')
+			->setRequired('Prosím zadejte váš e-mail.');
+
+		$form->addTextArea('buyerMessage', 'Text zprávy')
+			->setAttribute('class', 'form-control')
+			->setRequired('Prosím zadejte text vaší zprávy.');
+
+		$form->addSubmit('send', 'Odeslat poptávku')
+			->setAttribute('class', 'btn btn-success');
+
+		$form->onSuccess[] = [$this, 'UserProductBuyFormSuccess'];
+
+		return $form;
+	}
+
+	public function UserProductBuyFormSuccess($form, $vars)
+	{
+		$result = $this->systemMailerHelper->sendMailUserProductBuy($this->template->product, $this->template->shop, $vars);
+
+		if ($result)
+			$this->flashMessage('Vaše poptávka byla odeslána. Děkujeme za využití služeb FPVSpots.info');
+
+		$this->redirect('this');
 	}
 }
