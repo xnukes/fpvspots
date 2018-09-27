@@ -25,7 +25,8 @@
             markerClusterer: function(map) {
                 options = {
                     gridSize: 40,
-                    imagePath: {$basePath} + "/images/m"
+                    imagePath: {$basePath} + "/images/m",
+                    maxZoom: 19
                 };
 
                 return new MarkerClusterer(map, [], options);
