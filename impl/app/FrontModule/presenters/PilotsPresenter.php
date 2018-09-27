@@ -133,7 +133,7 @@ class PilotsPresenter extends BasePresenter
 		$grid->addColumnText('mapPlace', 'Google Mapy' )
 			->setFitContent()
 			->setRenderer(function ($place) {
-				$target = str_replace(';', ',', $place->mapPlace);
+				$target = $place->placeLatitude . ',' . $place->placeLongitude . ',' . $place->placeZoom;
 				return Html::el('a', ['href' => 'https://www.google.cz/maps/@' . $target . 'z', 'target' => '_blank'])
 					->addHtml(Html::el('i', ['class' => 'fa fa-google']))
 					->addText(' Otevřít mapu');
