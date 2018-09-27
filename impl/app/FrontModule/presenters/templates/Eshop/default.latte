@@ -1,0 +1,55 @@
+{block content}
+
+{define title}Seznam obchodníků{/define}
+
+<main role="main">
+
+    <div class="album text-muted">
+        <div class="container">
+
+            <h1 class="jumbotron-heading text-dark">
+                <i class="fa fa-shopping-cart"></i> Seznam obchodníků
+            </h1>
+
+            <div class="clearfix"></div>
+
+            {include googleAdsenseEvents}
+
+            {if !count($shops)}
+                <div class="alert alert-warning">Omlouváme se, ale žádný z prodejců není aktivní.</div>
+            {/if}
+
+            {foreach $shops as $shop}
+                {if !empty($shop->shopCoverBg)}
+                    {var $bgImage = $basePath . '/files/covers/' . $shop->shopCoverBg}
+                {else}
+                    {var $bgImage = $basePath . '/Front/images/default_shop_bg.jpg'}
+                {/if}
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card bg-dark text-light">
+                            <div class="card-header shop-name">
+                                <a n:href=":detail $shop->username" class="text-light">
+                                    <h2>
+                                        <i class="fa fa-shopping-basket d-none d-sm-inline-block"></i> {$shop->shopTitle}
+                                        <button type="button" class="btn btn-light pull-right d-none d-sm-block">
+                                            Inzerátů <span class="badge badge-dark">{count($shop->shopProducts)}</span>
+                                        </button>
+                                    </h2>
+                                </a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="shop-cover-bg-small p-4" style="background-image: url({$bgImage|noescape})">
+                                    {$shop->shopDesc|noescape}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {/foreach}
+        </div>
+    </div>
+</main>
+
+{include '../@footer-back.latte'}

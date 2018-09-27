@@ -73,7 +73,7 @@ class EventsPresenter extends BasePresenter
 			})
 			->getElementPrototype('th')->setAttribute('class', 'col-md-2');
 
-		$grid->addAction('remove', $this->getTranslator()->translate('default.buttons.remove'))
+		$grid->addAction('removeEvent!', $this->getTranslator()->translate('default.buttons.remove'))
 			->setClass('btn btn-danger btn-xs')
 			->setConfirm('Opravdu chcete odstranit událost %s', 'name');
 
@@ -118,6 +118,23 @@ class EventsPresenter extends BasePresenter
 		}
 
 		$this['eventUsersGrid']->reload();
+	}
+
+	public function handleRemoveEvent($id)
+	{
+		$event = $this->eventsManager->getEvent($id);
+
+		if($event->user != $this->userEntity) {
+			$this->flashMessage('Tato událost nepatří vám.', 'danger');
+			$this->redirect('this');
+		}
+
+		$this->entityManager->remove($event);
+
+		$this->entityManager->flush();
+
+		$this->flashMessage('Událost byla odstraněna.');
+		$this->redirect('this');
 	}
 
 	public function handleRemoveEventPhoto($photoId)

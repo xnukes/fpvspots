@@ -1,18 +1,18 @@
 {include '@head.latte'}
 
-<body>
-<!-- Global Site Tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-51240862-7"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){
-        dataLayer.push(arguments)
-    };
-    gtag('js', new Date());
+<body class="{*img-bg*}">
+	<!-- Global Site Tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-51240862-7"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){
+			dataLayer.push(arguments)
+		};
+		gtag('js', new Date());
 
-    gtag('config', 'UA-51240862-7');
-</script>
-	<div class="padding-15">
+		gtag('config', 'UA-51240862-7');
+	</script>
+	<div class="padding-15 img-bg">
 		<div class="login-box">
 			<div class="row">
 				<div class="col-12 text-center">
@@ -23,6 +23,7 @@
 			</div>
 			<hr>
 			{include content}
+			<div class="clear"></div>
 		</div>
 	</div>
 	<!-- JAVASCRIPT FILES -->

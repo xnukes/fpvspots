@@ -30,21 +30,41 @@
                         <img class="avatar" src="{$basePath}/Admin/assets/images/noavatar.jpg" width="50" height="50" alt="avatar">
                     {/if}
                     <div class="comment-body">
-                        <a href="#" class="comment-author">
+                        <a href="#" class="comment-author" onclick="appendUsernameIntoMessage({$message->user->username});">
                             <small class="text-muted pull-right">
                                 {$message->createdOn|date:'d.m.Y H:i:s'}
                             </small>
                             <span>{$message->user->username} ({$message->user->email})</span>
                         </a>
+                        <div class="wall-msg-content">{$message->message|noescape}</div>
                         <small n:if="$message->user == $presenter->userEntity">
                             <a n:href="remove! $message->id" class="text-danger text-muted pull-right">{_default.buttons.remove} <i class="fa fa-remove"></i></a>
                         </small>
-                        <p>{$message->message}</p>
                     </div>
                 </li>
                 <hr>
             {/foreach}
         </ul>
 
+        <div class="row">
+            <div class="col-md-4 text-right">
+                <a n:href="setPage! $page - 1" n:if="$page > 1"> << Předchozí </a>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <small>Příspěvky na stránce {$page} z {$totalPages}</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <a n:href="setPage! $page + 1" n:if="$page < $totalPages"> Další >> </a>
+            </div>
+        </div>
+
     </div>
 </div>
+<script type="text/javascript">
+    function appendUsernameIntoMessage(name)
+    {
+        $('textarea[name="message"]').append(name + ': ');
+    }
+</script>

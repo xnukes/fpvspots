@@ -17,7 +17,7 @@ class PilotsPresenter extends BasePresenter
 	/** @persistent */
 	public $page = 0;
 
-	public $perPage = 10;
+	public $perPage = 100;
 
 	/** @var \App\Entities\UserEntity */
 	public $pilot;
@@ -27,6 +27,7 @@ class PilotsPresenter extends BasePresenter
 
 	public function actionDefault()
 	{
+		// TODO: please create component paginator for this
 		$this->template->pilots = $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())
 			->findBy(['public' => true], ['createdOn' => 'DESC'], $this->perPage, $this->page * $this->perPage);
 	}
@@ -132,7 +133,7 @@ class PilotsPresenter extends BasePresenter
 		$grid->addColumnText('mapPlace', 'Google Mapy' )
 			->setFitContent()
 			->setRenderer(function ($place) {
-				$target = str_replace(';', ',', $place->mapPlace);
+				$target = $place->placeLatitude . ',' . $place->placeLongitude . ',' . $place->placeZoom;
 				return Html::el('a', ['href' => 'https://www.google.cz/maps/@' . $target . 'z', 'target' => '_blank'])
 					->addHtml(Html::el('i', ['class' => 'fa fa-google']))
 					->addText(' Otevřít mapu');

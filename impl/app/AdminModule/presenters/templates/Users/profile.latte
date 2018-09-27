@@ -3,6 +3,15 @@
 
 
 {form usersProfileForm, class => 'nomargin'}
+
+    <div class="row nomargin" n:if="$form->hasErrors()">
+        <div class="col-md-12">
+            <div class="alert alert-danger ml-4 mr-4" n:foreach="$form->errors as $error">
+                <span>{$error}</span>
+            </div>
+        </div>
+    </div>
+
     <div class="row nomargin">
         <div class="col-md-12">
             <div class="panel panel-default">

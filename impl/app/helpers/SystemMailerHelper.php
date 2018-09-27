@@ -9,6 +9,7 @@ namespace App\Helpers;
 
 use App\Entities\EventEntity;
 use App\Entities\UserEntity;
+use App\Entities\UserProductEntity;
 use App\Models\ConfigRepository;
 use Latte\Runtime\Template;;
 use Nette\Mail\Message;
@@ -49,6 +50,24 @@ class SystemMailerHelper
 		$this->message->setFrom($this->configRepository->mailerFrom, $this->configRepository->sitetitle);
 	}
 
+	public function sendMailUserProductBuy(UserProductEntity $product, UserEntity $shop, $vars)
+	{
+		$this->addParam('shop', $shop);
+		$this->addParam('product', $product);
+		$this->addParam('vars', $vars);
+
+		$this->setMailerTemplate('product-buy-seller');
+		$this->addSendTo($shop->email);
+		$result = $this->send();
+
+		$this->setMailerTemplate('product-buy-buyer');
+		$this->resetSendTo();
+		$this->addSendTo($vars->buyerEmail);
+		$this->send();
+
+		return $result;
+	}
+
 	public function sendMailEventRequestJoin(EventEntity $event, UserEntity $user)
 	{
 		$this->setMailerTemplate('event-request-join');
@@ -86,6 +105,11 @@ class SystemMailerHelper
 		}
 
 		return $result;
+	}
+
+	public function resetSendTo()
+	{
+		$this->sendTo = [];
 	}
 
 	public function addSendTo($email)

@@ -3,6 +3,7 @@ services:
 	- App\AdminModule\Forms\UsersEditForm
 	- App\AdminModule\Forms\UsersProfileForm
 	- App\AdminModule\Forms\UsersProfilePageForm
+	- App\AdminModule\Forms\UserProductForm
 	- App\AdminModule\Forms\DroneForm
 	- App\AdminModule\Forms\PlaceForm
 	- App\AdminModule\Forms\EventForm

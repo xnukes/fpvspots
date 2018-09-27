@@ -43,6 +43,11 @@
 						<i class="main-icon fa fa-calendar"></i> <span>{_administrator.menu.events}</span>
 					</a>
 				</li>
+				<li n:class="$presenter->isLinkCurrent('Eshop:*') ? active">
+					<a class="eshop" n:href="Eshop:default">
+						<i class="main-icon fa fa-shopping-cart"></i> <span>{_administrator.menu.eshop}</span>
+					</a>
+				</li>
 			</ul>
 		</nav>
 	</aside>

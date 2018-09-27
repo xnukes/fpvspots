@@ -6,6 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Nette\Utils\DateTime;
 
+// TODO: https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/cookbook/advanced-field-value-conversion-using-custom-mapping-types.html
+// TODO: vytvorime si vlastni typ sloupce - point
+
 /**
  * @property integer $id
  * @property string $name
@@ -52,9 +55,19 @@ class PlaceEntity extends BaseEntity
 	protected $minusDesc;
 
 	/**
-	 * @ORM\Column(type="string")
+	 * @ORM\Column(type="float")
 	 */
-	protected $mapPlace;
+	protected $placeLatitude;
+
+	/**
+	 * @ORM\Column(type="float")
+	 */
+	protected $placeLongitude;
+
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	protected $placeZoom;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="UserEntity")
@@ -82,6 +95,7 @@ class PlaceEntity extends BaseEntity
 	{
 		$this->createdOn = new DateTime();
 		$this->changedOn = new DateTime();
+		$this->photos    = new ArrayCollection();
 	}
 
 	public function addPhoto(PhotoEntity $photoEntity)

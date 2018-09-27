@@ -31,6 +31,11 @@ use Nette\Utils\DateTime;
  * @property string $pageFacebook
  * @property string $pageGoogleplus
  * @property string $pageContent
+ * @property boolean $shopEnabled
+ * @property string $shopTitle
+ * @property string $shopCoverBg
+ * @property string $shopDesc
+ * @property ArrayCollection $shopProducts
  * @property string $role
  * @property ArrayCollection $events
  * @property ArrayCollection $drones
@@ -138,6 +143,31 @@ class UserEntity extends BaseEntity
 	 * @ORM\Column(type="text")
 	 */
 	protected $pageContent;
+
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	protected $shopEnabled;
+
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	protected $shopTitle;
+
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	protected $shopCoverBg;
+
+	/**
+	 * @ORM\Column(type="text")
+	 */
+	protected $shopDesc;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="UserProductEntity", mappedBy="user", cascade={"persist", "remove"})
+	 */
+	protected $shopProducts;
 
 	/**
 	 * @ORM\Column(type="string")

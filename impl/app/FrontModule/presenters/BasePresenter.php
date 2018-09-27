@@ -6,6 +6,7 @@
  **************************************************************************************************/
 
 namespace App\FrontModule\Presenters;
+
 use WebLoader\Nette\CssLoader;
 use WebLoader\Nette\JavaScriptLoader;
 use WebLoader\Nette\LoaderFactory;
@@ -17,11 +18,8 @@ use WebLoader\Nette\LoaderFactory;
  */
 class BasePresenter extends \App\Presenters\BasePresenter
 {
-
-
     /** @var LoaderFactory @inject */
     public $webLoader;
-
 
     /** @return CssLoader */
     protected function createComponentCss()

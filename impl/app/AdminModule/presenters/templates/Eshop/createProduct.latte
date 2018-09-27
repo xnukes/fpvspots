@@ -1,0 +1,78 @@
+{block content}
+
+{define pagetitle}{_administrator.menu.eshop}{/define}
+
+{form userProductForm}
+
+    <div class="row nomargin" n:if="$form->hasErrors()">
+        <div class="col-md-12">
+            <div class="alert alert-danger ml-4 mr-4" n:foreach="$form->errors as $error">
+                <span>{$error}</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="title elipsis">
+                        <strong>{_administrator.eshop.title.editProduct}</strong>
+                    </span>
+                    <ul class="options pull-right list-inline">
+                        <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Sbalit"></a></li>
+                        <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Celá obrazovka"><i class="fa fa-expand"></i></a></li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            {label productTitle /}
+                            {input productTitle}
+                        </div>
+                        <div class="col-md-1">
+                            {label published /}
+                            {input published}
+                        </div>
+                        <div class="col-md-1">
+                            {label productState /}
+                            {input productState}
+                        </div>
+                        <div class="col-md-1">
+                            {label productStock /}
+                            {input productStock}
+                        </div>
+                        <div class="col-md-2">
+                            {label productPrice /}
+                            {input productPrice}
+                        </div>
+                        <div class="col-md-2">
+                            {label productShipment /}
+                            {input productShipment}
+                        </div>
+                        <div class="col-md-2">
+                            {label productImage /}
+                            {input productImage}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            {label productDesc /}
+                            {input productDesc}
+                        </div>
+                        <div class="col-md-2">
+                            {label productDescShort /}
+                            {input productDescShort}
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    {input send}
+                    <a n:href=":default" class="btn btn-warning pull-right">{_default.buttons.backToList}</a>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/form}

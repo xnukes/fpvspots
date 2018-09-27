@@ -40,6 +40,12 @@ class BasePresenter extends Presenter
 	/** @var UserEntity */
 	public $userEntity;
 
+	/**
+	 * @var string
+	 * @persistent
+	 */
+	public $backlink = '';
+
 	protected function startup()
 	{
 		parent::startup();
@@ -53,18 +59,6 @@ class BasePresenter extends Presenter
 			$this->userEntity->visitedOn = new Nette\Utils\DateTime();
 			$this->entityManager->persist($this->userEntity)->flush();
 		}
-
-		$this->template->addFilter('latitude', function ($mapPlace){
-			return explode(';', $mapPlace)[0];
-		});
-		$this->template->addFilter('longtitude', function ($mapPlace){
-			return explode(';', $mapPlace)[1];
-		});
-	}
-
-	public function getGmapsPointer($string)
-	{
-		return explode(';', $string);
 	}
 
 	protected function beforeRender()

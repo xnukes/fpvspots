@@ -19,7 +19,7 @@ class BasePresenter extends \App\Presenters\BasePresenter
 			if ($this->user->getLogoutReason() === IUserStorage::INACTIVITY) {
 				$this->flashMessage('Byli jste příliš dlouho neaktivní. Přihlašte se prosím znovu.', 'warning');
 			}
-			$this->redirect('Sign:in');
+			$this->redirect('Sign:in', ['backlink' => $this->storeRequest()]);
 		} elseif (!$this->user->isAllowed($this->name, $this->action)) {
 			$this->flashMessage('Přístup nepovolen.', 'warning');
 			$this->redirect('Dashboard:');

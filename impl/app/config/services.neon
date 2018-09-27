@@ -7,5 +7,6 @@ services:
 	- App\Managers\PlaceManager
 	- App\Managers\EventsManager
 	- App\Managers\VideoManager
+	- App\Managers\EshopManager
 
 	- App\Helpers\SystemMailerHelper

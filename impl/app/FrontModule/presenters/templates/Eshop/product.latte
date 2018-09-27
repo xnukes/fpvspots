@@ -1,0 +1,142 @@
+{block content}
+
+{define title}{$shop->shopTitle}{/define}
+
+{if !empty($shop->shopCoverBg)}
+    {var $bgImage = $shop->shopCoverBg}
+{else}
+    {var $bgImage = $basePath . '/Front/images/default_shop_bg.jpg'}
+{/if}
+
+<div class="shop-cover-bg" style="background-image: url({$bgImage})">
+    <span class="title">{$shop->shopTitle}</span>
+    <div class="desc">
+        {$shop->shopDesc|noescape}
+    </div>
+</div>
+
+<main role="main">
+
+    <div class="album text-muted">
+        <div class="container">
+
+            {form userProductBuyForm}
+                <ul class="alert alert-danger" n:if="$form->hasErrors()">
+                    <li n:foreach="$form->errors as $error">{$error}</li>
+                </ul>
+                <div class="modal fade" id="productBuyModal" tabindex="-1" role="dialog" aria-labelledby="productBuyModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="productBuyModalLabel">{$product->productTitle}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="product-modal-desc" n:if="$product->productDescShort">
+                                    {$product->productDescShort}
+                                    <hr>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {label buyerName /}
+                                        {input buyerName}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {label buyerEmail /}
+                                        {input buyerEmail}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {label buyerMessage /}
+                                        {input buyerMessage}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                                {input send}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {/form}
+
+            {if count($product->photos)}
+                {var $photo = reset($product->photos)}
+                {var $productPhoto = $basePath . '/files/photos/thumbs/' . $photo->filehash}
+                {var $productPhotoOrig = $basePath . '/files/photos/' . $photo->filehash}
+            {else}
+                {var $productPhoto = $basePath . '/Front/images/default_product.jpg'}
+                {var $productPhotoOrig = $basePath . '/Front/images/default_product.jpg'}
+            {/if}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row product-item">
+                        <div class="col-md-2">
+                            <a href="{$productPhotoOrig}" data-fancybox="gallery" data-caption="{$product->productTitle}<br>Cena: <strong>{$product->productPrice},- Kč</strong>">
+                                <img src="{$productPhoto}" alt="{$product->productTitle}" title="{$product->productTitle}" class="shop-product-img">
+                            </a>
+                        </div>
+                        <div class="col-md-8">
+                            <h3>{$product->productTitle}</h3>
+                            <div class="product-desc">
+                                {$product->productDescShort}
+                            </div>
+                            <hr>
+                            <div class="product-info navbar-collapse navbar navbar-expand-md p-0">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item">
+                                        Cena: <strong>{$product->productPrice},- Kč</strong>
+                                    </li>
+                                    <li class="divider-vertical"></li>
+                                    <li class="nav-item">
+                                        Poštovné: <strong>{$product->productShipment},- Kč</strong>
+                                    </li>
+                                    <li class="divider-vertical"></li>
+                                    <li class="nav-item">
+                                        Stav: <strong>{$product->getState()}</strong>
+                                    </li>
+                                    <li class="divider-vertical"></li>
+                                    <li class="nav-item">
+                                        Skladem: <strong>{$product->productStock}</strong> kus/ů
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <a n:href=":detail $shop->username" class="btn btn-warning btn-sm w-100 mb-1"><i class="fa fa-shopping-cart"></i> Zpět do seznamu</a>
+                            <a href="#" class="btn btn-success btn-sm w-100 mb-1" data-toggle="modal" data-target="#productBuyModal"><i class="fa fa-shopping-cart"></i> Poptat u prodejce</a>
+                            {*<a href="" class="btn btn-danger btn-sm w-100 mt-2"><i class="fa fa-warning"></i> Nahlásit produkt</a>*}
+                        </div>
+                    </div>
+
+                    {if !empty($product->productDesc)}
+                        <hr>
+                        <h3>Popis produktu:</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {$product->productDesc|noescape}
+                            </div>
+                        </div>
+                    {/if}
+                    {if count($product->photos)}
+                        <hr>
+                        <h3>Fotogalerie:</h3>
+                        <div class="row">
+                            <div class="col-md-2" n:foreach="$product->photos as $photo">
+                                <a href="{$basePath}/files/photos/{$photo->filehash}" data-fancybox="gallery" data-caption="{$product->productTitle}<br>Cena: <strong>{$product->productPrice},- Kč</strong>">
+                                    <img src="{$basePath}/files/photos/thumbs/{$photo->filehash}" alt="{$product->productTitle}" class="img-thumbnail">
+                                </a>
+                            </div>
+                        </div>
+                    {/if}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>

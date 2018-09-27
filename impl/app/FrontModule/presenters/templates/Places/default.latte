@@ -1,43 +1,169 @@
 {block content}
 
-<div class="places-map" id="places-map" style="width: 100%; height: 94%; display: inline-block; position: absolute"></div>
+<form method="post" id="geocoding_form">
+    <div class="d-block">
+        <input type="text" id="address" name="address" class="form-control gmaps-search-event" placeholder="Zadejte místo, které hledáte v mapě a zmáčkněte enter ...">
+        {*<input type="submit" class="btn btn-light col-md-4 d-none" value="Hledej ...">*}
+    </div>
+</form>
+
+<div class="places-map" id="places-map" style="position: absolute; top: 65px; right: 0; bottom: 0; left: 0;"></div>
 
 {define js}
 <script type="text/javascript">
+
     $(document).ready(function () {
 
+        var marksFirstStart = true;
         var map = new GMaps({
             el: '#places-map', //49.366099 17.3211333
             lat: 49.396099,
             lng: 17.3211333,
             zoom: 8,
             cursor: 'pointer',
-            mapType: 'hybrid'
+            mapType: 'hybrid',
+            markerClusterer: function(map) {
+                options = {
+                    gridSize: 40,
+                    imagePath: {$basePath} + "/images/m",
+                    maxZoom: 19
+                };
+
+                return new MarkerClusterer(map, [], options);
+            },
+            success: function(position) {
+                map.setCenter(position.coords.latitude, position.coords.longitude);
+            },
+            zoom_changed: updateMarkers,
+            dragend: updateMarkers,
+            bounds_changed: function(){
+                if(marksFirstStart){
+                    marksFirstStart = false;
+                    updateMarkers();
+                }
+            },
         });
+        map.showedPlaces = {};
 
-        $.ajax({
-            url: {link getGmapsMarkers!},
-            success: function(data) {
-
-                $.each(data['places'], function (i, o) {
-
-                    map.addMarker({
-                        lat: o['place'][0],
-                        lng: o['place'][1],
-                        title: o['name'],
-                        icon: {$basePath} + o['icon'],
-                        infoWindow: {
-                            content: '<h4><strong>' + o['name'] + '</strong> (' + o['username'] + ')</h4><hr>'
-                                + (o['desc'] ? '<p>Popis:</p><p>' + o['desc'] + '</p>' : '')
-                                + (o['plus'] ? '<p>Plusy:</p><p>' + o['plus'] + '</p>' : '')
-                                + (o['minus'] ? '<p>Mínusy:</p><p>' + o['minus'] + '</p>' : '')
-                                + ('<p><a href="' + o['url'] + '" class="btn btn-primary w-100">Detail spotu</a></p>')
+		$('input.gmaps-search-event').on('keydown', function(event){
+			if (event.which === 13) { // on key Enter
+				GMaps.geocode({
+					address: event.target.value,
+					callback: function(results, status){
+						if(status === 'OK'){
+							var latlng = results[0].geometry.location;
+							map.setCenter(latlng.lat(), latlng.lng());
+							map.setZoom(12);
+							updateMarkers();
+						} else {
+							alert('Váš požadavek nebyl nalezen. Zkontrolujte prosím váš požadavek.');
                         }
-                    });
-                })
+					}
+				});
+				event.preventDefault();
+			}
+		});
+
+        /*
+        $('#geocoding_form').submit(function(e){
+            e.preventDefault();
+            GMaps.geocode({
+                address: $('#address').val().trim(),
+                callback: function(results, status){
+                    if(status=='OK'){
+                        var latlng = results[0].geometry.location;
+                        map.setCenter(latlng.lat(), latlng.lng());
+                        map.setZoom(12);
+                        updateMarkers();
+                    }
+                }
+            });
+        });
+        */
+
+        GMaps.geolocate({
+            success: function(position) {
+                map.setCenter(position.coords.latitude, position.coords.longitude);
+                map.setZoom(12);
+
+                new google.maps.Marker({
+                    position: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    },
+                    animation: google.maps.Animation.DROP,
+                    title: 'Your are here',
+                    icon: {$basePath} + '/Front/images/map-icon-home.png',
+                    map: map.map
+                });
+
+            },
+            error: function(error) {
+                console.log('Geolocation failed: '+error.message);
+            },
+            not_supported: function() {
+                console.log("Your browser does not support geolocation");
+            },
+            always: function() {
             }
         });
+
+        var xhr;
+        function updateMarkers(){
+            var bounds = map.getBounds();
+            if(bounds){
+                if(xhr){
+                    xhr.abort()
+                }
+
+                xhr = $.ajax({
+                    url: {link getGmapsMarkers!},
+                    dataType: 'json',
+                    data: { viewport: JSON.stringify([
+                            {
+                                latitude: bounds['f']['b'],
+                                longitude: bounds['b']['b'],
+                            },
+                            {
+                                latitude:  bounds['f']['f'],
+                                longitude: bounds['b']['f'],
+                            }
+                        ])},
+                    method: 'POST',
+                    success: function(data) {
+
+                        $.each(data['places'], function (key, item) {
+                            if(map.showedPlaces && map.showedPlaces[item['latitude'] + '' + item['longitude']] === true)
+                            {
+                                return;
+                            }
+
+                            map.showedPlaces[item['latitude'] + '' + item['longitude']] = true;
+
+                            map.addMarker({
+                                lat: item['latitude'],
+                                lng: item['longitude'],
+                                title: item['name'],
+                                icon: {$basePath} + item['icon'],
+                                infoWindow: {
+                                    content: '<div class="ml-3 mt-2 width-250">'
+                                        + '<h5><strong>' + item['name'] + '</strong></h5>'
+                                        + '<h6>(' + item['username'] + ')</h6>'
+                                        + '<hr>'
+                                        + (item['desc'] ? '<p><u>Popis:</u></p><p>' + item['desc'] + '</p>' : '')
+                                        + (item['plus'] ? '<p><u>Plusy:</u></p><p>' + item['plus'] + '</p>' : '')
+                                        + (item['minus'] ? '<p><u>Mínusy:</u></p><p>' + item['minus'] + '</p>' : '')
+                                        + ('<p><a href="' + item['url'] + '" class="btn btn-primary w-100"><i class="fa fa-info-circle"></i> Detail spotu</a></p></div>')
+                                }
+                            });
+                        })
+                    }
+                });
+            }
+
+        };
     });
+
 </script>
 {/define}
 <style>

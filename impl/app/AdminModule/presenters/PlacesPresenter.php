@@ -26,11 +26,18 @@ class PlacesPresenter extends BasePresenter
 
 	public $place;
 
+	/**
+	 *
+	 */
 	public function actionDefault()
 	{
 		$this->places = $this->placeManager->getUserPlaces($this->userEntity);
 	}
 
+	/**
+	 * @param $id
+	 * @throws \Exception
+	 */
 	public function actionEdit($id)
 	{
 		$this->place = $this->placeManager->getPlace($id);
@@ -44,6 +51,11 @@ class PlacesPresenter extends BasePresenter
 		$this->template->place = $this->place;
 	}
 
+	/**
+	 * @param $name
+	 * @return Grid
+	 * @throws \Ublaboo\DataGrid\Exception\DataGridException
+	 */
 	public function createComponentPlacesGrid($name)
 	{
 		$grid = new Grid($this, $name);
@@ -53,17 +65,11 @@ class PlacesPresenter extends BasePresenter
 		$grid->addColumnText('name', 'Název', 'name')
 			->setSortable();
 
-		$grid->addColumnText('latitude', 'Latitude')
-			->setFitContent()
-			->setRenderer(function ($item) {
-				return explode(';', $item->mapPlace)[0];
-			});
+		$grid->addColumnText('latitude', 'Latitude', 'placeLatitude')
+			->setFitContent();
 
-		$grid->addColumnText('longtitude', 'Longtitude')
-			->setFitContent()
-			->setRenderer(function ($item) {
-				return explode(';', $item->mapPlace)[1];
-			});
+		$grid->addColumnText('longitude', 'Longitude', 'placeLongitude')
+			->setFitContent();
 
 		$grid->addColumnDateTime('createdOn', 'Vytvořeno')
 			->setSortable()
@@ -91,11 +97,19 @@ class PlacesPresenter extends BasePresenter
 		return $grid;
 	}
 
+	/**
+	 * @param $name
+	 * @return \App\Models\Form
+	 */
 	public function createComponentPlaceForm($name)
 	{
 		return $this->placeForm->create($this, $name);
 	}
 
+	/**
+	 * @param $id
+	 * @throws \Nette\Application\AbortException
+	 */
 	public function handleRemove($id)
 	{
 		try {
@@ -113,6 +127,10 @@ class PlacesPresenter extends BasePresenter
 		}
 	}
 
+	/**
+	 * @param $photo_id
+	 * @throws \Nette\Application\AbortException
+	 */
 	public function handleRemovePlacePhoto($photo_id)
 	{
 		$result = $this->photoManager->removePlacePhoto($photo_id);

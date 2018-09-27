@@ -2,7 +2,7 @@
 
 {form registerForm, class => 'sky-form boxed'}
 
-    <header><i class="fa fa-users"></i> Registrace do systému</header>
+    <header><i class="fa fa-users"></i> Registrace nového účtu</header>
 
     {snippet flashes}
         <div n:foreach="$flashes as $flash" class="{$flash->type} alert alert-{$flash->type} noborder text-center weight-400 nomargin noradius">{$flash->message|noescape}</div>
@@ -50,6 +50,9 @@
         <div class="row">
             <div class="col-md-6 text-left"><a n:href="Sign:in" class="btn btn-sm btn-primary pull-left"><i class="fa fa-user-o"></i> Přihlásit se</a></div>
             <div class="col-md-6 text-right"><button n:name="send" class="btn btn-sm btn-warning pull-right"><i class="fa fa-sign-in"></i> Odeslat registraci</button></div>
+        </div>
+        <div class="text-center login-footer">
+            {$systemVersion|noescape}
         </div>
     </footer>
 {/form}

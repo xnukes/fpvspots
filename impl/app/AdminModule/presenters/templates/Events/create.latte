@@ -3,6 +3,15 @@
 {define pagetitle}{_administrator.menu.events}{/define}
 
 {form eventForm}
+
+    <div class="row nomargin" n:if="$form->hasErrors()">
+        <div class="col-md-12 nopadding">
+            <div class="alert alert-danger" n:foreach="$form->errors as $error">
+                <span>{$error}</span>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -47,7 +56,7 @@
                 </div>
                 <div class="panel-footer">
                     {input send, class => 'btn btn-success btn-sm pull-right'}
-                    <a n:href=":default" class="btn btn-danger btn-sm pull-right">{_default.buttons.backToList}</a>
+                    <a n:href=":default" class="btn btn-warning btn-sm pull-right">{_default.buttons.backToList}</a>
                     <div class="clear"></div>
                 </div>
             </div>

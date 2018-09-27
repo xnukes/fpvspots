@@ -1,0 +1,80 @@
+{block content}
+
+{define pagetitle}{_administrator.menu.eshop}{/define}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+		<span class="title elipsis">
+			<strong>{_administrator.eshop.title.list}</strong>
+		</span>
+                <ul class="options pull-right list-inline">
+                    <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Sbalit"></a></li>
+                    <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Celá obrazovka"><i class="fa fa-expand"></i></a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                {control productsGrid}
+            </div>
+            <div class="panel-footer">
+                <a n:href=":createProduct" class="btn btn-success btn-sm pull-right">{_administrator.eshop.buttons.create}</a>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{form eshopSettingsForm}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+		<span class="title elipsis">
+			<strong>{_administrator.eshop.title.settings}</strong>
+		</span>
+                <ul class="options pull-right list-inline">
+                    <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Sbalit"></a></li>
+                    <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Celá obrazovka"><i class="fa fa-expand"></i></a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        {label shopTitle /}
+                        {input shopTitle}
+                    </div>
+                    <div class="col-md-2">
+                        {label shopCoverBg /}
+                        {input shopCoverBg}
+                    </div>
+                    <div class="col-md-2">
+                        <hr>
+                        <label class="checkbox">
+                            <input type="checkbox" value="1" n:name="removeCoverBg">
+                            <i></i> Smazat úvodní fotku
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <hr>
+                        <label class="checkbox">
+                            <input type="checkbox" value="1" n:name="shopEnabled">
+                            <i></i> Obchodní modul povolen
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {label shopDesc /}
+                        {input shopDesc}
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                {input send}
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{/form}
