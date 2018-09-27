@@ -30,9 +30,32 @@ html, body {
 
 form#geocoding_form {
 	position: absolute;
-	top: 67px;
-	left: 270px;
+	bottom: 10px;
+	left: 10px;
 	z-index: 2;
+	width: 64%;
+}
+
+input#address {
+	background: rgba(255, 255, 255, 0.7);
+}
+input#address:hover {
+	background: rgba(255, 255, 255, 1);
+}
+
+nav.navbar-custom-pos {
+	top: 0px;
+	left: 0px;
+	position: absolute;
+	z-index: 3;
+	width: 100%;
+	border-bottom: 1px solid #1d1d1d;
+	box-shadow: #000000 0px 0px 4px;
+}
+
+img.user-avatar {
+	border: 1px solid #9a9da0;
+	padding: 1px;
 }
 
 /* shop section */
@@ -42,6 +65,7 @@ form#geocoding_form {
 	background-size: cover;
 	background-position: center;
 	text-shadow: #000000 1px 1px 1px;
+	overflow: hidden;
 }
 
 .shop-cover-bg {
@@ -49,6 +73,7 @@ form#geocoding_form {
 	height: 300px;
 	background-position: center;
 	background-size: cover;
+	overflow: hidden;
 }
 
 .shop-cover-bg .title {
@@ -56,23 +81,33 @@ form#geocoding_form {
 	font-size: 62px;
 	font-weight: 700;
 	text-shadow: #000000 4px 3px 10px;
+	line-height: 56px;
 	padding: 20px 30px;
 	display: block;
 }
 
 .shop-cover-bg .desc {
 	color: white;
-	padding: 20px 30px;
+	padding: 4px 30px;
 	display: block;
 	text-shadow: #000000 4px 3px 10px;
 }
 
 .shop-product-img {
 	width: 100%;
+	padding-bottom: 8px;
 }
 
 .product-item {
 	/*max-height: 160px;*/
+}
+
+.product-info {
+	margin-bottom: 6px !important;
+}
+
+.card-header.shop-name h2 {
+	text-shadow: #000 3px 3px 5px;
 }
 
 /* header */
@@ -86,6 +121,16 @@ a:hover {
 	color: #0056b3;
 	text-decoration: none;
 }
+
+
+ul.navbar-nav li.active a.nav-link span {
+	text-shadow: #000000 1px 2px 6px;
+	font-weight: 500;
+}
+/*.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
+	color: #fff;
+	text-shadow: #000000 1px 2px 6px;
+}*/
 
 /* google search */
 input.gsc-search-button.gsc-search-button-v2 {
@@ -150,7 +195,7 @@ div.ratings a:hover, div.ratings a.active {
 
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
 body {
-	padding-top: 3.53rem;
+	padding-top: 65px;
 }
 
 /*

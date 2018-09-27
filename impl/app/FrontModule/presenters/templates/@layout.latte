@@ -53,7 +53,7 @@
     gtag('js', new Date());
     gtag('config', 'UA-51240862-7');
 </script>
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark {*fixed-top*} navbar-custom-pos bg-dark">
     <a class="{*navbar-brand*}" href="{$basePath}/">
         <img src="{$basePath}/Front/images/web-logo-fpvspots.png" alt="FPVSpots.info">
     </a>
@@ -67,31 +67,31 @@
         <ul class="navbar-nav mr-auto">
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Places:*') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Places:default"><i class="fa fa-map-signs"></i> <span class="d-md-none d-lg-inline">Mapa spotů</span></a>
+                <a class="nav-link" n:href="Places:default"><i class="fa fa-map-signs"></i> <span class="d-md-none d-xl-inline">Mapa spotů</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Events:*') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Events:default"><i class="fa fa-calendar"></i> <span class="d-md-none d-lg-inline">Události</span></a>
+                <a class="nav-link" n:href="Events:default"><i class="fa fa-calendar"></i> <span class="d-md-none d-xl-inline">Události</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Pilots:*') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Pilots:default"><i class="fa  fa-address-book-o"></i> <span class="d-md-none d-lg-inline">Seznam pilotů</span></a>
+                <a class="nav-link" n:href="Pilots:default"><i class="fa  fa-address-book-o"></i> <span class="d-md-none d-xl-inline">Seznam pilotů</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Machines:default') || $presenter->isLinkCurrent('Machines:detail') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Machines:default"><i class="fa fa-rocket"></i> <span class="d-md-none d-lg-inline">Seznam Strojů</span></a>
+                <a class="nav-link" n:href="Machines:default"><i class="fa fa-rocket"></i> <span class="d-md-none d-xl-inline">Seznam Strojů</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Machines:top5') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Machines:top5"><i class="fa fa-trophy"></i> <span class="d-md-none d-lg-inline">TOP5 Strojů</span></a>
+                <a class="nav-link" n:href="Machines:top5"><i class="fa fa-trophy"></i> <span class="d-md-none d-xl-inline">TOP5 Strojů</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Eshop:*') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Eshop:default"><i class="fa fa-shopping-cart"></i> <span class="d-md-none d-lg-inline">Obchody</span></a>
+                <a class="nav-link" n:href="Eshop:default"><i class="fa fa-shopping-cart"></i> <span class="d-md-none d-xl-inline">Obchody</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Search:*') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Search:default"><i class="fa fa-search"></i> <span class="d-md-none d-lg-inline">Hledání</span></a>
+                <a class="nav-link" n:href="Search:default"><i class="fa fa-search"></i> <span class="d-md-none d-xl-inline">Hledání</span></a>
             </li>
         </ul>
 
@@ -99,21 +99,26 @@
         <ul class="navbar-nav">
             {if !$user->isLoggedIn()}
                 <li n:class="'nav-item'">
-                    <a class="nav-link" n:href=":Admin:Sign:in"><i class="fa fa-sign-in"></i> Přihlášení</a>
+                    <a class="nav-link" n:href=":Admin:Sign:in">
+                        <i class="fa fa-sign-in"></i> <span class="d-md-none d-xl-inline">Přihlášení</span>
+                    </a>
                 </li>
                 <li class="divider-vertical"></li>
                 <li class="nav-item">
-                    <a class="nav-link" n:href=":Admin:Register:in"><i class="fa fa-user-plus"></i> Registrace</a>
+                    <a class="nav-link" n:href=":Admin:Register:in">
+                        <i class="fa fa-user-plus"></i> <span class="d-md-none d-xl-inline">Registrace</span>
+                    </a>
                 </li>
             {/if}
             <li class="nav-item" n:if="$user->isLoggedIn()">
+                <hr class="d-block d-sm-none">
                 <a class="nav-link" n:href=":Admin:Users:profile">
                     {if empty($userEntity->photo)}
                         <img class="user-avatar" src="{$basePath}/Admin/assets/images/noavatar.jpg" height="34">
                     {else}
                         <img class="user-avatar" src="{$basePath}/files/photos/thumbs/{$userEntity->photo->filehash}" height="34">
                     {/if}
-                    &nbsp;{$userEntity->email}
+                    <span class="d-md-none d-xl-inline">&nbsp;{$userEntity->email}</span>
                 </a>
             </li>
         </ul>

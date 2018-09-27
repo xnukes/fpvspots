@@ -22,7 +22,7 @@ abstract class SystemRepository
 
 	const SystemVersion 	= '1.0';
 
-	const SystemSubVersion	= '0';
+	const SystemSubVersion	= '2';
 
 	const SystemYear		= '2016 - 2018';
 
@@ -30,7 +30,7 @@ abstract class SystemRepository
 
 	const SystemAuthorEmail = 'xnukes@gmail.com';
 
-	const SystemName 		= '<a href="mailto:' . self::SystemAuthorEmail . '" target="_blank">' .self::SystemApp . '</a> powered by Nette Framework.';
+	const SystemName 		= '<a href="mailto:' . self::SystemAuthorEmail . '" target="_blank">' .self::SystemApp . '</a> powered by <abbr class="initialism">Nette Framework</abbr>.';
 
 	public static function getSystemVersion(\Kdyby\Translation\Translator $translator)
 	{

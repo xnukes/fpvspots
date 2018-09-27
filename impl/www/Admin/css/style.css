@@ -3,25 +3,24 @@
     color: black;
     text-decoration: underline;
 }
+
 .login-footer {
-    background-color: rgb(228, 228, 228);
-    padding: 2px 0px 25px 0px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    background-color: rgba(240, 240, 240, 0.5);
+    padding: 4px 0px;
+    border-radius: 5px;
     color: black;
-    text-shadow: white 0px 0px 5px;
+    text-shadow: white 1px 1px 6px;
     width: 100%;
-    height: 35px;
-    margin: 0px 0px -25px 0px;
     display: inline-block;
-    font-size: 11px;
+    font-size: 9px;
+    border: 1px solid #ccc;
 }
 
 /*
 * custom stylesheet file
 */
 
-body.img-bg {
+.img-bg {
     background: none;
     background-image: url(../images/background.jpg);
     background-size: cover;
@@ -29,6 +28,15 @@ body.img-bg {
     background-color: #2a2e39;
     background-blend-mode: screen;
     background-attachment: fixed;
+}
+.padding-15.img-bg {
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    position: fixed;
+    overflow: scroll;
+    height: 102%;
 }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
@@ -67,4 +75,11 @@ div.panel-body tbody, div.panel-body thead {
 }
 .datagrid form {
      margin-bottom: 0px;
+}
+
+/* wall component */
+.wall-msg-content {
+    background: #0000000d;
+    padding: 8px 16px;
+    border-radius: 20px;
 }

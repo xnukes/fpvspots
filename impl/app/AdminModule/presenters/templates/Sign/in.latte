@@ -2,7 +2,7 @@
 
 {form signInForm, class => 'sky-form boxed'}
 
-	<header><i class="fa fa-users"></i> Přihlášení do systému</header>
+	<header><i class="fa fa-users"></i> Přihlášení do účtu</header>
 
 	{snippet flashes}
 		<div n:foreach="$flashes as $flash" class="{$flash->type} alert alert-{$flash->type} noborder text-center weight-400 nomargin noradius">{$flash->message|noescape}</div>
@@ -37,10 +37,10 @@
 	<footer>
 		<div class="row">
 			<div class="col-md-6 text-left"><a n:href="Sign:lost" class="btn btn-sm btn-primary pull-left"><i class="fa fa-life-ring"></i>Zapoměli jste heslo?</a></div>
-			<div class="col-md-6 text-right"><button n:name="send" class="btn btn-sm btn-warning pull-right"><i class="fa fa-signing"></i>Přihlásit</button></div>
+			<div class="col-md-6 text-right"><button n:name="send" class="btn btn-sm btn-warning pull-right"><i class="fa fa-signing"></i>Přihlásit se</button></div>
 		</div>
 		<section class="text-center">
-			<small class="text-muted">Pokud ještě nemáte účet, stačí se <a n:href="Register:in">zaregistrovat zde.</a></small>
+			<small class="text-muted">Pokud ještě nemáte účet, stačí se <a n:href="Register:in"><strong>zaregistrovat zde</strong>.</a></small>
 		</section>
 		<div class="text-center login-footer">
             {$systemVersion|noescape}

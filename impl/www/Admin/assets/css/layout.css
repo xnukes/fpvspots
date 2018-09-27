@@ -792,7 +792,7 @@ body.boxed #asidebg {
 
 #middle div.panel-heading {
 	color: #1E252D !important;
-	height:51px;
+	/*height:51px;*/
 }
 #middle .panel-primary .panel-heading ul.options>li>a,
 #middle .panel-primary div.panel-heading strong,
@@ -1720,9 +1720,12 @@ li.comment p {
 	margin:0; padding:0;
 }
 li.comment img.avatar {
-	position:absolute;
-	left:0; top:0;
-	display:inline-block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: inline-block;
+	border-top-right-radius: 25px;
+	border-bottom-right-radius: 25px;
 }
 li.comment.comment-reply img.avatar {
 	left:6px; top:6px;

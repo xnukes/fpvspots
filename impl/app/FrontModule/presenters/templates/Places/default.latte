@@ -1,13 +1,13 @@
 {block content}
 
-<form method="post" id="geocoding_form" class="d-none d-sm-block">
-    <div class="input row">
-        <input type="text" id="address" name="address" class="form-control col-md-8">
-        <input type="submit" class="btn btn-light col-md-4" value="Hledej ..." style="font-weight: 700;">
+<form method="post" id="geocoding_form">
+    <div class="d-block">
+        <input type="text" id="address" name="address" class="form-control gmaps-search-event" placeholder="Zadejte místo, které hledáte v mapě a zmáčkněte enter ...">
+        {*<input type="submit" class="btn btn-light col-md-4 d-none" value="Hledej ...">*}
     </div>
 </form>
 
-<div class="places-map" id="places-map" style="width: 100%; height: 94%; display: inline-block; position: absolute"></div>
+<div class="places-map" id="places-map" style="position: absolute; top: 65px; right: 0; bottom: 0; left: 0;"></div>
 
 {define js}
 <script type="text/javascript">
@@ -45,6 +45,26 @@
         });
         map.showedPlaces = {};
 
+		$('input.gmaps-search-event').on('keydown', function(event){
+			if (event.which === 13) { // on key Enter
+				GMaps.geocode({
+					address: event.target.value,
+					callback: function(results, status){
+						if(status === 'OK'){
+							var latlng = results[0].geometry.location;
+							map.setCenter(latlng.lat(), latlng.lng());
+							map.setZoom(12);
+							updateMarkers();
+						} else {
+							alert('Váš požadavek nebyl nalezen. Zkontrolujte prosím váš požadavek.');
+                        }
+					}
+				});
+				event.preventDefault();
+			}
+		});
+
+        /*
         $('#geocoding_form').submit(function(e){
             e.preventDefault();
             GMaps.geocode({
@@ -59,6 +79,7 @@
                 }
             });
         });
+        */
 
         GMaps.geolocate({
             success: function(position) {

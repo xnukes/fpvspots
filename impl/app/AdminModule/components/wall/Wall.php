@@ -3,18 +3,48 @@ namespace App\AdminModule\Components\Wall;
 
 use App\AdminModule\Components\BaseComponent;
 use App\Models\Form;
+use Nette\ComponentModel\IContainer;
 
 class Wall extends BaseComponent
 {
-	/** @persitent int */
-	public $page = 0;
+	/** @persistent */
+	public $page = 1;
+
+	/** @var int */
+	public $perPage = 6;
+
+	/** @var int */
+	private $totalItems = 0;
+
+	private $loadedItems;
+
+	public function __construct(IContainer $parent, $name)
+	{
+		parent::__construct($parent, $name);
+
+		$this->totalItems = $this->getPresenter()->entityManager->getRepository(\App\Entities\WallMessageEntity::class)->count(['parent' => null]);
+
+		$this->loadedItems = $this->getPresenter()->entityManager
+			->getRepository(\App\Entities\WallMessageEntity::class)
+			->findBy(['parent' => null], ['createdOn' => 'DESC'], $this->perPage, ($this->perPage * ($this->page - 1)));
+	}
+
+	public function handlesetPage($page)
+	{
+		$this->page = $page;
+		$this->redirect('this');
+	}
 
 	public function render()
 	{
 		$this->template->setFile(__DIR__ . DIRECTORY_SEPARATOR . 'Wall.latte');
 
-		$this->template->wallMessages = $this->getPresenter()->entityManager->getRepository(\App\Entities\WallMessageEntity::class)
-			->findBy(['parent' => null], ['createdOn' => 'DESC'], 20);
+		$this->template->wallMessages = $this->loadedItems;
+
+		$this->template->totalItems = $this->totalItems;
+		$this->template->perPage = $this->perPage;
+		$this->template->page = $this->page;
+		$this->template->totalPages = round($this->totalItems / $this->perPage);
 
 		$this->template->render();
 	}
