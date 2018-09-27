@@ -16,6 +16,12 @@ body {
 #map {
 	height: 100%;
 }
+
+/* google maps info window image width fix */
+.gm-style-iw img {
+	width: 250px !important;
+}
+
 html, body {
 	height: 100%;
 	margin: 0;

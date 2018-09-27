@@ -124,11 +124,14 @@
                                 title: item['name'],
                                 icon: {$basePath} + item['icon'],
                                 infoWindow: {
-                                    content: '<h4><strong>' + item['name'] + '</strong> (' + item['username'] + ')</h4><hr>'
-                                        + (item['desc'] ? '<p>Popis:</p><p>' + item['desc'] + '</p>' : '')
-                                        + (item['plus'] ? '<p>Plusy:</p><p>' + item['plus'] + '</p>' : '')
-                                        + (item['minus'] ? '<p>Mínusy:</p><p>' + item['minus'] + '</p>' : '')
-                                        + ('<p><a href="' + item['url'] + '" class="btn btn-primary w-100" target="_blank">Detail spotu</a></p>')
+                                    content: '<div class="ml-3 mt-2 width-250">'
+                                        + '<h5><strong>' + item['name'] + '</strong></h5>'
+                                        + '<h6>(' + item['username'] + ')</h6>'
+                                        + '<hr>'
+                                        + (item['desc'] ? '<p><u>Popis:</u></p><p>' + item['desc'] + '</p>' : '')
+                                        + (item['plus'] ? '<p><u>Plusy:</u></p><p>' + item['plus'] + '</p>' : '')
+                                        + (item['minus'] ? '<p><u>Mínusy:</u></p><p>' + item['minus'] + '</p>' : '')
+                                        + ('<p><a href="' + item['url'] + '" class="btn btn-primary w-100"><i class="fa fa-info-circle"></i> Detail spotu</a></p></div>')
                                 }
                             });
                         })
