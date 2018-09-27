@@ -51,9 +51,8 @@
             <div class="col-md-6 text-left"><a n:href="Sign:in" class="btn btn-sm btn-primary pull-left"><i class="fa fa-user-o"></i> Přihlásit se</a></div>
             <div class="col-md-6 text-right"><button n:name="send" class="btn btn-sm btn-warning pull-right"><i class="fa fa-sign-in"></i> Odeslat registraci</button></div>
         </div>
+        <div class="text-center login-footer">
+            {$systemVersion|noescape}
+        </div>
     </footer>
 {/form}
-
-<div class="text-center login-footer">
-    {$systemVersion|noescape}
-</div>
