@@ -4,9 +4,14 @@
 
 {form userProductForm}
 
-    <ul class="alert alert-danger" n:if="$form->hasErrors()">
-        <li n:foreach="$form->errors as $error">{$error}</li>
-    </ul>
+    <div class="row nomargin" n:if="$form->hasErrors()">
+        <div class="col-md-12">
+            <div class="alert alert-danger ml-4 mr-4" n:foreach="$form->errors as $error">
+                <span>{$error}</span>
+            </div>
+        </div>
+    </div>
+
 
     <div class="row">
         <div class="col-md-12">

@@ -6,6 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Nette\Utils\DateTime;
 
+// TODO: https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/cookbook/advanced-field-value-conversion-using-custom-mapping-types.html
+// TODO: vytvorime si vlastni typ sloupce - point
+
 /**
  * @property integer $id
  * @property string $name

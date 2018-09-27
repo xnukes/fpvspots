@@ -66,9 +66,35 @@ class PlaceForm implements IBaseForm
 			$form->setDefaults($defaultData);
 		}
 
+		$form->onValidate[] = [$this, 'onValidate'];
+
 		$form->onSuccess[] = [$this, 'onSuccess'];
 
 		return $form;
+	}
+
+	public function onValidate(\App\Models\Form $form, $vars)
+	{
+		list($vars->placeLatitude, $vars->placeLongitude, $vars->placeZoom) = explode(';', $vars->mapPlace);
+
+		if($this->defaultData && isset($this->defaultData->id)) {
+			$existNearby = $form->getPresenter()->entityManager->getRepository(PlaceEntity::class)->findBy([
+				'placeLatitude <= ' => $vars->placeLatitude + 0.00008, 'placeLatitude >= ' => $vars->placeLatitude - 0.00008,
+				'placeLongitude <= ' => $vars->placeLongitude + 0.00008, 'placeLongitude >= ' => $vars->placeLongitude - 0.00008,
+				'id !=' => $this->defaultData->id
+			]);
+		} else {
+			$existNearby = $form->getPresenter()->entityManager->getRepository(PlaceEntity::class)->findBy([
+				'placeLatitude <= ' => $vars->placeLatitude + 0.00008, 'placeLatitude >= ' => $vars->placeLatitude - 0.00008,
+				'placeLongitude <= ' => $vars->placeLongitude + 0.00008, 'placeLongitude >= ' => $vars->placeLongitude - 0.00008,
+			]);
+		}
+
+		if(count($existNearby) > 0) {
+			foreach ($existNearby as $item) {
+				$form->addError('Promiňte, ale v této lokaci již existuje spot. ' . $item->name );
+			}
+		}
 	}
 
 	public function onSuccess(\App\Models\Form $form, $vars)
