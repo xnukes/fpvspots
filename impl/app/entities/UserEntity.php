@@ -210,5 +210,10 @@ class UserEntity extends BaseEntity
 		$this->events = new ArrayCollection();
 		$this->drones = new ArrayCollection();
 		$this->places = new ArrayCollection();
+		$this->shopProducts = new ArrayCollection();
+		$this->shopCoverBg = '';
+		$this->shopTitle = '';
+		$this->shopDesc = '';
+		$this->shopEnabled = false;
     }
 }
