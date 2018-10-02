@@ -53,6 +53,13 @@ nav.navbar-custom-pos {
 	box-shadow: #000000 0px 0px 4px;
 }
 
+.navbar-dark .navbar-toggler {
+	z-index: 100;
+}
+.navbar-dark .navbar-toggler:hover {
+	box-shadow: #ffffff 0px 0px 3px;
+}
+
 img.user-avatar {
 	border: 1px solid #9a9da0;
 	padding: 1px;
