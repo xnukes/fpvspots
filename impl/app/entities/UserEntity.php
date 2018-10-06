@@ -175,7 +175,7 @@ class UserEntity extends BaseEntity
 	protected $role;
 
 	/**
-	 * @ORM\ManyToMany(targetEntity="EventEntity", mappedBy="users")
+	 * @ORM\OneToMany(targetEntity="EventEntity", mappedBy="user")
 	 */
 	protected $events;
 

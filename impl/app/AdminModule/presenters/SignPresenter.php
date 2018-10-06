@@ -107,8 +107,9 @@ class SignPresenter extends BasePresenter
 			$message = $this->userManager->createLostPsw($vars->username, $vars->email);
 			$this->flashMessage($message, 'info');
 			$this->redirect('Sign:in');
-		} catch (Nette\Application\BadRequestException $e) {
-			$form->addError($e->getMessage());
+		} catch (\Exception $e) {
+			$this->flashMessage($e->getMessage(), 'danger');
+			$this->redirect('Sign:lost');
 		}
 	}
 }

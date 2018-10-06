@@ -4,6 +4,22 @@
  * Copyright (c) 2018 Lukáš Vlček (http://www.vlceklukas.cz)
  */
 
+/* pilots styles */
+.list-pilot-item {
+	border: 1px solid #cccccc;
+	margin: 0px;
+	padding: 10px 0px;
+	background: rgba(0,0,0,0.02);
+	border-radius: 30px;
+}
+
+.list-pilot-item img.img-thumbnail {
+	border-radius: 70px;
+	margin-top: -25px;
+}
+
+/* datagrid */
+
 .datagrid table {
 	margin: 0;
 	margin-top: 10px !important;

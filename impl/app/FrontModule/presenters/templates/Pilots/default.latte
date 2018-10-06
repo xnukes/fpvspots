@@ -17,19 +17,51 @@
             <div class="row">
                 {foreach $pilots as $pilot}
                     <div class="col-md-12">
-                        <div class="row">
+                        <div class="row list-pilot-item">
                             <div class="col-md-2 col-lg-2 pb-3 pb-md-0">
-                            {if $pilot->photo}
-                                <a data-fancybox="gallery" href="{$basePath}/files/photos/{$pilot->photo->filehash}">
-                                    <img class="w-100 img-thumbnail" src="{$basePath}/files/photos/thumbs/{$pilot->photo->filehash}" alt="{$pilot->username}">
-                                </a>
-                            {else}
-                                <img class="w-100 img-thumbnail" src="{$basePath}/Front/images/noimage.png" alt="{$pilot->username}">
-                            {/if}
+                                {if $pilot->photo}
+                                    <a data-fancybox="gallery" href="{$basePath}/files/photos/{$pilot->photo->filehash}">
+                                        <img class="w-100 img-thumbnail" src="{$basePath}/files/photos/thumbs/{$pilot->photo->filehash}" alt="{$pilot->username}">
+                                    </a>
+                                {else}
+                                    <img class="w-100 img-thumbnail" src="{$basePath}/Front/images/noimage.png" alt="{$pilot->username}">
+                                {/if}
+                                <div class="text-center w-100 size-12 mt-2">Naposledy {$pilot->visitedOn|date:'d.m.Y H:i'}</div>
                             </div>
                             <div class="col-md-10 col-lg-10">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        {if $pilot->shopEnabled}
+                                            {*<span class="badge badge-primary size-16 mr-5 pull-right">Seznam zboží</span>*}
+                                        {/if}
+
+                                        <a n:href=":detail $pilot->username" title="{$pilot->username}">
+                                            <h4>
+                                                <strong><i class="fa fa-hashtag"></i> {$pilot->username}</strong> {if $pilot->firstName}({$pilot->firstName} {$pilot->lastName}){/if}
+                                            </h4>
+                                        </a>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 mb-2 col-md-6 col-sm-6">
+                                        <i class="fa fa-rocket"></i>  Počet strojů: {count($pilot->drones)}
+                                    </div>
+                                    <div class="col-lg-3 mb-2 col-md-6 col-sm-6">
+                                        <i class="fa fa-map-signs"></i> Počet spotů: {count($pilot->places)}
+                                    </div>
+                                    <div class="col-lg-3 mb-2 col-md-6 col-sm-6">
+                                        <i class="fa fa-youtube"></i> Počet videií: {count($pilot->videos)}
+                                    </div>
+                                    <div class="col-lg-3 mb-2 col-md-6 col-sm-6">
+                                        <i class="fa fa-calendar"></i> Počet událostí: {count($pilot->events)}
+                                    </div>
+                                </div>
+                            </div>
+                            {*<div class="col-md-10 col-lg-10">
                                 <div class="row mb-2">
-                                    <div class="col-md-4 col-12"><a n:href=":detail $pilot->username" title="Show pilot details."><h4><i class="fa fa-hashtag"></i>{* Pilot *}{$pilot->username}</h4></a></div>
+                                    <div class="col-md-4 col-12"><a n:href=":detail $pilot->username" title="Show pilot details."><h4><i class="fa fa-hashtag"></i>*}{* Pilot *}{*{$pilot->username}</h4></a></div>
                                     <div class="col-md-8 col-12"><a n:href=":detail $pilot->username" title="Show pilot details."><h4><i class="fa fa-envelope"></i> {$pilot->email}</h4></a></div>
                                 </div>
                                 <div class="row">
@@ -42,7 +74,7 @@
                                         <h6>Naposledy aktivní {$pilot->visitedOn|date:'d.m.Y H:i'}</h6>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*}
                         </div>
                         <hr class="mb-4 mt-4" n:if="!$iterator->isLast()">
                     </div>

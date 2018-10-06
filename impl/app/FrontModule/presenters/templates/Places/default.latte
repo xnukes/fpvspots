@@ -47,17 +47,21 @@
 
 		$('input.gmaps-search-event').on('keydown', function(event){
 			if (event.which === 13) { // on key Enter
+
+                $.spinner.show();
+
 				GMaps.geocode({
 					address: event.target.value,
 					callback: function(results, status){
 						if(status === 'OK'){
 							var latlng = results[0].geometry.location;
 							map.setCenter(latlng.lat(), latlng.lng());
-							map.setZoom(12);
+							map.setZoom(14);
 							updateMarkers();
 						} else {
 							alert('Váš požadavek nebyl nalezen. Zkontrolujte prosím váš požadavek.');
                         }
+						$.spinner.hide();
 					}
 				});
 				event.preventDefault();

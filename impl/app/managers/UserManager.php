@@ -37,9 +37,10 @@ class UserManager extends BaseManager
 
 	public function createLostPsw($username, $email)
 	{
-		$exists = $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())->findOneBy(['username' => $username, 'email' => $email]) ? true : false;
-		if(!$exists) {
-			return 'Tato kombinace uživ. jména a emailu nebyla nalezena.';
+		$result = $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())->findOneBy(['username' => $username, 'email' => $email]) ? true : false;
+		if(!$result) {
+			throw new \Exception('Tato kombinace uživ. jména a emailu nebyla nalezena.');
 		}
+		return 'Nové heslo bylo zasláno na e-mail.';
 	}
 }

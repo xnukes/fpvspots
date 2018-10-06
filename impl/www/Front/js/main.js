@@ -6,6 +6,21 @@
 
 jQuery(function($) {
 
+    $.spinner = {
+        show: function (e) {
+			$("#ajax-spinner").css({
+				display: "block",
+				left: 0,
+				top: 0
+			});
+		},
+        hide: function (e) {
+			$("#ajax-spinner").css({
+				display: "none"
+			});
+		}
+    };
+
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     });
