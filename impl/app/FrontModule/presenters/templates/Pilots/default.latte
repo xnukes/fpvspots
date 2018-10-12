@@ -14,19 +14,18 @@
 
             {include googleAdsensePilots}
 
-            <div class="row">
+            <div class="row mt-2">
                 {foreach $pilots as $pilot}
                     <div class="col-md-12">
                         <div class="row list-pilot-item">
                             <div class="col-md-2 col-lg-2 pb-3 pb-md-0">
-                                {if $pilot->photo}
+                                {if $pilot->photo && file_exists('files/photos/thumbs/' . $pilot->photo->filehash)}
                                     <a data-fancybox="gallery" href="{$basePath}/files/photos/{$pilot->photo->filehash}">
                                         <img class="w-100 img-thumbnail" src="{$basePath}/files/photos/thumbs/{$pilot->photo->filehash}" alt="{$pilot->username}">
                                     </a>
                                 {else}
                                     <img class="w-100 img-thumbnail" src="{$basePath}/Front/images/noimage.png" alt="{$pilot->username}">
                                 {/if}
-                                <div class="text-center w-100 size-12 mt-2">Naposledy {$pilot->visitedOn|date:'d.m.Y H:i'}</div>
                             </div>
                             <div class="col-md-10 col-lg-10">
                                 <div class="row">
@@ -38,23 +37,24 @@
 
                                         <a n:href=":detail $pilot->username" title="{$pilot->username}">
                                             <h4>
-                                                <strong><i class="fa fa-hashtag"></i> {$pilot->username}</strong> {if $pilot->firstName}({$pilot->firstName} {$pilot->lastName}){/if}
+                                                <strong><i class="fa fa-user-circle-o"></i> {$pilot->username}</strong> {if $pilot->firstName}({$pilot->firstName} {$pilot->lastName}){/if}
                                             </h4>
                                         </a>
-                                        <hr>
+                                        <div class="w-100 size-12"><i class="fa fa-eye"></i> Naposledy online {$pilot->visitedOn|date:'d.m.Y H:i'}</div>
+                                        <hr class="mt-2 mb-1">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-3 mb-2 col-md-6 col-sm-6">
+                                    <div class="col-12 col-sm-6 col-lg-3 mb-2">
                                         <i class="fa fa-rocket"></i>  Počet strojů: {count($pilot->drones)}
                                     </div>
-                                    <div class="col-lg-3 mb-2 col-md-6 col-sm-6">
+                                    <div class="col-12 col-sm-6 col-lg-3 mb-2">
                                         <i class="fa fa-map-signs"></i> Počet spotů: {count($pilot->places)}
                                     </div>
-                                    <div class="col-lg-3 mb-2 col-md-6 col-sm-6">
+                                    <div class="col-12 col-sm-6 col-lg-3 mb-2">
                                         <i class="fa fa-youtube"></i> Počet videií: {count($pilot->videos)}
                                     </div>
-                                    <div class="col-lg-3 mb-2 col-md-6 col-sm-6">
+                                    <div class="col-12 col-sm-6 col-lg-3 mb-2">
                                         <i class="fa fa-calendar"></i> Počet událostí: {count($pilot->events)}
                                     </div>
                                 </div>
