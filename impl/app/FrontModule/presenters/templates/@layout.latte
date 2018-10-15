@@ -67,7 +67,7 @@
         <ul class="navbar-nav mr-auto">
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Places:*') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Places:default"><i class="fa fa-map-signs"></i> <span class="d-md-none d-xl-inline">Mapa spotů</span></a>
+                <a class="nav-link" n:href="Places:default"><i class="fa fa-map-signs"></i> <span class="d-md-none d-xl-inline">Spoty</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Events:*') ? active, 'nav-item'">
@@ -75,15 +75,15 @@
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Pilots:*') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Pilots:default"><i class="fa  fa-address-book-o"></i> <span class="d-md-none d-xl-inline">Seznam pilotů</span></a>
+                <a class="nav-link" n:href="Pilots:default"><i class="fa  fa-address-book-o"></i> <span class="d-md-none d-xl-inline">Piloti</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Machines:default') || $presenter->isLinkCurrent('Machines:detail') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Machines:default"><i class="fa fa-rocket"></i> <span class="d-md-none d-xl-inline">Seznam Strojů</span></a>
+                <a class="nav-link" n:href="Machines:default"><i class="fa fa-rocket"></i> <span class="d-md-none d-xl-inline">Stroje</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Machines:top5') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Machines:top5"><i class="fa fa-trophy"></i> <span class="d-md-none d-xl-inline">TOP5 Strojů</span></a>
+                <a class="nav-link" n:href="Machines:top5"><i class="fa fa-trophy"></i> <span class="d-md-none d-xl-inline">Top Five</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Eshop:*') ? active, 'nav-item'">
@@ -91,7 +91,7 @@
             </li>
             <li class="divider-vertical"></li>
             <li n:class="$presenter->isLinkCurrent('Search:*') ? active, 'nav-item'">
-                <a class="nav-link" n:href="Search:default"><i class="fa fa-search"></i> <span class="d-md-none d-xl-inline">Hledání</span></a>
+                <a class="nav-link" n:href="Search:default"><i class="fa fa-search"></i> <span class="d-md-none">Hledání</span></a>
             </li>
         </ul>
 
@@ -112,7 +112,7 @@
             {/if}
             <li class="nav-item" n:if="$user->isLoggedIn()">
                 <hr class="d-block d-sm-none">
-                <a class="nav-link" n:href=":Admin:Users:profile">
+                <a class="nav-link" n:href=":Admin:Dashboard:default">
                     {if empty($userEntity->photo)}
                         <img class="user-avatar" src="{$basePath}/Admin/assets/images/noavatar.jpg" height="34">
                     {else}

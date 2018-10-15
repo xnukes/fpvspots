@@ -78,10 +78,10 @@
                 </div>
             </div>
 
-            <hr class="my-4">
 
             {snippet pilotContent}
 
+                <hr class="my-4" n:if="count($pilot->videos)">
                 <div class="card bg-light" id="videos" n:if="count($pilot->videos)">
                     <div class="card-header">
                         <h4><i class="fa fa-video-camera"></i> <a href="#videos">Nahrané videa</a></h4>
@@ -99,8 +99,7 @@
                     </div>
                 </div>
 
-                <hr class="my-4">
-
+                <hr class="my-4" n:if="!empty($pilot->pageContent)">
                 <div class="card bg-light" n:if="!empty($pilot->pageContent)" id="blog">
                     <div class="card-header">
                         <h4><i class="fa fa-rss"></i> <a href="#blog">{$pilot->username} MicroBlog</a></h4>
