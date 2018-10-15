@@ -4,6 +4,12 @@
  * Copyright (c) 2018 Lukáš Vlček (http://www.vlceklukas.cz)
  */
 
+/* supports logos */
+img.fe-support-logo {
+	max-width: 180px;
+	max-height: 150px;
+}
+
 /* pilots styles */
 .list-pilot-item {
 	border: 1px solid #cccccc;
