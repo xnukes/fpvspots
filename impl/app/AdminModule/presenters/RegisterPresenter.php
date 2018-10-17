@@ -57,17 +57,21 @@ class RegisterPresenter extends BasePresenter
 
 		$exists = $this->userManager->isUsernameExists($vars->username);
 
+		$existsEmail = $this->userManager->isEmailExists($vars->email);
+
 		$user = null;
-		if(!$exists)
+		if(!$exists && !$existsEmail)
         	$user = $this->userManager->registerUser($vars->username, $vars->password, $vars->email);
 
-        if ($user && $exists == false) {
+        if ($user && $exists == false && $existsEmail == false) {
             $this->flashMessage('Děkujeme za registraci, nyní se prosím přihlašte. <strong>Váš login: ' . $vars->username . '</strong>');
             $this->redirect('Sign:in');
         } else {
             $this->flashMessage('Nastala chyba při registraci.', 'warning');
 			if($exists)
             	$this->flashMessage('Toto přihlašovací jméno již existuje.', 'warning');
+			if($existsEmail)
+            	$this->flashMessage('Tento email již existuje.', 'warning');
             $this->redirect('Register:in');
         }
     }

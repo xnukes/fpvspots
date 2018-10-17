@@ -35,6 +35,11 @@ class UserManager extends BaseManager
 		return $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())->findOneBy(['username' => $username]) ? true : false;
 	}
 
+    public function isEmailExists($email)
+	{
+		return $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())->findOneBy(['email' => $email]) ? true : false;
+	}
+
 	public function createLostPsw($username, $email)
 	{
 		$result = $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())->findOneBy(['username' => $username, 'email' => $email]) ? true : false;
