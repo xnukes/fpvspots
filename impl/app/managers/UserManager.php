@@ -8,6 +8,7 @@
 namespace App\Managers;
 
 use	Nette\Security\Passwords;
+use Nette\Utils\Random;
 use Nette\Utils\Strings;
 
 /**
@@ -46,6 +47,10 @@ class UserManager extends BaseManager
 		if(!$result) {
 			throw new \Exception('Tato kombinace uživ. jména a emailu nebyla nalezena.');
 		}
-		return 'Nové heslo bylo zasláno na e-mail.';
+
+		$token = Random::generate(64);
+
+		dump($token);
+		exit;
 	}
 }

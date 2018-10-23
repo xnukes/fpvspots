@@ -117,7 +117,8 @@
         var xhr;
         function updateMarkers(){
             var bounds = map.getBounds();
-            if(bounds){
+            if(bounds && bounds['j'] && bounds['j']['l'] && bounds['j']['j']){
+
                 if(xhr){
                     xhr.abort()
                 }
@@ -127,12 +128,12 @@
                     dataType: 'json',
                     data: { viewport: JSON.stringify([
                             {
-                                latitude: bounds['f']['b'],
-                                longitude: bounds['b']['b'],
+                                latitude: bounds['l']['j'],
+                                longitude: bounds['j']['j'],
                             },
                             {
-                                latitude:  bounds['f']['f'],
-                                longitude: bounds['b']['f'],
+                                latitude:  bounds['l']['l'],
+                                longitude: bounds['j']['l'],
                             }
                         ])},
                     method: 'POST',
