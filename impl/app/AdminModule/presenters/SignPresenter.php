@@ -31,7 +31,7 @@ class SignPresenter extends BasePresenter
 
 	public function actionLost()
 	{
-		if ($this->user->isLoggedIn() && $this->user->isInRole('admin')) {
+		if ($this->user->isLoggedIn()) {
 			$this->flashMessage('Již jste přihlášeni.');
 			$this->redirect('Dashboard:');
 		} else {
