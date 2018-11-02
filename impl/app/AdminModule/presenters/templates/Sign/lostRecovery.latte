@@ -1,6 +1,6 @@
 {block content}
-{*
-{form signLostForm, class => 'sky-form boxed'}
+
+{form signLostRecoveryForm, class => 'sky-form boxed'}
 
     <header><i class="fa fa-users"></i> Ztracené heslo</header>
 
@@ -13,30 +13,29 @@
 
     <fieldset>
         <section>
-            {label username, class => 'label' /}
+            {label password, class => 'label' /}
             <label class="input">
                 <i class="icon-append fa fa-user"></i>
-                {input username}
-                <span class="tooltip tooltip-top-right">Zadejte vaše uživatelské jméno</span>
+                {input password}
+                <span class="tooltip tooltip-top-right">Zadejte nové heslo</span>
             </label>
         </section>
         <section>
-            {label email, class => 'label' /}
+            {label passwordVerify, class => 'label' /}
             <label class="input">
                 <i class="icon-append fa fa-envelope"></i>
-                {input email}
-                <span class="tooltip tooltip-top-right">Zadejte vaš platný e-mail</span>
+                {input passwordVerify}
+                <span class="tooltip tooltip-top-right">Zadejte heslo znovu</span>
             </label>
         </section>
     </fieldset>
     <footer>
         <div class="row">
             <div class="col-md-6 text-left"><a n:href="Sign:in" class="btn btn-sm btn-primary pull-left"><i class="fa fa-user-o"></i> Přihlásit se</a></div>
-            <div class="col-md-6 text-right"><button n:name="send" class="btn btn-sm btn-warning pull-right"><i class="fa fa-paper-plane-o"></i> Zaslat heslo</button></div>
+            <div class="col-md-6 text-right"><button n:name="send" class="btn btn-sm btn-warning pull-right"><i class="fa fa-paper-plane-o"></i> Uložit heslo</button></div>
         </div>
         <div class="text-center login-footer">
             {$systemVersion|noescape}
         </div>
     </footer>
 {/form}
-*}
