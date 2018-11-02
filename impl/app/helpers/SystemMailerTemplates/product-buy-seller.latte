@@ -1,3 +1,5 @@
+{include 'header.latte'}
+
 Dobrý den,<br>
 <br>
 Na váš nabízený produkt <strong>{$product->productTitle}</strong> byla zadána poptávka. <br>
@@ -9,4 +11,5 @@ Jméno: {$vars->buyerName}<br>
 E-mail: <a href="mailto:{$vars->buyerEmail}">{$vars->buyerEmail}</a><br>
 Zpráva: {$vars->buyerMessage}<br>
 <br>
-S pozdravem team FPVSpots.
+
+{include 'footer.latte'}
