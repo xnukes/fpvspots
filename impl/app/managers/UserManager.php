@@ -7,6 +7,7 @@
 
 namespace App\Managers;
 
+use App\Entities\UserEntity;
 use	Nette\Security\Passwords;
 use Nette\Utils\Random;
 use Nette\Utils\Strings;
@@ -41,6 +42,12 @@ class UserManager extends BaseManager
 		return $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())->findOneBy(['email' => $email]) ? true : false;
 	}
 
+	/**
+	 * Function return recovery token
+	 * @param $username
+	 * @param $email
+	 * @throws \Exception
+	 */
 	public function createLostPsw($username, $email)
 	{
 		$result = $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())->findOneBy(['username' => $username, 'email' => $email]) ? true : false;
@@ -50,7 +57,35 @@ class UserManager extends BaseManager
 
 		$token = Random::generate(64);
 
-		dump($token);
-		exit;
+		/** @var UserEntity $user */
+		$user = $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())->findOneBy(['username' => $username, 'email' => $email]);
+
+		$user->token = $token;
+
+		$this->entityManager->persist($user)->flush();
+
+		return $token;
+	}
+
+	public function changePasswordByToken($token, $password)
+	{
+		/** @var UserEntity $user */
+		$user = $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())->findOneBy(['token' => $token]);
+
+		if(!$user) {
+			throw new \Exception('Token nebyl nalezen !');
+		}
+
+		$user->password = \Nette\Security\Passwords::hash($password);
+		$user->token = null;
+
+		$this->entityManager->persist($user)->flush();
+
+		return $user;
+	}
+
+	public function isTokenIsExists($token)
+	{
+		return $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())->findOneBy(['token' => $token]) ? true : false;
 	}
 }

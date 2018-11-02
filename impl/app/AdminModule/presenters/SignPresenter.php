@@ -7,6 +7,8 @@
 
 namespace App\AdminModule\Presenters;
 
+use App\Entities\UserEntity;
+use App\Helpers\SystemMailerHelper;
 use App\Models\Form;
 use Nette;
 /**
@@ -18,6 +20,11 @@ class SignPresenter extends BasePresenter
 {
 	/** @var \App\Managers\UserManager @inject */
 	public $userManager;
+
+	/** @var SystemMailerHelper @inject */
+	public $systemMailerHelper;
+
+	public $token;
 
 	public function actionIn()
     {
@@ -31,6 +38,23 @@ class SignPresenter extends BasePresenter
 
 	public function actionLost()
 	{
+		if ($this->user->isLoggedIn()) {
+			$this->flashMessage('Již jste přihlášeni.');
+			$this->redirect('Dashboard:');
+		} else {
+			$this->setLayout('lost');
+		}
+	}
+
+	public function actionLostRecovery($token)
+	{
+		$this->token = $token;
+
+		if(!$this->userManager->isTokenIsExists($token)) {
+			$this->flashMessage('Token neexistuje ! Prosím zkuste to znovu.', 'danger');
+			$this->redirect('Sign:in');
+		}
+
 		if ($this->user->isLoggedIn()) {
 			$this->flashMessage('Již jste přihlášeni.');
 			$this->redirect('Dashboard:');
@@ -102,13 +126,53 @@ class SignPresenter extends BasePresenter
 
 	public function signLostFormSuccess(Nette\Application\UI\Form $form, $vars)
 	{
-		// TODO: dodělat obnovu hesla
 		try {
-			$message = $this->userManager->createLostPsw($vars->username, $vars->email);
-			$this->flashMessage($message, 'info');
+			$token = $this->userManager->createLostPsw($vars->username, $vars->email);
+
+			$recoveryLink = $this->link('//Sign:lostRecovery', ['token' => $token]);
+
+			/** @var UserEntity $user */
+			$user = $this->entityManager->getRepository(\App\Entities\UserEntity::getClassName())->findOneBy(['username' => $vars->username, 'email' => $vars->email]);
+
+			$this->systemMailerHelper->sendMailUserLostRecovery($user, $recoveryLink);
+
+			$this->flashMessage('Obnovovácí odkaz vám byl zaslán na e-mail.', 'info');
 			$this->redirect('Sign:in');
 		} catch (\Exception $e) {
 			$this->flashMessage($e->getMessage(), 'danger');
+			$this->redirect('Sign:lost');
+		}
+	}
+
+	public function createComponentSignLostRecoveryForm($name)
+	{
+		$form = new Form($this, $name);
+
+		$form->addPassword('password', 'Vaše heslo')
+			->setAttribute('class', 'form-control');
+
+		$form->addPassword('passwordVerify', 'Heslo pro kontrolu')
+			->setRequired(false)
+			->setAttribute('class', 'form-control')
+			->addRule(Form::EQUAL, 'Hesla se neshodují', $form['password'])
+			->addCondition(Form::FILLED, $form['password'])
+			->setRequired('Prosím vypňte potvrzovací heslo.');
+
+		$form->addSubmit('send', 'Uložit heslo');
+
+		$form->onSuccess[] = array($this, 'signLostRecoveryFormSuccess');
+
+		return $form;
+	}
+
+	public function signLostRecoveryFormSuccess(Nette\Application\UI\Form $form, $vars)
+	{
+		try {
+			$user = $this->userManager->changePasswordByToken($this->token, $vars->password);
+			$this->flashMessage('Vaše heslo bylo uloženo :)');
+			$this->redirect('Sign:in');
+		} catch (\Exception $exception) {
+			$this->flashMessage($exception->getMessage(), 'danger');
 			$this->redirect('Sign:lost');
 		}
 	}

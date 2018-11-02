@@ -50,6 +50,20 @@ class SystemMailerHelper
 		$this->message->setFrom($this->configRepository->mailerFrom, $this->configRepository->sitetitle);
 	}
 
+	public function sendMailUserLostRecovery(UserEntity $user, $link)
+	{
+		$this->setSubject('Nové heslo');
+
+		$this->addParam('user', $user);
+		$this->addParam('recoverylink', $link);
+
+		$this->setMailerTemplate('user-lost-recovery');
+		$this->addSendTo($user->email);
+		$this->send();
+
+		return true;
+	}
+
 	public function sendMailUserProductBuy(UserProductEntity $product, UserEntity $shop, $vars)
 	{
 		$this->addParam('shop', $shop);
