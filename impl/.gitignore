@@ -3,6 +3,8 @@
 /temp/proxies/*
 /temp/sessions/*
 /www/webtemp/*
+/www/files/photos/*
+/www/files/covers/*
 /vendor/*
 config.local.neon
 !.gitignore

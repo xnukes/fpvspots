@@ -15,7 +15,7 @@
             <div class="clearfix"></div>
 
             {if !$user->isLoggedIn()}
-            {include googleAdsenseEvents}
+                {include googleAdsenseEvents}
             {/if}
 
             <div class="row margin-bottom-20">
@@ -31,7 +31,7 @@
                     <div class="card bg-primary">
                         <div class="card-header text-white text-center">
                             {if $event->getMaxUsers() > 0}
-                                <i class="fa fa-user-o"></i> Volných přihlášek {($event->getMaxUsers() - $joinedCount)} z {$event->getMaxUsers()}
+                                <i class="fa fa-user-o"></i> Volných {($event->getMaxUsers() - $joinedCount)} z {$event->getMaxUsers()}
                             {else}
                                 <i class="fa fa-user-o"></i> Neomezený počet přihlášek
                             {/if}
@@ -111,7 +111,31 @@
 
             </div>
 
-            {include googleAdsenseEvents}
+            {if !$user->isLoggedIn()}
+                {include googleAdsenseEvents}
+            {/if}
+
+            {if $event->photos->count() > 1}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card bg-light">
+                        <div class="card-header"><h4><i class="fa fa-image"></i> Fotogalerie</h4></div>
+                        <div class="card-body">
+                            <div class="row">
+                            {foreach $event->photos->slice(1) as $photo}
+                                <div class="col-md-2">
+                                    <a href="{$basePath}/files/photos/{$photo->filehash}" data-fancybox="gallery">
+                                        <img src="{$basePath}/files/photos/thumbs/{$photo->filehash}" class="img-thumbnail" alt="">
+                                    </a>
+                                </div>
+                            {/foreach}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            {/if}
 
             <div class="row">
                 <div class="col-md-12">
