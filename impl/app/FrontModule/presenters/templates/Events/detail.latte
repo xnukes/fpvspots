@@ -1,10 +1,58 @@
 {block content}
 
-{define title}Nadcházející závody, turnaje, soutěže{/define}
+{define title}{$event->name}{/define}
+
+{*{if !empty($event->photos)}
+    {var $bgImage = $basePath . '/files/photos/' . $event->photos->get(0)->filehash}
+{else}
+    {var $bgImage = $basePath . '/Front/images/default_shop_bg.jpg'}
+{/if}
+<div class="shop-cover-bg" style="background-image: url({$bgImage})">
+    <span class="title">{$event->name}
+        <a n:href=":default" class="pull-right" title="Zpět na seznam"><i class="fa fa-close text-danger"></i></a>
+    </span>
+    <div class="clear"></div>
+    <div class="desc">
+        <div class="row margin-bottom-20">
+            <div class="col-md-3">
+                <div class="card bg-dark">
+                    <div class="card-header text-white text-center">
+                        <i class="fa fa-calendar"></i> Začátek {$event->eventDate|date:'d.m.Y'}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark">
+                    <div class="card-header text-white text-center">
+                        {if $event->getMaxUsers() > 0}
+                            <i class="fa fa-user-o"></i> Volných {($event->getMaxUsers() - $joinedCount)} z {$event->getMaxUsers()}
+                        {else}
+                            <i class="fa fa-user-o"></i> Neomezený počet přihlášek
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark">
+                    <div class="card-header text-white text-center">
+                        <i class="fa fa-address-card-o"></i> Založil {$event->user->username}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark">
+                    <div class="card-header text-white text-center">
+                        <i class="fa fa-mail-forward"></i> {$event->user->email}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*}
 
 <main role="main">
 
-    <div class="album text-muted">
+    <div class="album text-muted padding-top-20">
         <div class="container">
 
             <h1 class="jumbotron-heading text-dark">
@@ -54,6 +102,7 @@
                 </div>
 
             </div>
+
             <div class="row">
 
                 <div class="col-md-8">
@@ -73,7 +122,7 @@
                                 <a href="#" class="btn btn-sm btn-info fullwidth" n:if="$isJoined & ($joinedStatus == \App\Entities\EventUserEntity::STATE_WAIT)"><i class="fa fa-clock-o"></i> Čeká na schválení</a>
                                 <a n:href="cancelJoin!" class="btn btn-sm btn-danger fullwidth" n:if="$isJoined & ($joinedStatus > \App\Entities\EventUserEntity::STATE_WAIT)"><i class="fa fa-remove"></i> Zrušit přihlášku</a>
                             {else}
-                                <a n:href=":Admin:Sign:in" class="btn btn-sm btn-danger fullwidth"><i class="fa fa-sign-in"></i> Přihlašte se prosím</a>
+                                <a n:href=":Admin:Sign:in, 'backlink' => $presenter->storeRequest()" class="btn btn-sm btn-danger fullwidth"><i class="fa fa-sign-in"></i> Přihlašte se prosím</a>
                             {/if}
                         </div>
                     </div>
@@ -121,7 +170,7 @@
                     <div class="card bg-light">
                         <div class="card-header"><h4><i class="fa fa-image"></i> Fotogalerie</h4></div>
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row text-center">
                             {foreach $event->photos->slice(1) as $photo}
                                 <div class="col-md-2">
                                     <a href="{$basePath}/files/photos/{$photo->filehash}" data-fancybox="gallery">
@@ -143,6 +192,19 @@
                         <div class="card-header"><h4><i class="fa fa-map-marker"></i> Mapa kde se událost koná</h4></div>
                         <div class="card-body p-0">
                             <div class="map" id="gmaps-container" style="width: 100%; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card bg-light">
+                        <div class="card-header"><h4><i class="fa fa-comments"></i> Komentáře</h4></div>
+                        <div class="card-body">
+                            {control comments}
                         </div>
                     </div>
                 </div>

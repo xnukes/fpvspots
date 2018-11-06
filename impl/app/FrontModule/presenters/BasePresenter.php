@@ -7,6 +7,7 @@
 
 namespace App\FrontModule\Presenters;
 
+use App\FrontModule\Components\Comments\Comments;
 use WebLoader\Nette\CssLoader;
 use WebLoader\Nette\JavaScriptLoader;
 use WebLoader\Nette\LoaderFactory;
@@ -37,4 +38,10 @@ class BasePresenter extends \App\Presenters\BasePresenter
     {
         return $this->webLoader->createJavaScriptLoader('bottom');
     }
+
+    public function createComponentComments($name)
+	{
+		$component = new Comments($this, $name);
+		return $component;
+	}
 }
