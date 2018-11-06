@@ -117,7 +117,7 @@
         <ul class="navbar-nav">
             {if !$user->isLoggedIn()}
                 <li n:class="'nav-item'">
-                    <a class="nav-link" n:href=":Admin:Sign:in">
+                    <a class="nav-link" n:href=":Admin:Sign:in, 'backlink' => $presenter->storeRequest()">
                         <i class="fa fa-sign-in"></i> <span class="d-md-none d-xl-inline">Přihlášení</span>
                     </a>
                 </li>

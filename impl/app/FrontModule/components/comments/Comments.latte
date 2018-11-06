@@ -1,0 +1,66 @@
+<div class="row">
+
+    {* Sekce pro formulář *}
+    {if $user->isLoggedIn()}
+        <div class="col-md-12">
+            {form commentForm, class => 'w-100', 'autocomplete' => 'off'}
+                <div class="row">
+                    <div class="col-md-10">
+                        {input comment}
+                    </div>
+                    <div class="col-md-2">
+                        {input send}
+                    </div>
+                </div>
+            {/form}
+        </div>
+    {else}
+        <div class="col-md-12">
+            <div class="alert alert-danger text-center">Pro okomentování se prosím přihlašte.</div>
+        </div>
+    {/if}
+
+    <div class="col-md-12">
+        <hr>
+    </div>
+
+    {if !$comments}
+        <div class="col-md-12">
+            <p class="text-center p-4">V této chvíli zde neexistuje žádný komentář.</p>
+        </div>
+    {else}
+        <div class="col-md-12">
+            {foreach $comments as $comment}
+                <div class="row">
+                    <div class="col-md-1">
+                        {if $comment->user->photo}
+                            <a data-fancybox="gallery" href="{$basePath}/files/photos/{$comment->user->photo->filehash}">
+                                <img class="w-100 img-thumbnail" src="{$basePath}/files/photos/thumbs/{$comment->user->photo->filehash}" alt="{$comment->user->username}">
+                            </a>
+                        {else}
+                            <img class="w-100 img-thumbnail" src="{$basePath}/Front/images/noimage.png" alt="{$comment->user->username}">
+                        {/if}
+                    </div>
+                    <div class="col-md-11">
+                        <div class="comment-text">
+                            <strong>
+                                {if !empty($comment->user->firstName)}
+                                    {$comment->user->firstName} {$comment->user->lastName}
+                                {else}
+                                    {$comment->user->username}
+                                {/if}
+                            </strong> {$comment->text}
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom-10">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-11">
+                        <small class="text-muted">dne {$comment->created|date:'d.m.Y H:i'}</small>
+                    </div>
+                </div>
+            {/foreach}
+        </div>
+    {/if}
+
+</div>
