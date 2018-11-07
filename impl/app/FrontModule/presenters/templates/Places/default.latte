@@ -13,13 +13,12 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-
         var marksFirstStart = true;
-        var map = new GMaps({
+        map = new GMaps({
             el: '#places-map', //49.366099 17.3211333
-            lat: 49.396099,
-            lng: 17.3211333,
-            zoom: 8,
+            lat: $.cookie("lat") || 49.396099,
+            lng: $.cookie("lng") || 17.3211333,
+            zoom:  $.cookie("zoom") * 1 || 8,
             cursor: 'pointer',
             mapType: 'hybrid',
             markerClusterer: function(map) {
@@ -34,12 +33,19 @@
             success: function(position) {
                 map.setCenter(position.coords.latitude, position.coords.longitude);
             },
-            zoom_changed: updateMarkers,
-            dragend: updateMarkers,
+            zoom_changed: function(){
+                updateMarkers();
+                saveMapPositionState();
+            },
+            dragend: function(){
+                updateMarkers();
+                saveMapPositionState();
+            },
             bounds_changed: function(){
                 if(marksFirstStart){
                     marksFirstStart = false;
                     updateMarkers();
+                    saveMapPositionState();
                 }
             },
         });
@@ -86,6 +92,7 @@
         */
 
         window.addEventListener('resize', updateMarkers);
+        window.addEventListener('resize', saveMapPositionState);
 
         GMaps.geolocate({
             success: function(position) {
@@ -169,6 +176,12 @@
             }
 
         };
+
+        function saveMapPositionState(){
+           $.cookie("lat", map.getCenter().lat(), { expires : 10});
+           $.cookie("lng", map.getCenter().lng(), { expires : 10});
+           $.cookie("zoom", map.getZoom(), { expires : 10});
+        }
     });
 
 </script>
