@@ -50,7 +50,17 @@ use Nette\Utils\DateTime;
  */
 class UserEntity extends BaseEntity
 {
-    const ROLE_USER = 'user';
+    const ROLE_GUEST 	= 'guest';
+    const ROLE_USER 	= 'user';
+    const ROLE_MANAGER 	= 'manager';
+    const ROLE_ADMIN 	= 'admin';
+
+    const ROLES = [
+    	self::ROLE_GUEST => 'Anonym',
+    	self::ROLE_USER => 'Uživatel',
+    	self::ROLE_MANAGER => 'Uživatel',
+    	self::ROLE_ADMIN => 'Admin',
+	];
 
 	/**
 	 * @ORM\Id
