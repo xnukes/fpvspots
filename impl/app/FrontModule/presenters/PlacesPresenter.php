@@ -58,6 +58,7 @@ class PlacesPresenter extends BasePresenter
 
 		if($viewport = json_decode($this->getRequest()->getPost('viewport')))
 		{
+			// Y(LAT) > ?1 AND Y(LAT) < ?3 AND X(LONG) > ?2 AND X(LONG) < ?4
 			$qb->where('places.placeLatitude > ?1 AND places.placeLatitude < ?3 AND places.placeLongitude > ?2 AND places.placeLongitude < ?4');
 
 			$viewport = (array)$viewport;

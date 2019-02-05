@@ -124,7 +124,10 @@
         var xhr;
         function updateMarkers(){
             var bounds = map.getBounds();
-            if(bounds && bounds['j'] && bounds['j']['l'] && bounds['j']['j']){
+
+            var preparedBounds = prepareGMapsBounds(bounds); // for you, fucking google maps ...
+
+            if (preparedBounds.length === 4) {
 
                 if(xhr){
                     xhr.abort()
@@ -135,12 +138,12 @@
                     dataType: 'json',
                     data: { viewport: JSON.stringify([
                             {
-                                latitude: bounds['l']['j'],
-                                longitude: bounds['j']['j'],
+								latitude: preparedBounds[0],
+								longitude: preparedBounds[2],
                             },
                             {
-                                latitude:  bounds['l']['l'],
-                                longitude: bounds['j']['l'],
+                                latitude:  preparedBounds[1],
+                                longitude: preparedBounds[3],
                             }
                         ])},
                     method: 'POST',
@@ -176,6 +179,25 @@
             }
 
         };
+
+		function isFloat(n){
+			return Number(n) === n && n % 1 !== 0;
+		}
+
+        function prepareGMapsBounds(bounds) {
+        	var res = [];
+            var indexing = 0;
+            $.each(bounds, function (i,e) {
+                $.each(e, function (i2, e2) {
+                	if (isFloat(e2)) {
+						res[indexing] = e2;
+						indexing++;
+                    }
+                });
+            });
+
+        	return res;
+        }
 
         function saveMapPositionState(){
            $.cookie("lat", map.getCenter().lat(), { expires : 10});
