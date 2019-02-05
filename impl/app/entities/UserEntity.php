@@ -17,6 +17,7 @@ use Nette\Utils\DateTime;
  * @property string $username
  * @property string $password
  * @property string $token
+ * @property string $nickName
  * @property string $firstName
  * @property string $lastName
  * @property string $email
@@ -49,7 +50,17 @@ use Nette\Utils\DateTime;
  */
 class UserEntity extends BaseEntity
 {
-    const ROLE_USER = 'user';
+    const ROLE_GUEST 	= 'guest';
+    const ROLE_USER 	= 'user';
+    const ROLE_MANAGER 	= 'manager';
+    const ROLE_ADMIN 	= 'admin';
+
+    const ROLES = [
+    	self::ROLE_GUEST => 'Anonym',
+    	self::ROLE_USER => 'Uživatel',
+    	self::ROLE_MANAGER => 'Uživatel',
+    	self::ROLE_ADMIN => 'Admin',
+	];
 
 	/**
 	 * @ORM\Id
@@ -72,6 +83,11 @@ class UserEntity extends BaseEntity
 	 * @ORM\Column(type="string")
 	 */
 	protected $token;
+
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	protected $nickName;
 
 	/**
 	 * @ORM\Column(type="string")
@@ -216,4 +232,22 @@ class UserEntity extends BaseEntity
 		$this->shopDesc = '';
 		$this->shopEnabled = false;
     }
+
+    public function getEmail()
+	{
+		return $this->email;
+	}
+
+    public function getName()
+	{
+		if(!empty($this->nickName)) {
+			return $this->nickName;
+		} else {
+			if(!empty($this->firstName) | !empty($this->lastName)) {
+				return $this->firstName . ' ' . $this->lastName;
+			} else {
+				return $this->username;
+			}
+		}
+	}
 }
