@@ -34,8 +34,8 @@
 
     <meta property="og:url"                 content="{link //this}" />
     <meta property="og:type"                content="article" />
-    <meta property="og:title"               content="{ifset #fbtitle}{include fbtitle}{elseifset}{$parameters->sitename}{/ifset}" />
-    <meta property="og:description"         content="{ifset #fbdesc}{include fbdesc}{elseifset}CZ/SK Databáze spotů, buildů, pilotů atd ---{/ifset}" />
+    <meta property="og:title"               content="{ifset #fbtitle}{include fbtitle}{else}{$parameters->sitename}{/ifset}" />
+    <meta property="og:description"         content="{ifset #fbdesc}{include fbdesc}{else}CZ/SK Databáze spotů, buildů, pilotů atd ---{/ifset}" />
     {ifset #fbimg}<meta property="og:image" content="{$baseUrl}/Front/images/{include fbimg}" />{else}<meta property="og:image" content="{$baseUrl}/Front/images/fpvspots-fb-banner-2.png" />{/ifset}
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
