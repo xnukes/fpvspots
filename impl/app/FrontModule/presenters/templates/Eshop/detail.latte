@@ -1,8 +1,8 @@
 {block content}
 
 {define title}{$shop->shopTitle}{/define}
-{define fbtitle}{$shop->shopTitle}{/define}
-{define fbdesc}{$shop->shopDesc}{/define}
+{define fbtitle}{$shop->shopTitle} - FPVSpots.info{/define}
+{define fbdesc}{$shop->shopDesc|striptags|noescape}{/define}
 
 {if !empty($shop->shopCoverBg)}
     {var $bgImage = $basePath . '/files/covers/' . $shop->shopCoverBg}
