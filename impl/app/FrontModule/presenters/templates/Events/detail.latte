@@ -1,6 +1,8 @@
 {block content}
 
 {define title}{$event->name}{/define}
+{define fbtitle}{$event->name} - FPVSpots.info{/define}
+{define fbdesc}{$event->description}{/define}
 
 {*{if !empty($event->photos)}
     {var $bgImage = $basePath . '/files/photos/' . $event->photos->get(0)->filehash}

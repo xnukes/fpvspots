@@ -1,6 +1,8 @@
 {block content}
 
 {define title}{$shop->shopTitle}{/define}
+{define fbtitle}{$shop->shopTitle}{/define}
+{define fbdesc}{$shop->shopDesc}{/define}
 
 {if !empty($shop->shopCoverBg)}
     {var $bgImage = $basePath . '/files/covers/' . $shop->shopCoverBg}

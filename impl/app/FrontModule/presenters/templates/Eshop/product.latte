@@ -1,6 +1,8 @@
 {block content}
 
 {define title}{$shop->shopTitle}{/define}
+{define fbtitle}{$shop->shopTitle} - {$product->productTitle}{/define}
+{define fbdesc}{$product->productDescShort}{/define}
 
 {if !empty($shop->shopCoverBg)}
     {var $bgImage = $shop->shopCoverBg}
