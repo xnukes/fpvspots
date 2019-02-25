@@ -7,6 +7,13 @@
         {if isset($pilot)}{$pilot->username} - Veřejná stránka{/if}
     {/if}
 {/define}
+{define fbtitle}
+    {if isset($pilot) && !empty($pilot->firstName && $pilot->lastName)}
+        {$pilot->firstName} {$pilot->lastName} - Veřejná stránka
+    {else}
+        {if isset($pilot)}{$pilot->username} - Veřejná stránka{/if}
+    {/if}
+{/define}
 
 <main role="main">
 
