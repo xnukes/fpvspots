@@ -4,6 +4,11 @@
  * Copyright (c) 2018 Lukáš Vlček (http://www.vlceklukas.cz)
  */
 
+button.gm-ui-hover-effect {
+	width: 178px !important;
+	height: 6px !important;
+}
+
 .comment-text {
 	background: #FFFFFF;
 	/*border: 1px solid #ccc;*/
